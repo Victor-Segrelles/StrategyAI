@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     private List<Character> enemies = new List<Character>();
     private int activeCharacterIndex = 0;
 
+    public CharacterController characterController;
+
     void Start()
     {
         PopulateList(alliesContainer, allies);
@@ -23,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        //print("Se mueve " + GetCurrentCharacter().IsMoving());                        //Debug
+        //print("Se ha movido " + GetCurrentCharacter().IsMovementCompleted());         //Debug
         if (IsTurnComplete())
         {
             EndTurn();
@@ -38,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         // Reiniciar el estado de movimiento solo para el personaje actual
         GetCurrentCharacter().ResetMovementStatus();
+        characterController.SetCharacter(GetCurrentCharacter());
     }
 
     private void EndTurn()
@@ -52,6 +57,7 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateTurnText();
+        StartTurn();
     }
 
     private void PopulateList(GameObject container, List<Character> list)

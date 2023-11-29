@@ -93,7 +93,7 @@ public class Character : MonoBehaviour
     public void ResetMovementStatus()
     {
         isMoving = false;
-        movementCompleted = true;
+        movementCompleted = false;
     }
 }
 

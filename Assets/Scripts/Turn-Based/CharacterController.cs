@@ -12,6 +12,8 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
+        //print(character.characterName);       //Debug
+
         if (character != null && Input.GetKeyDown(KeyCode.Space) && !character.IsMoving())
         {
             StartCoroutine(MoveForward());
