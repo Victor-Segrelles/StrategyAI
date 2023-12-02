@@ -140,7 +140,7 @@ public class Character : MonoBehaviour
 
     private void OnMouseDown()
     {
-        gm.selectedCharacter = this;
+        gm.selectedCharacters.Add(this);
     }
 
     public void Highlight()

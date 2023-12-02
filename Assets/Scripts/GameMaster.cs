@@ -7,7 +7,7 @@ public class GameMaster : MonoBehaviour
     private PlayerCamera camera;
     public Character activeCharacter;
     public Character focusedCharacter;
-    public Character selectedCharacter;
+    public List<Character> selectedCharacters = new List<Character>();
     public Transform selectedGroundPosition;
 
     private void Start()
@@ -23,6 +23,10 @@ public class GameMaster : MonoBehaviour
     public void StarTurn()
     {
         activeCharacter.StartTurn();
+        if (activeCharacter.isPlayerControlled)
+        {
+            // show interface according to character type: mage | warrior | archer | cleric
+        }
     }
 
     /// <summary>
@@ -30,7 +34,7 @@ public class GameMaster : MonoBehaviour
     /// </summary>
     public void Move()
     {
-        selectedCharacter = null;
+        selectedCharacters.Clear();
         selectedGroundPosition = null;
         Debug.Log("Waiting for either target position or target character to be selected.");
 
@@ -39,14 +43,14 @@ public class GameMaster : MonoBehaviour
 
     private IEnumerator WaitForSelection()
     {
-        while (selectedCharacter == null && selectedGroundPosition == null)
+        while (selectedCharacters.Count == 0 && selectedGroundPosition == null)
         {
             yield return null;
         }
 
-        if (selectedCharacter != null)
+        if (selectedCharacters.Count > 0)
         {
-            activeCharacter.Move(selectedCharacter.transform);
+            activeCharacter.Move(selectedCharacters[0].transform);
         }
         else if (selectedGroundPosition != null)
         {
@@ -56,16 +60,61 @@ public class GameMaster : MonoBehaviour
 
     public void PerformAction1()
     {
+        if (activeCharacter is Warrior)
+        {
+            
+        }
+        else if (activeCharacter is Mage)
+        {
 
+        }
+        else if (activeCharacter is Archer)
+        {
+
+        }
+        else if (activeCharacter is Cleric)
+        {
+
+        }
     }
 
     public void PerformAction2()
     {
-        
+        if (activeCharacter is Warrior)
+        {
+            
+        }
+        else if (activeCharacter is Mage)
+        {
+
+        }
+        else if (activeCharacter is Archer)
+        {
+
+        }
+        else if (activeCharacter is Cleric)
+        {
+            
+        }
     }
 
     public void PerformAction3()
     {
-        
+        if (activeCharacter is Warrior)
+        {
+            
+        }
+        else if (activeCharacter is Mage)
+        {
+
+        }
+        else if (activeCharacter is Archer)
+        {
+
+        }
+        else if (activeCharacter is Cleric)
+        {
+            
+        }
     }
 }
