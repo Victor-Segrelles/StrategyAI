@@ -96,27 +96,3 @@ public class Character : MonoBehaviour
         movementCompleted = false;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

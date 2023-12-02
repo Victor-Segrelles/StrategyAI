@@ -45,15 +45,3 @@ public class CharacterController : MonoBehaviour
         yield return StartCoroutine(character.Rotate());
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
