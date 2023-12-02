@@ -42,12 +42,12 @@ public class PlayerCamera : MonoBehaviour
         transform.position += movement * Time.deltaTime * speed;
     }
 
-    public void FocusUnit()
+    public void FocusCharacter()
     {
-        if (gm.focusedUnit != null)
+        if (gm.focusedCharacter != null)
         {
-            target = gm.focusedUnit.transform;
-            transform.position = new Vector3(target.position.x, target.position.y + 10, target.position.z - 10);
+            target = gm.focusedCharacter.transform;
+            transform.position = new Vector3(target.position.x, target.position.y + 15, target.position.z - 15);
             transform.LookAt(target);
         }
     }

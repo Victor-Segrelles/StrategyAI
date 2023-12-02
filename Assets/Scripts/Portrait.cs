@@ -5,7 +5,7 @@ using UnityEngine;
 public class Portrait : MonoBehaviour
 {
     GameMaster gm;
-    public Target unit;
+    public Character character;
 
     void Start()
     {
@@ -14,7 +14,7 @@ public class Portrait : MonoBehaviour
 
     private void OnMouseDown()
     {
-        gm.focusedUnit = unit;
-        gm.FocusUnit();
+        gm.focusedCharacter = character;
+        gm.FocusCharacter();
     }
 }
