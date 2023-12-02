@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Portrait : MonoBehaviour
@@ -10,9 +11,11 @@ public class Portrait : MonoBehaviour
     void Start()
     {
         gm = FindObjectOfType<GameMaster>();
+        Button button = GetComponent<Button>();
+        button.onClick.AddListener(OnButtonClick);
     }
 
-    private void OnMouseDown()
+    private void OnButtonClick()
     {
         gm.focusedCharacter = character;
         gm.FocusCharacter();

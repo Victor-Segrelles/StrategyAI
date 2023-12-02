@@ -62,11 +62,13 @@ public class GameMaster : MonoBehaviour
     {
         if (activeCharacter is Warrior)
         {
-            
+            Warrior warrior = (Warrior) activeCharacter;
+            warrior.Slash(activeCharacter); // TODO: only for testing
         }
         else if (activeCharacter is Mage)
         {
-
+            Mage mage = (Mage) activeCharacter;
+            mage.Fireball(activeCharacter.transform); // TODO: only for testing
         }
         else if (activeCharacter is Archer)
         {
@@ -116,5 +118,17 @@ public class GameMaster : MonoBehaviour
         {
             
         }
+    }
+
+    public void MageTurn() // TODO: DELETE
+    {
+        Mage mage = FindObjectOfType<Mage>();
+        activeCharacter = mage;
+    }
+
+    public void WarriorTurn() // TODO: DELETE
+    {
+        Warrior warrior = FindObjectOfType<Warrior>();
+        activeCharacter = warrior;
     }
 }
