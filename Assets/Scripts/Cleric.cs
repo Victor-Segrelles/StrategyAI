@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Cleric : Character
+{
+    public void Smite(Character target)
+    {
+        Debug.Log("Cleric smites 1 target");
+    }
+
+    public void Heal(Character target)
+    {
+        Debug.Log("Cleric heals 1 target");
+    }
+
+    public void HealingArea(Transform target)
+    {
+        Debug.Log("Cleric heals area");
+    }
+}
