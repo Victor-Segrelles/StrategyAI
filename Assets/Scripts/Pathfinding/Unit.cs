@@ -25,6 +25,7 @@ public class Unit : MonoBehaviour {
 	public bool warned = false;
 	public List<GameObject> warnedEnemies;
 	bool chasing = false;
+	public Transform hijo;
 
 	void Awake() {
        
@@ -35,13 +36,31 @@ public class Unit : MonoBehaviour {
 	}
 
     private void Update() {
-		if (!stuned)
+
+        Ray ray = new Ray(transform.position + new Vector3(0, 100, 0), Vector3.down);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+            var distanceToGround = hit.distance;
+            Debug.Log(distanceToGround);
+            hijo.position = new Vector3(hijo.position.x, transform.position.y+100-distanceToGround+1, hijo.position.z);
+        }
+
+        /*RaycastHit hit;
+        if (Physics.Raycast(transform.position + new Vector3(0,-1,0), -Vector3.up, out hit))
+        {
+            var distanceToGround = hit.distance;
+			Debug.Log(distanceToGround);
+			hijo.position = new Vector3(hijo.position.x, distanceToGround-1, hijo.position.z);
+        }*/
+
+        if (!stuned)
 		{
 			MoveEnemy();
 			//debug
 			if(debug_recentstun){
 				debug_recentstun=false;
-				target=waypoints[currentIndex];
+				target = waypoints[currentIndex];
 			}
 		}
 	}
