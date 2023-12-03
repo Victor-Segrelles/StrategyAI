@@ -3,9 +3,9 @@ using System.Collections;
 
 public class CharacterController : MonoBehaviour
 {
-    private Character character;
+    private CharacterPlaceHolder character;
 
-    public void SetCharacter(Character newCharacter)
+    public void SetCharacter(CharacterPlaceHolder newCharacter)
     {
         character = newCharacter;
     }

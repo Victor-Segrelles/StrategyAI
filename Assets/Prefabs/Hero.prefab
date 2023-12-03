@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3905204312611476084}
   - component: {fileID: 3905204312611476085}
   - component: {fileID: 3905204312611476090}
+  - component: {fileID: 8363827708035162354}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -131,7 +132,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9950851ba5853da4b803924af2eefb2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: 
   advanceDistance: 5
+  rotateAngle: 90
+  dashDistance: 10
+  movementSpeed: 5
+--- !u!114 &8363827708035162354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905204312611476088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9950851ba5853da4b803924af2eefb2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 
+  advanceDistance: 5
+  rotateAngle: 90
+  dashDistance: 10
   movementSpeed: 5
 --- !u!1 &3905204312810606395
 GameObject:

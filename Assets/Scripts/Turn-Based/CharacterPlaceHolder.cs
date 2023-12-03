@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Character : MonoBehaviour
+public class CharacterPlaceHolder : MonoBehaviour
 {
     public string characterName;
     public float advanceDistance = 5f;

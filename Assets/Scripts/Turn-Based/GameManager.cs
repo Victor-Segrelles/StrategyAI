@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     public GameObject enemiesContainer;
     public TMP_Text turnText;
 
-    private List<Character> allies = new List<Character>();
-    private List<Character> enemies = new List<Character>();
+    private List<CharacterPlaceHolder> allies = new List<CharacterPlaceHolder>();
+    private List<CharacterPlaceHolder> enemies = new List<CharacterPlaceHolder>();
     private int activeCharacterIndex = 0;
 
     public CharacterController characterController;
@@ -60,9 +60,9 @@ public class GameManager : MonoBehaviour
         StartTurn();
     }
 
-    private void PopulateList(GameObject container, List<Character> list)
+    private void PopulateList(GameObject container, List<CharacterPlaceHolder> list)
     {
-        Character[] characters = container.GetComponentsInChildren<Character>();
+        CharacterPlaceHolder[] characters = container.GetComponentsInChildren<CharacterPlaceHolder>();
         list.AddRange(characters);
     }
 
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private Character GetCurrentCharacter()
+    private CharacterPlaceHolder GetCurrentCharacter()
     {
         if (activeCharacterIndex < allies.Count)
         {
