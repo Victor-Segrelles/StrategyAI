@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - aStar
+  - Enemigo
   layers:
   - Default
   - TransparentFX
@@ -12,8 +13,8 @@ TagManager:
   - Unwalkable
   - Water
   - UI
-  - 
-  - 
+  - camino
+  - cesped
   - 
   - 
   - 
