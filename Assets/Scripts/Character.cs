@@ -11,10 +11,10 @@ public class Character : MonoBehaviour
     public List<Character> selectedCharacters = new List<Character>();
     public Transform selectedGroundPosition;
     public bool selectionFinished = false;
-    // const int MaxHealth = 100;
+    const int MaxHealth = 100;
     // const int MaxMovementAmount = 100;
 
-    // int health = MaxHealth;
+    public int health = MaxHealth;
     // int movementAmountLeft = 0;
 
     GameMaster gm;
@@ -139,5 +139,37 @@ public class Character : MonoBehaviour
         selectedCharacters.Clear();
         selectedGroundPosition = null;
         selectionFinished = false;
+    }
+
+    public void ReceiveDamage(int damage)
+    {
+        int newHealth = health - damage;
+        if (newHealth < 1)
+        {
+            health = 0;
+            Die();
+        }
+        else
+        {
+            health = newHealth;
+        }
+    }
+
+    public void ReceiveHealing(int heal)
+    {
+        int newHealth = health + heal;
+        if (newHealth > MaxHealth)
+        {
+            health = MaxHealth;
+        }
+        else
+        {
+            health = newHealth;
+        }
+    }
+
+    public void Die()
+    {
+        Debug.Log("Character died.");
     }
 }

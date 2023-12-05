@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Cleric : Character
 {
+    const int smiteDamage = 10;
+    const int healPower = 10;
+    const int healingAreaPower = 5;
     public override void PerformAction1()
     {
         ResetSelected();
@@ -58,11 +61,15 @@ public class Cleric : Character
     public void Smite(Character target)
     {
         Debug.Log("Cleric smites 1 target");
+        target.ReceiveDamage(smiteDamage);
+        Debug.Log("Target health: " + target.health);
     }
 
     public void Heal(Character target)
     {
         Debug.Log("Cleric heals 1 target");
+        target.ReceiveHealing(healPower);
+        Debug.Log("Target health: " + target.health);
     }
 
     public void HealingArea(Transform target)
