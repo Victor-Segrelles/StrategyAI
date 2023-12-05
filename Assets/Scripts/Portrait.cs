@@ -5,19 +5,18 @@ using UnityEngine;
 
 public class Portrait : MonoBehaviour
 {
-    GameMaster gm;
+    private PlayerCamera camera;
     public Character character;
 
     void Start()
     {
-        gm = FindObjectOfType<GameMaster>();
+        camera = FindObjectOfType<PlayerCamera>();
         Button button = GetComponent<Button>();
         button.onClick.AddListener(OnButtonClick);
     }
 
     private void OnButtonClick()
     {
-        gm.focusedCharacter = character;
-        gm.FocusCharacter();
+        camera.FocusCharacter(character);
     }
 }
