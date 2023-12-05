@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class Warrior : Character
 {
+    public override void PerformAction1()
+    {
+
+    }
+
+    public override void PerformAction2()
+    {
+        
+    }
+
+    public override void PerformAction3()
+    {
+
+    }
     public void Slash(Character target)
     {
         Debug.Log("Warrior slashes target enemy");

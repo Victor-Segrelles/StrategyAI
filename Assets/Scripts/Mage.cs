@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class Mage : Character
 {
+    public override void PerformAction1()
+    {
+        Transform targetPosition = this.transform; // TODO: change
+        Fireball(targetPosition);
+    }
+
+    public override void PerformAction2()
+    {
+
+    }
+
+    public override void PerformAction3()
+    {
+
+    }
     public void Fireball(Transform target)
     {
         Debug.Log("Mage casts a fireball.");

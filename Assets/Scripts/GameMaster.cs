@@ -60,64 +60,17 @@ public class GameMaster : MonoBehaviour
 
     public void PerformAction1()
     {
-        if (activeCharacter is Warrior)
-        {
-            Warrior warrior = (Warrior) activeCharacter;
-            warrior.Slash(activeCharacter); // TODO: only for testing
-        }
-        else if (activeCharacter is Mage)
-        {
-            Mage mage = (Mage) activeCharacter;
-            mage.Fireball(activeCharacter.transform); // TODO: only for testing
-        }
-        else if (activeCharacter is Archer)
-        {
-
-        }
-        else if (activeCharacter is Cleric)
-        {
-
-        }
+        
     }
 
     public void PerformAction2()
     {
-        if (activeCharacter is Warrior)
-        {
-            
-        }
-        else if (activeCharacter is Mage)
-        {
-
-        }
-        else if (activeCharacter is Archer)
-        {
-
-        }
-        else if (activeCharacter is Cleric)
-        {
-            
-        }
+        
     }
 
     public void PerformAction3()
     {
-        if (activeCharacter is Warrior)
-        {
-            
-        }
-        else if (activeCharacter is Mage)
-        {
-
-        }
-        else if (activeCharacter is Archer)
-        {
-
-        }
-        else if (activeCharacter is Cleric)
-        {
-            
-        }
+        
     }
 
     public void MageTurn() // TODO: DELETE
