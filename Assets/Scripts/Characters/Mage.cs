@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Mage : Character
 {
+
+    public GameObject fireballVFX;
+    public GameObject arcanemissileVFX;
+    private GameObject currentFireballVFX;
+    private GameObject currentArcaneMissileVFX;
+    const int fireballDamage = 10;
+    const int arcaneMissileDamage = 8;
     public override void PerformAction1()
     {
         ResetSelected();
