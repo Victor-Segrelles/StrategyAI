@@ -10,11 +10,12 @@ public class Character : MonoBehaviour
 
     public List<Character> selectedCharacters = new List<Character>();
     public Transform selectedGroundPosition;
-    const int MaxHealth = 100;
-    const int MaxMovementAmount = 100;
+    protected bool selectionFinished = false;
+    // const int MaxHealth = 100;
+    // const int MaxMovementAmount = 100;
 
-    int health = MaxHealth;
-    int movementAmountLeft = 0;
+    // int health = MaxHealth;
+    // int movementAmountLeft = 0;
 
     GameMaster gm;
     private Renderer rend;
@@ -28,7 +29,7 @@ public class Character : MonoBehaviour
 
     public void StartTurn()
     {
-        movementAmountLeft = MaxMovementAmount;
+        // movementAmountLeft = MaxMovementAmount;
         if (isPlayerControlled)
         {
             // show control interface
@@ -42,7 +43,7 @@ public class Character : MonoBehaviour
         StartCoroutine(WaitForMoveTargetSelection());
     }
 
-    private IEnumerator WaitForMoveTargetSelection()
+    protected IEnumerator WaitForMoveTargetSelection()
     {
         while (selectedCharacters.Count == 0 && selectedGroundPosition == null)
         {
@@ -57,6 +58,52 @@ public class Character : MonoBehaviour
         {
             parent.ChangeTarget(selectedGroundPosition);
         }
+    }
+
+    protected IEnumerator WaitForEnemyTargetSelection() // TODO: fix missing enemy confirmation functionality
+    {
+        while (selectedCharacters.Count < 1)
+        {
+            yield return null;
+        }
+        selectionFinished = true;
+    }
+
+    protected IEnumerator WaitForTwoEnemiesTargetSelection() // TODO: fix missing enemy confirmation functionality
+    {
+        while (selectedCharacters.Count < 2)
+        {
+            yield return null;
+        }
+        selectionFinished = true;
+    }
+
+    protected IEnumerator WaitForThreeEnemiesTargetSelection() // TODO: fix missing enemy confirmation functionality
+    {
+        while (selectedCharacters.Count < 3)
+        {
+            yield return null;
+        }
+        selectionFinished = true;
+    }
+
+    protected IEnumerator WaitForAllyTargetSelection() // TODO: fix missing ally confirmation functionality
+    {
+        while (selectedCharacters.Count < 1)
+        {
+            yield return null;
+        }
+        selectionFinished = true;
+    }
+
+    protected IEnumerator WaitForGroundTargetSelection()
+    {
+        while (selectedGroundPosition == null)
+        {
+            yield return null;
+        }
+        selectionFinished = true;
+
     }
 
     public virtual void PerformAction1() {}
@@ -94,5 +141,6 @@ public class Character : MonoBehaviour
     {
         selectedCharacters.Clear();
         selectedGroundPosition = null;
+        selectionFinished = false;
     }
 }
