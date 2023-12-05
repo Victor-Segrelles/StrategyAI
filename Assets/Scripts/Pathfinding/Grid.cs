@@ -50,7 +50,9 @@ public class Grid : MonoBehaviour
 				if (walkable) {
 					Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
 					RaycastHit hit;
+					
 					if (Physics.Raycast(ray,out hit, 100, walkableMask)) {
+						
 						walkableRegionsDictionary.TryGetValue(hit.collider.gameObject.layer, out movementPenalty);
 					}
 				}
