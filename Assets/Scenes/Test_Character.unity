@@ -3515,7 +3515,7 @@ MonoBehaviour:
   activeCharacter: {fileID: 1935370596}
   ground:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
 --- !u!4 &1263696652
 Transform:
   m_ObjectHideFlags: 0
@@ -5632,6 +5632,9 @@ MonoBehaviour:
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
   health: 100
+  smiteVFX: {fileID: 2944396702758532163, guid: e190bf97c041e58448af6b043116cba0, type: 3}
+  healVFX: {fileID: 9017484664307500583, guid: 1245b8d2997d5b34fb1637be70a7eb05, type: 3}
+  HealingAreaVFX: {fileID: 7986504087968017091, guid: 12a56ee4630040c4eb17ae9707ed4cef, type: 3}
 --- !u!136 &1935370597
 CapsuleCollider:
   m_ObjectHideFlags: 0
