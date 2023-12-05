@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5398831284170659214}
   - component: {fileID: 9223072934344116975}
   - component: {fileID: 3186466617813287419}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: cart_wheel_left_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 7227995309716154112}
   - component: {fileID: 4766536959248331121}
   - component: {fileID: 5636897672925184308}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: cart_iron_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 8655706966158442093}
   - component: {fileID: 7023414654092172342}
   - component: {fileID: 8558538971355857551}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: cart_wheel_right_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 216665158157456107}
   - component: {fileID: 2688365103343404299}
   - component: {fileID: 3587368266060310204}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: cart_shafts_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7557363939504866088}
-  m_Layer: 0
+  - component: {fileID: 5884727768819389869}
+  m_Layer: 3
   m_Name: cart_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +358,7 @@ Transform:
   m_GameObject: {fileID: 7181823975284578706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 801031576128472151}
@@ -366,6 +367,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5884727768819389869
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7181823975284578706}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9908772, y: 2.1044412, z: 2.5964108}
+  m_Center: {x: -0.00643003, y: 0.5522206, z: 0.19892693}
 --- !u!1 &7267378777978957431
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +391,7 @@ GameObject:
   - component: {fileID: 4400808256513775536}
   - component: {fileID: 1943044920964674300}
   - component: {fileID: 8922229984801124854}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: cart_frame_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +474,7 @@ GameObject:
   - component: {fileID: 801031576128472151}
   - component: {fileID: 3507150615105052312}
   - component: {fileID: 3587918390421471652}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: cart_body_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
