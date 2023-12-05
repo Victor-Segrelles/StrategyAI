@@ -5,6 +5,26 @@ using UnityEngine;
 public class GameMaster : MonoBehaviour
 {
     public Character activeCharacter;
+    public LayerMask ground;
+
+    private void Update()
+    {
+        if (!activeCharacter.selectionFinished)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Vector3 clickPosition = -Vector3.one;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 100f, ground))
+                {
+                    activeCharacter.selectedGroundPosition = hit.transform; // TODO: check if correct
+                    Debug.Log(activeCharacter.selectedGroundPosition);
+                }
+            }
+        }
+    }
 
     public void StarTurn()
     {

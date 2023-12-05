@@ -10,7 +10,7 @@ public class Character : MonoBehaviour
 
     public List<Character> selectedCharacters = new List<Character>();
     public Transform selectedGroundPosition;
-    protected bool selectionFinished = false;
+    public bool selectionFinished = false;
     // const int MaxHealth = 100;
     // const int MaxMovementAmount = 100;
 
