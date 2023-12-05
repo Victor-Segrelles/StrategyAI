@@ -112,10 +112,7 @@ public class Character : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (this != gm.activeCharacter)
-        {
-            Highlight();
-        }
+        Highlight();
     }
 
     private void OnMouseExit() {
