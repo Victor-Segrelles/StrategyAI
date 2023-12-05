@@ -6,8 +6,7 @@ public class Mage : Character
 {
     public override void PerformAction1()
     {
-        Transform targetPosition = this.transform; // TODO: change
-        Fireball(targetPosition);
+       //Fireball(targetPosition);
     }
 
     public override void PerformAction2()

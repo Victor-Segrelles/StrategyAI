@@ -7,6 +7,9 @@ public class Character : MonoBehaviour
     public bool isPlayerControlled;
 
 	public Unit parent;
+
+    public List<Character> selectedCharacters = new List<Character>();
+    public Transform selectedGroundPosition;
     const int MaxHealth = 100;
     const int MaxMovementAmount = 100;
 
@@ -32,9 +35,28 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void Move(Transform target) // should be limited by movementAmountLeft
+    public void Move() // should be limited by movementAmountLeft
     {
-        parent.ChangeTarget(target);
+        ResetSelected();
+        Debug.Log("Waiting for either target position or target character to be selected.");
+        StartCoroutine(WaitForMoveTargetSelection());
+    }
+
+    private IEnumerator WaitForMoveTargetSelection()
+    {
+        while (selectedCharacters.Count == 0 && selectedGroundPosition == null)
+        {
+            yield return null;
+        }
+
+        if (selectedCharacters.Count > 0)
+        {
+            parent.ChangeTarget(selectedCharacters[0].transform);
+        }
+        else if (selectedGroundPosition != null)
+        {
+            parent.ChangeTarget(selectedGroundPosition);
+        }
     }
 
     public virtual void PerformAction1() {}
@@ -55,7 +77,7 @@ public class Character : MonoBehaviour
 
     private void OnMouseDown()
     {
-        gm.selectedCharacters.Add(this);
+        gm.activeCharacter.selectedCharacters.Add(this);
     }
 
     public void Highlight()
@@ -66,5 +88,11 @@ public class Character : MonoBehaviour
     public void Reset()
     {
         rend.material.color = Color.white;
+    }
+
+    public void ResetSelected()
+    {
+        selectedCharacters.Clear();
+        selectedGroundPosition = null;
     }
 }

@@ -6,7 +6,7 @@ public class Warrior : Character
 {
     public override void PerformAction1()
     {
-
+        //Slash(targetCharacter);
     }
 
     public override void PerformAction2()
