@@ -4,19 +4,7 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
-    private PlayerCamera camera;
     public Character activeCharacter;
-    public Character focusedCharacter;
-
-    private void Start()
-    {
-        camera = FindObjectOfType<PlayerCamera>();
-    }
-
-    public void FocusCharacter()
-    {
-        camera.FocusCharacter();
-    }
 
     public void StarTurn()
     {
@@ -34,17 +22,18 @@ public class GameMaster : MonoBehaviour
 
     public void PerformAction1()
     {
-        
+        activeCharacter.PerformAction1();
     }
 
     public void PerformAction2()
     {
-        
+        activeCharacter.PerformAction2();
+
     }
 
     public void PerformAction3()
     {
-        
+        activeCharacter.PerformAction3();
     }
 
     public void MageTurn() // TODO: DELETE

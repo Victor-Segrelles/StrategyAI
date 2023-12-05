@@ -6,18 +6,19 @@ public class Warrior : Character
 {
     public override void PerformAction1()
     {
-        //Slash(targetCharacter);
+        ResetSelected();
     }
 
     public override void PerformAction2()
     {
-        
+        ResetSelected();
     }
 
     public override void PerformAction3()
     {
-
+        ResetSelected();
     }
+    
     public void Slash(Character target)
     {
         Debug.Log("Warrior slashes target enemy");

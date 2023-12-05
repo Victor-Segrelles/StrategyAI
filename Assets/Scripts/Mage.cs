@@ -6,17 +6,29 @@ public class Mage : Character
 {
     public override void PerformAction1()
     {
-       //Fireball(targetPosition);
+        ResetSelected();
+        Debug.Log("Waiting for target position to be selected.");
+        StartCoroutine(WaitForFireballTargetSelection());
+       //Fireball(selectedGroundPosition);
+    }
+
+    private IEnumerator WaitForFireballTargetSelection()
+    {
+        while (selectedGroundPosition == null)
+        {
+            yield return null;
+        }
+        Fireball(selectedGroundPosition);
     }
 
     public override void PerformAction2()
     {
-
+        ResetSelected();
     }
 
     public override void PerformAction3()
     {
-
+        ResetSelected();
     }
     public void Fireball(Transform target)
     {
