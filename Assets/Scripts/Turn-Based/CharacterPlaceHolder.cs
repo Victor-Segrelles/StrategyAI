@@ -8,6 +8,8 @@ public class CharacterPlaceHolder : MonoBehaviour
     public float rotateAngle = 90f; // Ángulo de giro en grados
     public float dashDistance = 10f;
     public float movementSpeed = 5f;
+
+    //Importantes
     private bool isMoving = false;
     private bool movementCompleted = false;
 

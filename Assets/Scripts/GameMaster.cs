@@ -6,7 +6,11 @@ public class GameMaster : MonoBehaviour
 {
     private PlayerCamera camera;
     public Character activeCharacter;
+
+    //Solo para cámara
     public Character focusedCharacter;
+
+    //Para objetivos
     public List<Character> selectedCharacters = new List<Character>();
     public Transform selectedGroundPosition;
 
