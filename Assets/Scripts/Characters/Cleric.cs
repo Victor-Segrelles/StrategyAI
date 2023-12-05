@@ -69,24 +69,16 @@ public class Cleric : Character
 
     public void Smite(Character target)
     {
-        Debug.Log("Cleric smites 1 target");
-        target.ReceiveDamage(smiteDamage);
-        Debug.Log("Target health: " + target.health);
-
         currentSmiteVFX = Instantiate(smiteVFX, target.transform.position, Quaternion.identity);
         currentSmiteVFX.SetActive(true);
-        StartCoroutine(PlaySmiteVFX());
+        StartCoroutine(PlaySmiteVFX(target));
     }
 
     public void Heal(Character target)
     {
-        Debug.Log("Cleric heals 1 target");
-        target.ReceiveHealing(healPower);
-        Debug.Log("Target health: " + target.health);
-        
         currentHealFX = Instantiate(healVFX, target.transform.position, Quaternion.identity);
         currentHealFX.SetActive(true);
-        StartCoroutine(PlayHealVFX());
+        StartCoroutine(PlayHealVFX(target));
     }
 
     public void HealingArea(Transform target)
@@ -94,15 +86,20 @@ public class Cleric : Character
         Debug.Log("Cleric heals area");
     }
 
-    private IEnumerator PlaySmiteVFX()
+    private IEnumerator PlaySmiteVFX(Character target)
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.3f);
         Destroy(currentSmiteVFX);
+
+        target.ReceiveDamage(smiteDamage);
+        Debug.Log("Target health: " + target.health);
     }
 
-    private IEnumerator PlayHealVFX()
+    private IEnumerator PlayHealVFX(Character target)
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.2f);
         Destroy(currentHealFX);
+        target.ReceiveHealing(healPower);
+        Debug.Log("Target health: " + target.health);
     }
 }
