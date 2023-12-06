@@ -4491,7 +4491,7 @@ MonoBehaviour:
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
   health: 100
-  fireballVFX: {fileID: 0}
+  firestormVFX: {fileID: 7957833072274404953, guid: 44f68e3d5c75a495ebb52825b092791e, type: 3}
   arcanemissileVFX: {fileID: 3591305668869986075, guid: 5389e1c7b2c6b4e06a0faa77eedffba6, type: 3}
 --- !u!1001 &1577184678
 PrefabInstance:
