@@ -5,18 +5,21 @@ using UnityEngine;
 public class Mage : Character
 {
 
-    public GameObject fireballVFX;
+    public GameObject firestormVFX;
     public GameObject arcanemissileVFX;
-    private GameObject currentFireballVFX;
+    private GameObject currentFirestormVFX;
     private GameObject currentArcaneMissile1VFX;
     private GameObject currentArcaneMissile2VFX;
     private GameObject currentArcaneMissile3VFX;
 
-    const int fireballDamage = 10;
+    const int firestormDamage = 10;
     const int arcaneMissileDamage = 8;
     public override void PerformAction1()
     {
         ResetSelected();
+        Debug.Log("Waiting for target position to be selected.");
+        StartCoroutine(WaitForGroundTargetSelection());
+        StartCoroutine(WaitForFirestormTargetSelection());
     }
 
     public override void PerformAction2()
@@ -32,6 +35,15 @@ public class Mage : Character
         StartCoroutine(WaitForArcaneMissilesTargetSelection());
     }
 
+    private IEnumerator WaitForFirestormTargetSelection()
+    {
+        while (!selectionFinished)
+        {
+            yield return null;
+        }
+        Firestorm(selectedGroundPosition);
+    }
+
     private IEnumerator WaitForArcaneMissilesTargetSelection()
     {
         while (!selectionFinished)
@@ -40,9 +52,12 @@ public class Mage : Character
         }
         ArcaneMissiles(selectedCharacters[0], selectedCharacters[1], selectedCharacters[2]);
     }
-    public void Fireball(Transform target)
+    public void Firestorm(Transform target)
     {
-        Debug.Log("Mage casts a fireball.");
+        Debug.Log("Mage casts a firestorm.");
+        currentFirestormVFX = Instantiate(firestormVFX, target.transform.position, Quaternion.identity);
+        currentFirestormVFX.SetActive(true);
+        StartCoroutine(PlayFirestormVFX(target));
     }
 
     public void SummonElemental()
@@ -63,6 +78,13 @@ public class Mage : Character
 
         StartCoroutine(PlayArcaneMissileVFXAndHit(target1, target2, target3));
         Debug.Log("Mage casts arcane missiles to up to three different targets.");
+    }
+
+    private IEnumerator PlayFirestormVFX(Transform target)
+    {
+        yield return new WaitForSeconds(1.2f);
+        Destroy(currentFirestormVFX);
+        // TODO: damage in area
     }
 
     private IEnumerator PlayArcaneMissileVFXAndHit(Character target1, Character target2, Character target3)

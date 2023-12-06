@@ -35,7 +35,7 @@ public class Cleric : Character
     public override void PerformAction3()
     {
         ResetSelected();
-        Debug.Log("Waiting for either target position to be selected.");
+        Debug.Log("Waiting for target position to be selected.");
         StartCoroutine(WaitForGroundTargetSelection());
         StartCoroutine(WaitForHealingAreaTargetSelection());
     }
@@ -84,6 +84,9 @@ public class Cleric : Character
     public void HealingArea(Transform target)
     {
         Debug.Log("Cleric heals area");
+        currentHealingAreaVFX = Instantiate(HealingAreaVFX, target.transform.position, Quaternion.identity);
+        currentHealingAreaVFX.SetActive(true);
+        StartCoroutine(PlayHealingAreaVFX(target));
     }
 
     private IEnumerator PlaySmiteVFX(Character target)
@@ -101,5 +104,12 @@ public class Cleric : Character
         Destroy(currentHealFX);
         target.ReceiveHealing(healPower);
         Debug.Log("Target health: " + target.health);
+    }
+
+    private IEnumerator PlayHealingAreaVFX(Transform target)
+    {
+        yield return new WaitForSeconds(1.2f);
+        Destroy(currentHealingAreaVFX);
+        // TODO: heal in area
     }
 }
