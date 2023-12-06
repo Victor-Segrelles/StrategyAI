@@ -87,38 +87,30 @@ public class Cleric : Character
         ResetSelected();
         Debug.Log("Waiting for target position to be selected.");
         StartCoroutine(WaitForGroundTargetSelection());
-        StartCoroutine(WaitForhealingAreaVFXTargetSelection());
+        StartCoroutine(WaitForhealingAreaTargetSelection());
     }
 
-    private IEnumerator WaitForhealingAreaVFXTargetSelection()
+    private IEnumerator WaitForhealingAreaTargetSelection()
     {
         while (!selectionFinished)
         {
             yield return null;
         }
-        healingAreaVFX(selectedGroundPosition);
+        healingArea(selectedGroundPosition);
     }
 
-    public void healingAreaVFX(Transform target)
+    public void healingArea(Transform target)
     {
         Debug.Log("Cleric heals area");
-        currentHealingAreaVFX
-
- = Instantiate(healingAreaVFX
-, target.transform.position, Quaternion.identity);
-        currentHealingAreaVFX
-
-.SetActive(true);
-        StartCoroutine(PlayhealingAreaVFX
-(target));
+        currentHealingAreaVFX = Instantiate(healingAreaVFX, target.transform.position, Quaternion.identity);
+        currentHealingAreaVFX.SetActive(true);
+        StartCoroutine(PlayHealingAreaVFX(target));
     }
 
-    private IEnumerator PlayhealingAreaVFX(Transform target)
+    private IEnumerator PlayHealingAreaVFX(Transform target)
     {
         yield return new WaitForSeconds(1.2f);
-        Destroy(currentHealingAreaVFX
-
-);
+        Destroy(currentHealingAreaVFX);
         // TODO: Find allies in area and heal them
     }
 }
