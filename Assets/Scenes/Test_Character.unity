@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerControlled: 1
-  parent: {fileID: 0}
+  parent: {fileID: 2034366236}
   selectedCharacters: []
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0

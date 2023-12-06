@@ -6,14 +6,14 @@ public class Cleric : Character
 {
     public GameObject smiteVFX;
     public GameObject healVFX;
-    public GameObject HealingAreaVFX;
-    const int smiteDamage = 10;
-    const int healPower = 10;
-    const int healingAreaPower = 5;
-
+    public GameObject healingAreaVFX;
     private GameObject currentSmiteVFX;
     private GameObject currentHealFX;
     private GameObject currentHealingAreaVFX;
+
+    const int smiteDamage = 10;
+    const int healPower = 10;
+    const int healingAreaPower = 5;
 
     // ACTION 1 - SMITE
     public override void PerformAction1()
@@ -47,7 +47,7 @@ public class Cleric : Character
 
         target.ReceiveDamage(smiteDamage);
     }
-    
+
     // ACTION 2 - HEAL
     public override void PerformAction2()
     {
@@ -87,30 +87,38 @@ public class Cleric : Character
         ResetSelected();
         Debug.Log("Waiting for target position to be selected.");
         StartCoroutine(WaitForGroundTargetSelection());
-        StartCoroutine(WaitForHealingAreaTargetSelection());
+        StartCoroutine(WaitForhealingAreaVFXTargetSelection());
     }
 
-    private IEnumerator WaitForHealingAreaTargetSelection()
+    private IEnumerator WaitForhealingAreaVFXTargetSelection()
     {
         while (!selectionFinished)
         {
             yield return null;
         }
-        HealingArea(selectedGroundPosition);
+        healingAreaVFX(selectedGroundPosition);
     }
 
-    public void HealingArea(Transform target)
+    public void healingAreaVFX(Transform target)
     {
         Debug.Log("Cleric heals area");
-        currentHealingAreaVFX = Instantiate(HealingAreaVFX, target.transform.position, Quaternion.identity);
-        currentHealingAreaVFX.SetActive(true);
-        StartCoroutine(PlayHealingAreaVFX(target));
+        currentHealingAreaVFX
+
+ = Instantiate(healingAreaVFX
+, target.transform.position, Quaternion.identity);
+        currentHealingAreaVFX
+
+.SetActive(true);
+        StartCoroutine(PlayhealingAreaVFX
+(target));
     }
 
-    private IEnumerator PlayHealingAreaVFX(Transform target)
+    private IEnumerator PlayhealingAreaVFX(Transform target)
     {
         yield return new WaitForSeconds(1.2f);
-        Destroy(currentHealingAreaVFX);
+        Destroy(currentHealingAreaVFX
+
+);
         // TODO: Find allies in area and heal them
     }
 }
