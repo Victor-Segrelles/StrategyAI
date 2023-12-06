@@ -14,25 +14,14 @@ public class Mage : Character
 
     const int firestormDamage = 10;
     const int arcaneMissileDamage = 8;
+
+    // ACTION 1 - FIRESTORM
     public override void PerformAction1()
     {
         ResetSelected();
         Debug.Log("Waiting for target position to be selected.");
         StartCoroutine(WaitForGroundTargetSelection());
         StartCoroutine(WaitForFirestormTargetSelection());
-    }
-
-    public override void PerformAction2()
-    {
-        ResetSelected();
-    }
-
-    public override void PerformAction3()
-    {
-        ResetSelected();
-        Debug.Log("Waiting for target characters to be selected.");
-        StartCoroutine(WaitForThreeEnemiesTargetSelection());
-        StartCoroutine(WaitForArcaneMissilesTargetSelection());
     }
 
     private IEnumerator WaitForFirestormTargetSelection()
@@ -44,14 +33,6 @@ public class Mage : Character
         Firestorm(selectedGroundPosition);
     }
 
-    private IEnumerator WaitForArcaneMissilesTargetSelection()
-    {
-        while (!selectionFinished)
-        {
-            yield return null;
-        }
-        ArcaneMissiles(selectedCharacters[0], selectedCharacters[1], selectedCharacters[2]);
-    }
     public void Firestorm(Transform target)
     {
         Debug.Log("Mage casts a firestorm.");
@@ -60,9 +41,40 @@ public class Mage : Character
         StartCoroutine(PlayFirestormVFX(target));
     }
 
+    private IEnumerator PlayFirestormVFX(Transform target)
+    {
+        yield return new WaitForSeconds(1.2f);
+        Destroy(currentFirestormVFX);
+        // TODO: damage in area
+    }
+
+    // ACTION 2 - SUMMON ELEMENTAL
+    public override void PerformAction2()
+    {
+        ResetSelected();
+    }
+
     public void SummonElemental()
     {
         Debug.Log("Mage summons an elemental.");
+    }
+
+    // ACTION 3 - ARCANE MISSILES
+    public override void PerformAction3()
+    {
+        ResetSelected();
+        Debug.Log("Waiting for target characters to be selected.");
+        StartCoroutine(WaitForThreeEnemiesTargetSelection());
+        StartCoroutine(WaitForArcaneMissilesTargetSelection());
+    }
+
+    private IEnumerator WaitForArcaneMissilesTargetSelection()
+    {
+        while (!selectionFinished)
+        {
+            yield return null;
+        }
+        ArcaneMissiles(selectedCharacters[0], selectedCharacters[1], selectedCharacters[2]);
     }
 
     public void ArcaneMissiles(Character target1, Character target2, Character target3)
@@ -78,13 +90,6 @@ public class Mage : Character
 
         StartCoroutine(PlayArcaneMissileVFXAndHit(target1, target2, target3));
         Debug.Log("Mage casts arcane missiles to up to three different targets.");
-    }
-
-    private IEnumerator PlayFirestormVFX(Transform target)
-    {
-        yield return new WaitForSeconds(1.2f);
-        Destroy(currentFirestormVFX);
-        // TODO: damage in area
     }
 
     private IEnumerator PlayArcaneMissileVFXAndHit(Character target1, Character target2, Character target3)
