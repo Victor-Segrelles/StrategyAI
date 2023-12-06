@@ -46,8 +46,8 @@ public class Cleric : Character
         Destroy(currentSmiteVFX);
 
         target.ReceiveDamage(smiteDamage);
-        Debug.Log("Target health: " + target.health);
     }
+    
     // ACTION 2 - HEAL
     public override void PerformAction2()
     {
@@ -78,8 +78,8 @@ public class Cleric : Character
         yield return new WaitForSeconds(1.2f);
         Destroy(currentHealFX);
         target.ReceiveHealing(healPower);
-        Debug.Log("Target health: " + target.health);
     }
+
     // ACTION 3 - HEALING AREA
 
     public override void PerformAction3()
@@ -111,6 +111,6 @@ public class Cleric : Character
     {
         yield return new WaitForSeconds(1.2f);
         Destroy(currentHealingAreaVFX);
-        // TODO: heal in area
+        // TODO: Find allies in area and heal them
     }
 }

@@ -45,7 +45,7 @@ public class Mage : Character
     {
         yield return new WaitForSeconds(1.2f);
         Destroy(currentFirestormVFX);
-        // TODO: damage in area
+        // TODO: Find enemies en area and damage them
     }
 
     // ACTION 2 - SUMMON ELEMENTAL
@@ -89,7 +89,7 @@ public class Mage : Character
         currentArcaneMissile3VFX.SetActive(true);
 
         StartCoroutine(PlayArcaneMissileVFXAndHit(target1, target2, target3));
-        Debug.Log("Mage casts arcane missiles to up to three different targets.");
+        Debug.Log("Mage casts arcane missiles.");
     }
 
     private IEnumerator PlayArcaneMissileVFXAndHit(Character target1, Character target2, Character target3)
@@ -126,10 +126,5 @@ public class Mage : Character
         target2.ReceiveDamage(arcaneMissileDamage);
         target3.ReceiveDamage(arcaneMissileDamage);
         // TODO: if missile arcanes can hit same character might overkill and crash game
-
-        Debug.Log("Target health: " + target1.health);
-        Debug.Log("Target health: " + target2.health);
-        Debug.Log("Target health: " + target3.health);
-
     }
 }
