@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
     }
 
     //Esta función devuelve el personaje actual
-    private CharacterPlaceHolder GetCurrentCharacter()
+    public CharacterPlaceHolder GetCurrentCharacter()
     {
         
         return charactersList[activeCharacterIndex];        
