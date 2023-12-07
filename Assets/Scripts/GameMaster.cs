@@ -13,16 +13,32 @@ public class GameMaster : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Vector3 clickPosition = -Vector3.one;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
                 if (Physics.Raycast(ray, out hit, 100f, ground))
                 {
-                    activeCharacter.selectedGroundPosition = hit.transform; // TODO: check if correct
-                    Debug.Log(activeCharacter.selectedGroundPosition);
+                    if (activeCharacter != null)
+                    {
+                        // Si activeCharacter tiene una propiedad llamada selectedGroundPosition
+                        // asigna hit.point a esa propiedad
+                        if (activeCharacter.GetType().GetProperty("selectedGroundPosition") != null)
+                        {
+                            activeCharacter.GetType().GetProperty("selectedGroundPosition").SetValue(activeCharacter, hit.transform, null);
+                        }
+                        else
+                        {
+                            // Si no tiene una propiedad específica, simplemente muestra la posición en el Debug.Log
+                            Debug.Log("Punto de impacto en el plano: " + hit.point);
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("activeCharacter es nulo. Asegúrate de asignar un valor a activeCharacter antes de intentar acceder a sus propiedades.");
+                    }
                 }
             }
+
         }
     }
 
