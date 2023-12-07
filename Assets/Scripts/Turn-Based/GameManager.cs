@@ -2,11 +2,15 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public TMP_Text characterText; 
     public TMP_Text turnText;
+    public Button firstSkill;
+    public Button secondSkill;
+    public Button thirdSkill;
 
     //Listas de enemigos y aliados
     public GameObject alliesContainer;
@@ -112,7 +116,14 @@ public class GameManager : MonoBehaviour
     {
         characterText.text = $"Turno de: {GetCurrentCharacterName()}";
         turnText.text = "Turno: " + generalTurn.ToString();
+        skillsNaming();
+    }
 
+    private void skillsNaming()
+    {
+        firstSkill.GetComponentInChildren<TMP_Text>().text = GetCurrentCharacter().firstSkill;
+        secondSkill.GetComponentInChildren<TMP_Text>().text = GetCurrentCharacter().secondSkill;
+        thirdSkill.GetComponentInChildren<TMP_Text>().text = GetCurrentCharacter().thirdSkill;
     }
 
     //Esta función se ocupa de coger todos los nombres de Character, bien su nombre principal o bien sus habilidades

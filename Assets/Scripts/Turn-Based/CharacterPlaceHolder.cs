@@ -39,8 +39,11 @@ public class CharacterPlaceHolder : MonoBehaviour
     Color highlightedColor = Color.green;
     Color actualColor;
 
+    private void Awake()
+    {
+        setNames();
+    }
 
-    
     void Start()
     {
         rend = GetComponent<Renderer>();
@@ -209,22 +212,22 @@ public class CharacterPlaceHolder : MonoBehaviour
 
     public virtual void PerformAction1()
     {
-        Rotate();
+        
     }
 
     public virtual void PerformAction2()
     {
-        Dash();
+        
     }
 
     public virtual void PerformAction3()
     {
-        Slide();
+        
     }
 
     public virtual void setNames()
     {
-        this.characterName = "Character";
+        //this.characterName = "Character";
         this.firstSkill = "1º skill";
         this.secondSkill = "2º skill";
         this.thirdSkill = "3º skill";
