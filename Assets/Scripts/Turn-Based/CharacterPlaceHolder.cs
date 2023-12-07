@@ -1,42 +1,46 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 
 public class CharacterPlaceHolder : MonoBehaviour
 {
     
-    public float advanceDistance = 5f;
-    public float rotateAngle = 90f; // Ángulo de giro en grados
-    public float dashDistance = 10f;
-    public float movementSpeed = 5f;
-
     //Nombres
     public string characterName;
     public string firstSkill;
     public string secondSkill;
     public string thirdSkill;
 
-    //Importantes
+    //Comprobantes de que se ha terminado
     private bool isMoving = false;
     private bool movementCompleted = false;
 
-    //Lucas
+    private bool skillCompleted =false;
+
+    //Comprobante del tipo de personaje
     public bool isPlayerControlled;
 
+    //Variables de selección
     public List<CharacterPlaceHolder> selectedCharacters = new List<CharacterPlaceHolder>();
     public Transform selectedGroundPosition;
     public bool selectionFinished = false;
+    
+    //Control de salud
     const int MaxHealth = 100;
-
     public int health = MaxHealth;
 
-    GameManager gm;
+    //Importar otros scripts
+    private GameManager gm;
+    [SerializeField] private Unit parent;
+
+    //Código gráfico para resaltar color
     private Renderer rend;
     Color highlightedColor = Color.green;
     Color actualColor;
 
-    public Unit parent;
 
+    
     void Start()
     {
         rend = GetComponent<Renderer>();
@@ -53,8 +57,8 @@ public class CharacterPlaceHolder : MonoBehaviour
         }
     }
 
-
-    public void Move()
+    //////////////////////////////////////////////Codigo de prueba//////////////////////////////////////////////
+    public void MoveForward()
     {
         if (!isMoving)
         {
@@ -100,6 +104,17 @@ public class CharacterPlaceHolder : MonoBehaviour
             isMoving = false;
             movementCompleted = true;
         }
+    }
+
+    //////////////////////////////////////////////Codigo de prueba//////////////////////////////////////////////
+
+
+
+    public void Move() // should be limited by movementAmountLeft
+    {
+        ResetSelected();
+        Debug.Log("Waiting for either target position or target character to be selected.");
+        StartCoroutine(WaitForMoveTargetSelection());
     }
 
     protected IEnumerator WaitForMoveTargetSelection()
@@ -164,20 +179,32 @@ public class CharacterPlaceHolder : MonoBehaviour
         selectionFinished = true;
 
     }
+
+    //Comprueba si el personaje se está moviendo o ejecutando la acción
     public bool IsMoving()
     {
         return isMoving;
     }
 
+    //Comprueba si se ha terminado el movimiento
     public bool IsMovementCompleted()
     {
         return movementCompleted;
     }
 
+    //Resetea las variables de turno al empezar el turno
     public void ResetMovementStatus()
     {
         isMoving = false;
         movementCompleted = false;
+    }
+
+    //
+    public void ResetSelected()
+    {
+        selectedCharacters.Clear();
+        selectedGroundPosition = null;
+        selectionFinished = false;
     }
 
     public virtual void PerformAction1()
@@ -193,6 +220,14 @@ public class CharacterPlaceHolder : MonoBehaviour
     public virtual void PerformAction3()
     {
         Slide();
+    }
+
+    public virtual void setNames()
+    {
+        this.characterName = "Character";
+        this.firstSkill = "1º skill";
+        this.secondSkill = "2º skill";
+        this.thirdSkill = "3º skill";
     }
 
     public void Highlight()

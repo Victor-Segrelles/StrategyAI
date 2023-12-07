@@ -5,19 +5,21 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public TMP_Text characterText; 
     public TMP_Text turnText;
 
     //Listas de enemigos y aliados
     public GameObject alliesContainer;
     public GameObject enemiesContainer;
 
-
     private List<CharacterPlaceHolder> allies = new List<CharacterPlaceHolder>();
     private List<CharacterPlaceHolder> enemies = new List<CharacterPlaceHolder>();
 
     public List<CharacterPlaceHolder> charactersList;
 
+    //Control de personajes y turnos
     private int activeCharacterIndex = 0;
+    private int generalTurn = 0;
 
     public LayerMask ground;
 
@@ -80,6 +82,7 @@ public class GameManager : MonoBehaviour
         if (activeCharacterIndex >= charactersList.Count)
         {
             activeCharacterIndex = 0;
+            generalTurn++;
             StartTurn();  // Iniciar un nuevo turno cuando se completa un ciclo de turnos
         }
 
@@ -107,7 +110,9 @@ public class GameManager : MonoBehaviour
     //Esta función se encarga de poner el texto por pantalla
     private void UpdateTurnText()
     {
-        turnText.text = $"Turno de: {GetCurrentCharacterName()}";
+        characterText.text = $"Turno de: {GetCurrentCharacterName()}";
+        turnText.text = "Turno: " + generalTurn.ToString();
+
     }
 
     //Esta función se ocupa de coger todos los nombres de Character, bien su nombre principal o bien sus habilidades
@@ -126,7 +131,7 @@ public class GameManager : MonoBehaviour
     //Estas funciones se "comunican" con el personaje y les da instrucciones de lo que hacer
     public void Move()
     {
-        GetCurrentCharacter().Move();
+        GetCurrentCharacter().MoveForward();
     }
 
     public void PerformAction1()
