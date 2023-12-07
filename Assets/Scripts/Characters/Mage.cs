@@ -12,6 +12,8 @@ public class Mage : Character
     private GameObject currentArcaneMissile2VFX;
     private GameObject currentArcaneMissile3VFX;
 
+    public GameObject elementalPrefab;
+
     const int firestormDamage = 10;
     const int arcaneMissileDamage = 8;
 
@@ -52,11 +54,15 @@ public class Mage : Character
     public override void PerformAction2()
     {
         ResetSelected();
+        Debug.Log("Waiting for point on ground to be selected.");
+        StartCoroutine(WaitForGroundTargetSelection());
     }
 
     public void SummonElemental()
     {
         Debug.Log("Mage summons an elemental.");
+        Instantiate(elementalPrefab, transform, selectedGroundPosition);
+
     }
 
     // ACTION 3 - ARCANE MISSILES
