@@ -2828,22 +2828,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1647446555}
     m_Modifications:
-    - target: {fileID: 3663306692295435329, guid: 386df07ce0d48d04f89331ddc012e1bf, type: 3}
-      propertyPath: healVFX
-      value: 
-      objectReference: {fileID: 9017484664307500583, guid: 6002308570e5040db90027a3b92aad02, type: 3}
-    - target: {fileID: 3663306692295435329, guid: 386df07ce0d48d04f89331ddc012e1bf, type: 3}
-      propertyPath: smiteVFX
-      value: 
-      objectReference: {fileID: 2944396702758532163, guid: 2fd5ab3d5ca5541f19d33acbc8ed910d, type: 3}
-    - target: {fileID: 3663306692295435329, guid: 386df07ce0d48d04f89331ddc012e1bf, type: 3}
-      propertyPath: characterName
-      value: Cleric 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3663306692295435329, guid: 386df07ce0d48d04f89331ddc012e1bf, type: 3}
-      propertyPath: healingAreaVFX
-      value: 
-      objectReference: {fileID: 7986504087968017091, guid: 894e432e9d0d747e097c115ed94f5ba3, type: 3}
     - target: {fileID: 7265527248713835928, guid: 386df07ce0d48d04f89331ddc012e1bf, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2901,18 +2885,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1647446555}
     m_Modifications:
-    - target: {fileID: 4511756999106213333, guid: c43e8cb97a7607f479a4714a1aba9aa1, type: 3}
-      propertyPath: slashVFX
-      value: 
-      objectReference: {fileID: 5284079036507001202, guid: 7879368136f1c4486a0c02d608050903, type: 3}
-    - target: {fileID: 4511756999106213333, guid: c43e8cb97a7607f479a4714a1aba9aa1, type: 3}
-      propertyPath: cleaveVFX
-      value: 
-      objectReference: {fileID: 3153472991145048103, guid: 61d43b9ca4ef24ce1ae3bfcbc889813b, type: 3}
-    - target: {fileID: 4511756999106213333, guid: c43e8cb97a7607f479a4714a1aba9aa1, type: 3}
-      propertyPath: characterName
-      value: Warrior 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7209382020328509457, guid: c43e8cb97a7607f479a4714a1aba9aa1, type: 3}
       propertyPath: m_Name
       value: Warrior
@@ -2970,18 +2942,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1647446555}
     m_Modifications:
-    - target: {fileID: 2075602447259698056, guid: 5e5f47cb25cc26549be80bbb73566250, type: 3}
-      propertyPath: firestormVFX
-      value: 
-      objectReference: {fileID: 7957833072274404953, guid: 44f68e3d5c75a495ebb52825b092791e, type: 3}
-    - target: {fileID: 2075602447259698056, guid: 5e5f47cb25cc26549be80bbb73566250, type: 3}
-      propertyPath: characterName
-      value: Mage 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2075602447259698056, guid: 5e5f47cb25cc26549be80bbb73566250, type: 3}
-      propertyPath: arcanemissileVFX
-      value: 
-      objectReference: {fileID: 3591305668869986075, guid: 5389e1c7b2c6b4e06a0faa77eedffba6, type: 3}
     - target: {fileID: 5691484240784449073, guid: 5e5f47cb25cc26549be80bbb73566250, type: 3}
       propertyPath: m_RootOrder
       value: 3
