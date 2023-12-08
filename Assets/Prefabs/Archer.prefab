@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3905204312611476091}
   - component: {fileID: 3905204312611476086}
   - component: {fileID: 3905204312611476087}
-  - component: {fileID: 3905204312611476084}
+  - component: {fileID: 8176104301287183761}
+  - component: {fileID: 7641528819271652492}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -85,7 +86,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3905204312611476084
+--- !u!114 &8176104301287183761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905204312611476088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad873fa8601e849e3b2dfe08f3395c33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Archer 1
+  firstSkill: 
+  secondSkill: 
+  thirdSkill: 
+  isPlayerControlled: 0
+  selectedCharacters: []
+  selectedGroundPosition: {fileID: 0}
+  selectionFinished: 0
+  health: 100
+  parent: {fileID: 0}
+--- !u!136 &7641528819271652492
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
