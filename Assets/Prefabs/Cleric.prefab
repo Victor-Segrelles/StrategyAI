@@ -109,7 +109,6 @@ GameObject:
   - component: {fileID: 5574598853585063659}
   - component: {fileID: 8618401339588387733}
   - component: {fileID: 233156645442587553}
-  - component: {fileID: 3663306692295435329}
   m_Layer: 0
   m_Name: Cleric
   m_TagString: Untagged
@@ -197,28 +196,3 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3663306692295435329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7650875116458590176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a5d38dc51915ac4fa614118b71a8610, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterName: Cleric 1
-  firstSkill: 
-  secondSkill: 
-  thirdSkill: 
-  isPlayerControlled: 0
-  selectedCharacters: []
-  selectedGroundPosition: {fileID: 0}
-  selectionFinished: 0
-  health: 100
-  parent: {fileID: 0}
-  smiteVFX: {fileID: 2944396702758532163, guid: 2fd5ab3d5ca5541f19d33acbc8ed910d, type: 3}
-  healVFX: {fileID: 9017484664307500583, guid: 6002308570e5040db90027a3b92aad02, type: 3}
-  healingAreaVFX: {fileID: 7986504087968017091, guid: 894e432e9d0d747e097c115ed94f5ba3, type: 3}

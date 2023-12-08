@@ -52,6 +52,7 @@ public class Warrior : Character
     public override void PerformAction2()
     {
         ResetSelected();
+        Cleave(this.transform);
     }
 
     public void Cleave(Transform target)
@@ -63,10 +64,19 @@ public class Warrior : Character
     public override void PerformAction3()
     {
         ResetSelected();
+        Taunt(this);
     }
 
     public void Taunt(Character target)
     {
         Debug.Log("Warrior taunts target enemy");
+    }
+
+    public override void setNames()
+    {
+        //characterName = "Arquero";
+        firstSkill = "Slash";
+        secondSkill = "Cleave";
+        thirdSkill = "Taunt";
     }
 }

@@ -8,6 +8,7 @@ public class Archer : Character
     public override void PerformAction1()
     {
         ResetSelected();
+        SingleShot(this);
     }
 
     public void SingleShot(Character target)
@@ -19,6 +20,7 @@ public class Archer : Character
     public override void PerformAction2()
     {
         ResetSelected();
+        TwinShot(this, this);
     }
 
     public void TwinShot(Character target1, Character target2)
@@ -30,10 +32,19 @@ public class Archer : Character
     public override void PerformAction3()
     {
         ResetSelected();
+        Evade();
     }
 
     public void Evade()
     {
         Debug.Log("Archer improves their evasion");
+    }
+
+    public override void setNames()
+    {
+        //characterName = "Arquero";
+        firstSkill = "Single Shot";
+        secondSkill = "Twin Shot";
+        thirdSkill = "Evade";
     }
 }

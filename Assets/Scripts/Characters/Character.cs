@@ -4,32 +4,69 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    //Nombres
+    public string characterName;
+    public string firstSkill;
+    public string secondSkill;
+    public string thirdSkill;
+
+    //Comprobantes de que se ha terminado
+    private bool isMoving = false;
+    private bool movementCompleted = false;
+
+    private bool skillCompleted = false;
+
+    //Comprobante del tipo de personaje
     public bool isPlayerControlled;
 
-	public Unit parent;
-
+    //Variables de selección
     public List<Character> selectedCharacters = new List<Character>();
     public Transform selectedGroundPosition;
     public bool selectionFinished = false;
+
+    //Control de salud
     const int MaxHealth = 100;
-    // const int MaxMovementAmount = 100;
-
     public int health = MaxHealth;
-    // int movementAmountLeft = 0;
 
-    GameMaster gm;
+    //Importar otros scripts
+    private GameMaster gm;
+    [SerializeField] private Unit parent;
+
+    //Código gráfico para resaltar color
     private Renderer rend;
     Color highlightedColor = Color.green;
+    Color actualColor;
 
+    private void Awake()
+    {
+        setNames();
+    }
     void Start()
     {
         rend = GetComponent<Renderer>();
+        actualColor = rend.material.color;
         gm = FindObjectOfType<GameMaster>();
     }
 
-    public void StartTurn()
+    //////////////////////////////////////////////Codigo de prueba//////////////////////////////////////////////
+    public void MoveForward()
     {
-        // movementAmountLeft = MaxMovementAmount;
+        if (!isMoving)
+        {
+            isMoving = true;
+            movementCompleted = false;
+            print(characterName + " has moved");
+            isMoving = false;
+            movementCompleted = true;
+        }
+    }
+
+    //////////////////////////////////////////////Codigo de prueba//////////////////////////////////////////////
+    
+
+    //Esta función comprueba si es enemigo o aliado
+    public void checkStatus()
+    {
         if (isPlayerControlled)
         {
             // show control interface
@@ -106,22 +143,54 @@ public class Character : MonoBehaviour
 
     }
 
-    public virtual void PerformAction1() {}
-    public virtual void PerformAction2() {}
-    public virtual void PerformAction3() {}
-
-    private void OnMouseEnter()
+    //Comprueba si el personaje se está moviendo o ejecutando la acción
+    public bool IsMoving()
     {
-        Highlight();
+        return isMoving;
     }
 
-    private void OnMouseExit() {
-        Reset();
+    //Comprueba si se ha terminado el movimiento
+    public bool IsMovementCompleted()
+    {
+        return movementCompleted;
     }
 
-    private void OnMouseDown()
+    //Resetea las variables de turno al empezar el turno
+    public void ResetMovementStatus()
     {
-        gm.activeCharacter.selectedCharacters.Add(this);
+        isMoving = false;
+        movementCompleted = false;
+    }
+
+    //
+    public void ResetSelected()
+    {
+        selectedCharacters.Clear();
+        selectedGroundPosition = null;
+        selectionFinished = false;
+    }
+
+    public virtual void PerformAction1()
+    {
+
+    }
+
+    public virtual void PerformAction2()
+    {
+
+    }
+
+    public virtual void PerformAction3()
+    {
+
+    }
+
+    public virtual void setNames()
+    {
+        //this.characterName = "Character";
+        this.firstSkill = "1º skill";
+        this.secondSkill = "2º skill";
+        this.thirdSkill = "3º skill";
     }
 
     public void Highlight()
@@ -129,16 +198,26 @@ public class Character : MonoBehaviour
         rend.material.color = highlightedColor;
     }
 
-    public void Reset()
+    private void OnMouseEnter()
     {
-        rend.material.color = Color.white;
+        Highlight();
     }
 
-    public void ResetSelected()
+    private void OnMouseExit()
     {
-        selectedCharacters.Clear();
-        selectedGroundPosition = null;
-        selectionFinished = false;
+        Reset();
+    }
+
+    public void Reset()
+    {
+        rend.material.color = actualColor;
+    }
+
+
+    private void OnMouseDown()
+    {
+
+        gm.GetCurrentCharacter().selectedCharacters.Add(this);
     }
 
     public void ReceiveDamage(int damage)

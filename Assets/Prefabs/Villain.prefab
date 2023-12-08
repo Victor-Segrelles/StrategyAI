@@ -110,7 +110,6 @@ GameObject:
   - component: {fileID: 949910342587815081}
   - component: {fileID: 949910342587815080}
   - component: {fileID: 949910342587815083}
-  - component: {fileID: 2107207556398051385}
   m_Layer: 0
   m_Name: Villain
   m_TagString: Untagged
@@ -216,17 +215,3 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2107207556398051385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949910342587815077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9950851ba5853da4b803924af2eefb2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  advanceDistance: 5
-  movementSpeed: 5

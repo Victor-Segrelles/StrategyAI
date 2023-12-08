@@ -113,4 +113,13 @@ public class Cleric : Character
         Destroy(currentHealingAreaVFX);
         // TODO: Find allies in area and heal them
     }
+
+
+    public override void setNames()
+    {
+
+        firstSkill = "Smite";
+        secondSkill = "Heal";
+        thirdSkill = "Healing area";
+    }
 }

@@ -133,4 +133,12 @@ public class Mage : Character
         target3.ReceiveDamage(arcaneMissileDamage);
         // TODO: if missile arcanes can hit same character might overkill and crash game
     }
+
+
+    public override void setNames()
+    {
+        firstSkill = "Firestorm";
+        secondSkill = "Summon elemental";
+        thirdSkill = "Arcane missiles";
+    }
 }
