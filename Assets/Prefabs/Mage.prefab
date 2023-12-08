@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5691484240784449084}
   - component: {fileID: 5691484240784449085}
   - component: {fileID: 5691484240784449086}
+  - component: {fileID: 2336604542495299676}
+  - component: {fileID: 3821760042218716304}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Untagged
@@ -99,6 +101,52 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2336604542495299676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5691484240784449074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0e5431d9f49d4b9786880e650d3ed01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Mage 1
+  firstSkill: 
+  secondSkill: 
+  thirdSkill: 
+  isPlayerControlled: 0
+  selectedCharacters: []
+  selectedGroundPosition: {fileID: 0}
+  selectionFinished: 0
+  health: 100
+  parent: {fileID: 0}
+  firestormVFX: {fileID: 7957833072274404953, guid: 44f68e3d5c75a495ebb52825b092791e, type: 3}
+  arcanemissileVFX: {fileID: 3591305668869986075, guid: 5389e1c7b2c6b4e06a0faa77eedffba6, type: 3}
+  elementalPrefab: {fileID: 0}
+--- !u!114 &3821760042218716304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5691484240784449074}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 077b4444e1cb7e84a9b5314cc14ec10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  speed: 20
+  waypoints: []
+  player: {fileID: 0}
+  enemies: []
+  audio: {fileID: 0}
+  warned: 0
+  warnedEnemies: []
+  hijo: {fileID: 0}
 --- !u!1 &5691484241650598769
 GameObject:
   m_ObjectHideFlags: 0
