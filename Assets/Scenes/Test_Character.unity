@@ -211,7 +211,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!114 &48802889
 MonoBehaviour:
@@ -373,12 +373,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c244140d9064b41f8b31bb16206c3c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: 
+  firstSkill: 
+  secondSkill: 
+  thirdSkill: 
   isPlayerControlled: 1
-  parent: {fileID: 2034366236}
   selectedCharacters: []
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
   health: 100
+  parent: {fileID: 2034366236}
   slashVFX: {fileID: 5284079036507001202, guid: 7879368136f1c4486a0c02d608050903, type: 3}
   cleaveVFX: {fileID: 3153472991145048103, guid: 61d43b9ca4ef24ce1ae3bfcbc889813b, type: 3}
   tauntVFX: {fileID: 0}
@@ -1186,7 +1190,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &508775472
 GameObject:
@@ -1282,6 +1286,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &522168780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 522168781}
+  m_Layer: 0
+  m_Name: -----------------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &522168781
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522168780}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.3947043, y: -5.0527744, z: -1.5736016}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &549919650
 GameObject:
   m_ObjectHideFlags: 0
@@ -3190,7 +3225,7 @@ Transform:
   m_Children:
   - {fileID: 1569877712}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1191461627
 MonoBehaviour:
@@ -3380,7 +3415,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c80c228f257437c86ba9c303ea4416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeCharacter: {fileID: 1935370596}
+  characterText: {fileID: 0}
+  turnText: {fileID: 0}
+  firstSkill: {fileID: 0}
+  secondSkill: {fileID: 0}
+  thirdSkill: {fileID: 0}
+  alliesContainer: {fileID: 0}
+  enemiesContainer: {fileID: 0}
+  charactersList: []
   ground:
     serializedVersion: 2
     m_Bits: 128
@@ -3397,7 +3439,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1313371622
 PrefabInstance:
@@ -4178,7 +4220,7 @@ Transform:
   m_Children:
   - {fileID: 252538254}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1567179993
 PrefabInstance:
@@ -4353,12 +4395,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e5431d9f49d4b9786880e650d3ed01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: 
+  firstSkill: 
+  secondSkill: 
+  thirdSkill: 
   isPlayerControlled: 1
-  parent: {fileID: 0}
   selectedCharacters: []
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
   health: 100
+  parent: {fileID: 0}
   firestormVFX: {fileID: 7957833072274404953, guid: 44f68e3d5c75a495ebb52825b092791e, type: 3}
   arcanemissileVFX: {fileID: 3591305668869986075, guid: 5389e1c7b2c6b4e06a0faa77eedffba6, type: 3}
   elementalPrefab: {fileID: 7459665164033792588, guid: dfbfc003135d2d742a7d303fea8fbc93, type: 3}
@@ -4769,6 +4815,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646580991}
   m_CullTransparentMesh: 1
+--- !u!1 &1670470441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1670470442}
+  m_Layer: 0
+  m_Name: -----------------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1670470442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670470441}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.3947043, y: -5.0527744, z: -1.5736016}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1682571868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5364,12 +5441,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59400255b356f408e99def31ccd144e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: 
+  firstSkill: 
+  secondSkill: 
+  thirdSkill: 
   isPlayerControlled: 1
-  parent: {fileID: 792956562}
   selectedCharacters: []
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
   health: 100
+  parent: {fileID: 792956562}
   smiteVFX: {fileID: 2944396702758532163, guid: 2fd5ab3d5ca5541f19d33acbc8ed910d, type: 3}
   healVFX: {fileID: 9017484664307500583, guid: 6002308570e5040db90027a3b92aad02, type: 3}
   healingAreaVFX: {fileID: 7986504087968017091, guid: 894e432e9d0d747e097c115ed94f5ba3, type: 3}
@@ -5814,7 +5895,7 @@ RectTransform:
   - {fileID: 646873898}
   - {fileID: 1646580992}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5928,7 +6009,7 @@ Transform:
   m_Children:
   - {fileID: 95267992}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2034366236
 MonoBehaviour:

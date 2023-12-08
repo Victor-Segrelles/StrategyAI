@@ -250,5 +250,7 @@ public class Character : MonoBehaviour
     public void Die()
     {
         Debug.Log("Character died.");
+        gm.charactersList.Remove(this);
+        Destroy(this.gameObject);
     }
 }
