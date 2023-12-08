@@ -38,7 +38,7 @@ public class Mage : Character
     public void Firestorm(Transform target)
     {
         Debug.Log("Mage casts a firestorm.");
-        currentFirestormVFX = Instantiate(firestormVFX, target.transform.position, Quaternion.identity);
+        currentFirestormVFX = Instantiate(firestormVFX, target.position, Quaternion.identity);
         currentFirestormVFX.SetActive(true);
         StartCoroutine(PlayFirestormVFX(target));
     }
