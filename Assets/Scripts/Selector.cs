@@ -2,14 +2,14 @@ using System.Collections.Generic;
 
 namespace BehaviorTree
 {
-    public class Selector : Node
+    public class Selector : NodeBT
     {
         public Selector() : base() { }
-        public Selector(List<Node> children) : base(children) { }
+        public Selector(List<NodeBT> children) : base(children) { }
 
         public override NodeState Evaluate()
         {
-            foreach (Node node in children)
+            foreach (NodeBT node in children)
             {
                 switch (node.Evaluate())
                 {
