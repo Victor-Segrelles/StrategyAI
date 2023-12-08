@@ -34,6 +34,9 @@ public class GameMaster : MonoBehaviour
         StartTurn();
     }
 
+    //Esto podría ser más optimo si se hiciera con maquinas de estado, pero no se nos ocurrió al principio.
+
+
     private void Update()
     {
         if (!GetCurrentCharacter().selectionFinished)
@@ -87,7 +90,7 @@ public class GameMaster : MonoBehaviour
         // Reiniciar el estado de movimiento solo para el personaje actual
         GetCurrentCharacter().ResetMovementStatus();
 
-        GetCurrentCharacter().checkStatus();
+        //GetCurrentCharacter().checkStatus();
 
 
     }

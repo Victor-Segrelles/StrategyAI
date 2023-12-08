@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 949910342587815081}
   - component: {fileID: 949910342587815080}
   - component: {fileID: 2733151437379340967}
+  - component: {fileID: 6901285522226182312}
   m_Layer: 0
   m_Name: Villain
   m_TagString: Untagged
@@ -218,3 +219,24 @@ MonoBehaviour:
   warned: 0
   warnedEnemies: []
   hijo: {fileID: 0}
+--- !u!114 &6901285522226182312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949910342587815077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1a835053edbc46a49632fe2e02620d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Enemigo 1
+  firstSkill: 
+  secondSkill: 
+  thirdSkill: 
+  isPlayerControlled: 0
+  selectedCharacters: []
+  selectedGroundPosition: {fileID: 0}
+  selectionFinished: 0
+  health: 100

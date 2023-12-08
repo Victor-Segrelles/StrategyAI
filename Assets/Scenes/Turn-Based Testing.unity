@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &52405459 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 949910342587815077, guid: 1df9daf857f7f2d4ab9e051bd79d43af, type: 3}
-  m_PrefabInstance: {fileID: 949910342264560770}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &73046717
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -421,28 +416,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 949910342587815082, guid: 1df9daf857f7f2d4ab9e051bd79d43af, type: 3}
   m_PrefabInstance: {fileID: 949910342264560770}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &491554862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 52405459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1a835053edbc46a49632fe2e02620d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterName: Enemigo 1
-  firstSkill: 
-  secondSkill: 
-  thirdSkill: 
-  isPlayerControlled: 0
-  selectedCharacters: []
-  selectedGroundPosition: {fileID: 0}
-  selectionFinished: 0
-  health: 100
-  parent: {fileID: 0}
 --- !u!4 &506313864 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 949910342587815082, guid: 1df9daf857f7f2d4ab9e051bd79d43af, type: 3}
@@ -608,7 +581,6 @@ MonoBehaviour:
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
   health: 100
-  parent: {fileID: 0}
 --- !u!1 &575104224
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,7 +1117,6 @@ MonoBehaviour:
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
   health: 100
-  parent: {fileID: 0}
 --- !u!1001 &1115386223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1327,7 +1298,6 @@ MonoBehaviour:
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
   health: 100
-  parent: {fileID: 0}
 --- !u!1 &1228947453
 GameObject:
   m_ObjectHideFlags: 0

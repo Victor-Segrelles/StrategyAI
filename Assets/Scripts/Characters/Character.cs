@@ -30,12 +30,15 @@ public class Character : MonoBehaviour
 
     //Importar otros scripts
     private GameMaster gm;
-    [SerializeField] private Unit parent;
+    private Unit parent;
 
     //Código gráfico para resaltar color
     private Renderer rend;
     Color highlightedColor = Color.green;
     Color actualColor;
+
+    //Movimiento
+    private float movementAmountLeft = 5f;
 
     private void Awake()
     {
@@ -46,37 +49,23 @@ public class Character : MonoBehaviour
         rend = GetComponent<Renderer>();
         actualColor = rend.material.color;
         gm = FindObjectOfType<GameMaster>();
+        parent = GetComponent<Unit>();
     }
-
-    //////////////////////////////////////////////Codigo de prueba//////////////////////////////////////////////
-    public void MoveForward()
-    {
-        if (!isMoving)
-        {
-            isMoving = true;
-            movementCompleted = false;
-            print(characterName + " has moved");
-            isMoving = false;
-            movementCompleted = true;
-        }
-    }
-
-    //////////////////////////////////////////////Codigo de prueba//////////////////////////////////////////////
-    
 
     //Esta función comprueba si es enemigo o aliado
-    public void checkStatus()
-    {
-        if (isPlayerControlled)
-        {
-            // show control interface
-        }
-    }
+    //public void checkStatus()
+    //{
+    //    if (isPlayerControlled)
+    //    {
+    //        // show control interface
+    //    }
+    //}
 
+    //Código de movimiento
     public void Move() // should be limited by movementAmountLeft
     {
         ResetSelected();
-        Debug.Log("Waiting for either target position or target character to be selected.");
+        Debug.Log("Waiting for target position to be selected.");
         StartCoroutine(WaitForMoveTargetSelection());
     }
 
@@ -87,11 +76,7 @@ public class Character : MonoBehaviour
             yield return null;
         }
 
-        if (selectedCharacters.Count > 0)
-        {
-            parent.ChangeTarget(selectedCharacters[0].transform);
-        }
-        else if (selectedGroundPosition != null)
+        if (selectedGroundPosition != null)
         {
             parent.ChangeTarget(selectedGroundPosition);
         }
@@ -252,5 +237,27 @@ public class Character : MonoBehaviour
         Debug.Log("Character died.");
         gm.charactersList.Remove(this);
         Destroy(this.gameObject);
+    }
+
+
+
+
+
+
+
+
+
+    ////////////////////////////////////////// Pruebas de movimiento /////////////////////////////////////////////////////////
+
+    public void MoveForward()
+    {
+        if (!isMoving)
+        {
+            isMoving = true;
+            movementCompleted = false;
+            print(characterName + " has moved");
+            isMoving = false;
+            movementCompleted = true;
+        }
     }
 }
