@@ -18,7 +18,7 @@ public class Character : MonoBehaviour
 
     //Variables de selección
     public List<Character> selectedCharacters = new List<Character>();
-    public Transform selectedGroundPosition;
+    public Transform selectedGroundPosition ;
     public bool selectionFinished = false;
 
     //Control de salud
@@ -26,11 +26,11 @@ public class Character : MonoBehaviour
     public int health = MaxHealth;
 
     //Importar otros scripts
-    private GameMaster gm;
-    private Unit parent;
+    public GameMaster gm;
+    public Unit parent;
 
     //Código gráfico para resaltar color
-    private Renderer rend;
+    public Renderer rend;
     Color highlightedColor = Color.green;
     Color actualColor;
 
@@ -49,43 +49,32 @@ public class Character : MonoBehaviour
     }
     void Start()
     {
-        rend = FindObjectOfType<Renderer>();
+        
+        rend = GetComponent<Renderer>();
         actualColor = rend.material.color;
         gm = FindObjectOfType<GameMaster>();
-        parent = FindObjectOfType<Unit>();
+        parent = GetComponent<Unit>();
+        selectedGroundPosition = this.transform;
 
     }
-
-    //Esta función comprueba si es enemigo o aliado
-    //public void checkStatus()
-    //{
-    //    if (isPlayerControlled)
-    //    {
-    //        // show control interface
-    //    }
-    //}
 
     //Código de movimiento
     public void ResetMovementStatus()
     {
-        selectedGroundPosition = null;
+        //selectedGroundPosition = null;
         isMoving = false;
         movementCompleted = false;
 
     }
-
+    
     public void Move()
     {
         
         parent.ChangeTarget(selectedGroundPosition);
         print("Jejeje, me moví a " + selectedGroundPosition);
-        isMoving = true;
-        while(!CheckMovement())
-        {
-            print("Me estoy moviendo jejejeje");
-        }
-        isMoving = false;
-        movementCompleted = true;
+        
+
+        StartCoroutine(CheckMovement());
 
     }
 
@@ -95,16 +84,21 @@ public class Character : MonoBehaviour
         print("Is going to move");
     }
 
-    public bool CheckMovement()
+    IEnumerator CheckMovement()
     {
-        if(Vector3.Distance(this.transform.position, selectedGroundPosition.position) < 2)
+        isMoving = true;
+
+        while (Mathf.Abs(Vector3.Distance(transform.position, selectedGroundPosition.position)) >= 2.5f)
         {
-            return true;
+            
+            print("Me estoy moviendo todavia churrita");
+            yield return null;
         }
-        else
-        {
-            return false;
-        }
+
+        isMoving = false;
+        movementCompleted = true;
+        print("Me terminé de mover");
+
     }
 
     ////////////////////////////////////////////////////////////

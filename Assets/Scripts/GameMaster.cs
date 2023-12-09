@@ -63,7 +63,7 @@ public class GameMaster : MonoBehaviour
                     auxTransform.rotation = Quaternion.identity;
 
                     GetCurrentCharacter().selectGroundPosition(auxTransform);
-                    //Destroy(newTransform.gameObject);
+                    
                     changeState(state.neutral);
                     GetCurrentCharacter().Move();
                 }
