@@ -6,22 +6,22 @@ using BehaviorTree;
 
 public class CheckDead80 : NodeBT
 {
-    private int _life;
+    private Unit unit;
 
-    public CheckDead80(int life)
+    public CheckDead80(Unit obj)
     {
-        _life = life;
+        unit=obj;
     }
 
     public override NodeState Evaluate()
     {
         object t = GetData("target");
-        if (t == null)
-        {
+        if(t==null || (int)t!=unit.life){
+        
 
-            if (_life < 80)
+            if (unit.life < 80)
             {
-                parent.parent.SetData("target", _life);
+                parent.parent.SetData("target", unit.life);
                 state = NodeState.SUCCESS;
                 return state;
             }

@@ -6,11 +6,11 @@ using BehaviorTree;
 
 public class ImAlive : NodeBT
 {
-    private int _life;
+    private Unit unit;
 
-    public ImAlive(int life)
+    public ImAlive(Unit obj)
     {
-        _life = life;
+        unit=obj;
     }
 
     public override NodeState Evaluate()
@@ -19,7 +19,8 @@ public class ImAlive : NodeBT
 
         if (amount > 80)
         {
-            Debug.Log("Tengo más de 80 de vida");
+            //Debug.Log("Tengo mï¿½s de 80 de vida");
+            Debug.Log("Tengo mï¿½s de 80 de vida"+amount);
         }
 
         state = NodeState.RUNNING;

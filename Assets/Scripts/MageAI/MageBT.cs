@@ -12,13 +12,13 @@ public class MageBT : Tree
         {
             new Sequence(new List<NodeBT>
             {
-                new CheckLife80(life),
-                new ImAlive(life),
+                new CheckLife80(GetComponent<Unit>()),
+                new ImAlive(GetComponent<Unit>()),
             }),
             new Sequence(new List<NodeBT>
             {
-                new CheckDead80(life),
-                new ImDead(life),
+                new CheckDead80(GetComponent<Unit>()),
+                new ImDead(GetComponent<Unit>()),
             }),
             new ImInLimbo(),
         });

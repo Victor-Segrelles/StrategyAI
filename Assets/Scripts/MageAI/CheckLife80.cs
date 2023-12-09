@@ -6,23 +6,23 @@ using BehaviorTree;
 
 public class CheckLife80 : NodeBT
 {
-    private int _life;
+    private Unit unit;
 
-    public CheckLife80(int life)
+    public CheckLife80(Unit obj)
     {
-        _life = life;
+        unit=obj;
     }
 
     public override NodeState Evaluate()
     {
+        Debug.Log(unit.life);
         object t = GetData("target");
-        if (t == null)
-        {
+        if(t==null || (int)t!=unit.life){
 
-            if (_life > 80)
+            if (unit.life > 80)
             {
-                Debug.Log(_life);
-                parent.parent.SetData("target", _life);
+                Debug.Log(unit.life);
+                parent.parent.SetData("target", unit.life);
                 state = NodeState.SUCCESS;
                 return state;
             }
@@ -30,7 +30,6 @@ public class CheckLife80 : NodeBT
             state = NodeState.FAILURE;
             return state;
         }
-        Debug.Log(_life);
         state = NodeState.SUCCESS;
         return state;
     }

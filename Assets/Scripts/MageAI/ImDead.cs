@@ -6,11 +6,11 @@ using BehaviorTree;
 
 public class ImDead : NodeBT
 {
-    private int _life;
+    private Unit unit;
 
-    public ImDead(int life)
+    public ImDead(Unit obj)
     {
-        _life = life;
+        unit=obj;
     }
 
     public override NodeState Evaluate()
@@ -19,7 +19,7 @@ public class ImDead : NodeBT
 
         if (amount < 80)
         {
-            Debug.Log("NOOOO TOY MUERTOOOOOOO");
+            Debug.Log("NOOOO TOY MUERTOOOOOOO"+amount);
         }
 
         state = NodeState.RUNNING;

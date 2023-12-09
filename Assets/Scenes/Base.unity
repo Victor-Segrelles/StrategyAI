@@ -16745,7 +16745,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   heightoffset: 0
-  life: 0
+  life: 45
 --- !u!114 &3308901394575718876
 MonoBehaviour:
   m_ObjectHideFlags: 0
