@@ -10,9 +10,6 @@ public class Character : MonoBehaviour
     public string secondSkill;
     public string thirdSkill;
 
-    //Comprobantes de que se ha terminado
-    private bool isMoving = false;
-    private bool movementCompleted = false;
 
     private bool skillCompleted = false;
 
@@ -37,8 +34,14 @@ public class Character : MonoBehaviour
     Color highlightedColor = Color.green;
     Color actualColor;
 
-    //Movimiento
-    private float movementAmountLeft = 5f;
+
+    //Comprobantes del movimiento
+    private bool isMoving = false;
+    private bool movementCompleted = false;
+
+
+    //Comprobantes de la accion
+    private bool isCastingSkill = false;
 
     private void Awake()
     {
@@ -46,10 +49,11 @@ public class Character : MonoBehaviour
     }
     void Start()
     {
-        rend = GetComponent<Renderer>();
+        rend = FindObjectOfType<Renderer>();
         actualColor = rend.material.color;
         gm = FindObjectOfType<GameMaster>();
-        parent = GetComponent<Unit>();
+        parent = FindObjectOfType<Unit>();
+
     }
 
     //Esta función comprueba si es enemigo o aliado
@@ -62,25 +66,48 @@ public class Character : MonoBehaviour
     //}
 
     //Código de movimiento
-    public void Move() // should be limited by movementAmountLeft
+    public void ResetMovementStatus()
     {
-        ResetSelected();
-        Debug.Log("Waiting for target position to be selected.");
-        StartCoroutine(WaitForMoveTargetSelection());
+        selectedGroundPosition = null;
+        isMoving = false;
+        movementCompleted = false;
+
     }
 
-    protected IEnumerator WaitForMoveTargetSelection()
+    public void Move()
     {
-        while (selectedCharacters.Count == 0 && selectedGroundPosition == null)
+        
+        parent.ChangeTarget(selectedGroundPosition);
+        print("Jejeje, me moví a " + selectedGroundPosition);
+        isMoving = true;
+        while(!CheckMovement())
         {
-            yield return null;
+            print("Me estoy moviendo jejejeje");
         }
+        isMoving = false;
+        movementCompleted = true;
 
-        if (selectedGroundPosition != null)
+    }
+
+    public void WarnMove()
+    {
+        ResetMovementStatus();
+        print("Is going to move");
+    }
+
+    public bool CheckMovement()
+    {
+        if(Vector3.Distance(this.transform.position, selectedGroundPosition.position) < 2)
         {
-            parent.ChangeTarget(selectedGroundPosition);
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
+
+    ////////////////////////////////////////////////////////////
 
     protected IEnumerator WaitForEnemyTargetSelection() // TODO: fix missing enemy confirmation functionality
     {
@@ -128,6 +155,12 @@ public class Character : MonoBehaviour
 
     }
 
+    //Setear la variable selectedGroundPosition
+    public void selectGroundPosition(Transform pos)
+    {
+        selectedGroundPosition = pos;
+    }
+
     //Comprueba si el personaje se está moviendo o ejecutando la acción
     public bool IsMoving()
     {
@@ -140,12 +173,6 @@ public class Character : MonoBehaviour
         return movementCompleted;
     }
 
-    //Resetea las variables de turno al empezar el turno
-    public void ResetMovementStatus()
-    {
-        isMoving = false;
-        movementCompleted = false;
-    }
 
     //
     public void ResetSelected()
@@ -154,6 +181,14 @@ public class Character : MonoBehaviour
         selectedGroundPosition = null;
         selectionFinished = false;
     }
+
+
+    //Actions
+    public bool IsCastingsSkill()
+    {
+        return isCastingSkill;
+    }
+
 
     public virtual void PerformAction1()
     {

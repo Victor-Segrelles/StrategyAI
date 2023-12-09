@@ -15,15 +15,15 @@ public class Unit : MonoBehaviour {
 	float turnDst=0;
 	float stoppingDst = 2;
 	public Transform[] waypoints;
-	public GameObject player;
-	public GameObject[] enemies;
+	
+	
 	Path path;
 	int currentIndex = 0;
 	bool stuned = false;
 	bool debug_recentstun=false;
     public AudioSource audio;
 	public bool warned = false;
-	public List<GameObject> warnedEnemies;
+	
 	bool chasing = false;
 	public Transform hijo;
 
@@ -42,7 +42,7 @@ public class Unit : MonoBehaviour {
         if (Physics.Raycast(ray, out hit, 100))
         {
             var distanceToGround = hit.distance;
-            Debug.Log(distanceToGround);
+            //Debug.Log(distanceToGround);
             hijo.position = new Vector3(hijo.position.x, transform.position.y+100-distanceToGround+1, hijo.position.z);
         }
 
@@ -56,7 +56,7 @@ public class Unit : MonoBehaviour {
 
         if (!stuned)
 		{
-			MoveEnemy();
+			
 			//debug
 			if(debug_recentstun){
 				debug_recentstun=false;
@@ -69,50 +69,7 @@ public class Unit : MonoBehaviour {
 		target = newTarget;
     }
 
-	private void MoveEnemy()
-	{
-		if (warned || Vector3.Distance(transform.position, player.transform.position) < 8)
-		{
-			chasing = true;
-			target = player.transform;
-			if (!warned)
-			{
-				for (int i = 0; i < enemies.Length; i++)
-				{
-					if (Vector3.Distance(transform.position, enemies[i].transform.position) < 15)
-					{
-						enemies[i].GetComponent<Unit>().ChangeTarget(player.transform);
-						if (!warnedEnemies.Contains(enemies[i]))
-						{
-							enemies[i].GetComponent<Unit>().warned = true;
-							warnedEnemies.Add(enemies[i]);
-						}
-					}
-				}
-			}
-		}
-		else
-		{
-			foreach (GameObject enemy in warnedEnemies)
-			{
-				enemy.GetComponent<Unit>().warned = false;
-			}
-			warnedEnemies.Clear();
-			if (chasing || (waypoints.Length > 0 && Vector3.Distance(transform.position, waypoints[currentIndex].position) < 1.9f))
-			{
-				chasing = false;
-				if (currentIndex + 1 >= waypoints.Length)
-				{
-					currentIndex = 0;
-				}
-				else
-				{
-					currentIndex++;
-				}
-				target = waypoints[currentIndex];
-			}
-		}
-	}
+	
 
 	public void OnPathFound(Vector3[] waypoints, bool pathSuccessful) {
 		if (pathSuccessful) {

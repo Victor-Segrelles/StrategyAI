@@ -21,25 +21,36 @@ public class GameMaster : MonoBehaviour
 
     public List<Character> charactersList;
 
+    //Raycast y derivados
+    Transform auxTransform;
+
     //Control de personajes y turnos
     private int activeCharacterIndex = 0;
     private int generalTurn = 0;
 
     public LayerMask ground;
 
+    //Máquina de estados
+    public enum state
+    {
+        neutral,
+        Moving,
+        Action
+    }
+
+    public state currentState = state.neutral;
+
     void Start()
     {
         charactersList = generateList(allies, enemies);
         UpdateTurnText();
         StartTurn();
+        auxTransform = new GameObject("auxTransform").transform;
     }
-
-    //Esto podría ser más optimo si se hiciera con maquinas de estado, pero no se nos ocurrió al principio.
-
 
     private void Update()
     {
-        if (!GetCurrentCharacter().selectionFinished)
+        if(currentState == state.Moving && !GetCurrentCharacter().IsMovementCompleted())
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -48,28 +59,20 @@ public class GameMaster : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit, 100f, ground))
                 {
-                    if (GetCurrentCharacter() != null)
-                    {
-                        // Si activeCharacter tiene una propiedad llamada selectedGroundPosition
-                        // asigna hit.point a esa propiedad
-                        if (GetCurrentCharacter().GetType().GetProperty("selectedGroundPosition") != null)
-                        {
-                            GetCurrentCharacter().GetType().GetProperty("selectedGroundPosition").SetValue(GetCurrentCharacter(), hit.transform, null);
-                        }
-                        else
-                        {
-                            // Si no tiene una propiedad específica, simplemente muestra la posición en el Debug.Log
-                            Debug.Log("Punto de impacto en el plano: " + hit.point);
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogError("activeCharacter es nulo. Asegúrate de asignar un valor a activeCharacter antes de intentar acceder a sus propiedades.");
-                    }
+                    auxTransform.position = hit.point;
+                    auxTransform.rotation = Quaternion.identity;
+
+                    GetCurrentCharacter().selectGroundPosition(auxTransform);
+                    //Destroy(newTransform.gameObject);
+                    changeState(state.neutral);
+                    GetCurrentCharacter().Move();
                 }
             }
+        }     
+            
+            
 
-        }
+        
 
         if (IsTurnComplete())
         {
@@ -90,7 +93,7 @@ public class GameMaster : MonoBehaviour
         // Reiniciar el estado de movimiento solo para el personaje actual
         GetCurrentCharacter().ResetMovementStatus();
 
-        //GetCurrentCharacter().checkStatus();
+        
 
 
     }
@@ -160,26 +163,41 @@ public class GameMaster : MonoBehaviour
     //Estas funciones se "comunican" con el personaje y les da instrucciones de lo que hacer
     public void Move()
     {
-        GetCurrentCharacter().MoveForward();
+        changeState(state.Moving);
+        //print("Hola estoy en el move de GameMaster");
+        GetCurrentCharacter().WarnMove();
+        
+        
+
     }
 
     public void PerformAction1()
     {
         GetCurrentCharacter().PerformAction1();
+        changeState(state.Action);
     }
 
     public void PerformAction2()
     {
         GetCurrentCharacter().PerformAction2();
+        changeState(state.Action);
 
     }
 
     public void PerformAction3()
     {
         GetCurrentCharacter().PerformAction3();
+        changeState(state.Action);
     }
 
-
+    //Cambio de estado
+    public void changeState(state st)
+    {
+        if(!GetCurrentCharacter().IsMoving() && !GetCurrentCharacter().IsCastingsSkill())
+        {
+            currentState = st;
+        }
+    }
 
     //Algoritmo para ordenar de forma aleatoria una lista
 
