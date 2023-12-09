@@ -122,7 +122,7 @@ public class GameMaster : MonoBehaviour
         PopulateList(enemiesContainer, enemies);
         List<Character> list = new List<Character>(list1);
         list.AddRange(list2);
-        ShuffleList(list);
+        //ShuffleList(list); TODO descomentar
         return list;
     }
 
