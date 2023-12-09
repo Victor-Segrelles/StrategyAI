@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    #region Variables
+
     //Nombres
     public string characterName;
     public string firstSkill;
@@ -18,7 +20,7 @@ public class Character : MonoBehaviour
 
     //Variables de selección
     public List<Character> selectedCharacters = new List<Character>();
-    public Transform selectedGroundPosition ;
+    public Transform selectedGroundPosition;
     public bool selectionFinished = false;
 
     //Control de salud
@@ -26,8 +28,8 @@ public class Character : MonoBehaviour
     public int health = MaxHealth;
 
     //Importar otros scripts
-    public GameMaster gm;
-    public Unit parent;
+    private GameMaster gm;
+    private Unit unit;
 
     //Código gráfico para resaltar color
     public Renderer rend;
@@ -43,9 +45,16 @@ public class Character : MonoBehaviour
     //Comprobantes de la accion
     private bool isCastingSkill = false;
 
+    #endregion
+
+    #region Métodos
+
+    #region Inicializadores
     private void Awake()
     {
         setNames();
+
+
     }
     void Start()
     {
@@ -53,11 +62,15 @@ public class Character : MonoBehaviour
         rend = GetComponent<Renderer>();
         actualColor = rend.material.color;
         gm = FindObjectOfType<GameMaster>();
-        parent = GetComponent<Unit>();
-        selectedGroundPosition = this.transform;
+        unit = GetComponent<Unit>();
+        //selectedGroundPosition = this.transform;
+
 
     }
 
+    #endregion
+
+    #region Movement
     //Código de movimiento
     public void ResetMovementStatus()
     {
@@ -69,8 +82,10 @@ public class Character : MonoBehaviour
     
     public void Move()
     {
-        
-        parent.ChangeTarget(selectedGroundPosition);
+        //
+        ////// Preguntar si el Unit puede ir allí
+        //
+        unit.ChangeTarget(selectedGroundPosition);
         print("Jejeje, me moví a " + selectedGroundPosition);
         
 
@@ -84,24 +99,37 @@ public class Character : MonoBehaviour
         print("Is going to move");
     }
 
+    //Comprueba si el personaje se está moviendo o ejecutando la acción
+    public bool IsMoving()
+    {
+        return isMoving;
+    }
+
+    //Comprueba si se ha terminado el movimiento
+    public bool IsMovementCompleted()
+    {
+        return movementCompleted;
+    }
+
     IEnumerator CheckMovement()
     {
         isMoving = true;
 
-        while (Mathf.Abs(Vector3.Distance(transform.position, selectedGroundPosition.position)) >= 2.5f)
+        while (Mathf.Abs(Vector3.Distance(transform.position, selectedGroundPosition.position)) >= 4f)
         {
-            
+            //print(Mathf.Abs(Vector3.Distance(transform.position, selectedGroundPosition.position)));
             print("Me estoy moviendo todavia churrita");
             yield return null;
         }
 
         isMoving = false;
         movementCompleted = true;
-        print("Me terminé de mover");
+        //print("Me terminé de mover");
 
     }
 
-    ////////////////////////////////////////////////////////////
+    #endregion
+
 
     protected IEnumerator WaitForEnemyTargetSelection() // TODO: fix missing enemy confirmation functionality
     {
@@ -155,17 +183,7 @@ public class Character : MonoBehaviour
         selectedGroundPosition = pos;
     }
 
-    //Comprueba si el personaje se está moviendo o ejecutando la acción
-    public bool IsMoving()
-    {
-        return isMoving;
-    }
 
-    //Comprueba si se ha terminado el movimiento
-    public bool IsMovementCompleted()
-    {
-        return movementCompleted;
-    }
 
 
     //
@@ -234,6 +252,7 @@ public class Character : MonoBehaviour
         gm.GetCurrentCharacter().selectedCharacters.Add(this);
     }
 
+    #region Control de daño
     public void ReceiveDamage(int damage)
     {
         int newHealth = health - damage;
@@ -265,28 +284,18 @@ public class Character : MonoBehaviour
     {
         Debug.Log("Character died.");
         gm.charactersList.Remove(this);
+        gm.auxTransform.Remove(selectedGroundPosition);
+        Destroy(selectedGroundPosition.gameObject);
         Destroy(this.gameObject);
     }
 
+    #endregion
+
+    #endregion
 
 
 
 
 
 
-
-
-    ////////////////////////////////////////// Pruebas de movimiento /////////////////////////////////////////////////////////
-
-    public void MoveForward()
-    {
-        if (!isMoving)
-        {
-            isMoving = true;
-            movementCompleted = false;
-            print(characterName + " has moved");
-            isMoving = false;
-            movementCompleted = true;
-        }
-    }
 }

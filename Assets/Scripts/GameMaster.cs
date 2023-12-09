@@ -22,7 +22,8 @@ public class GameMaster : MonoBehaviour
     public List<Character> charactersList;
 
     //Raycast y derivados
-    Transform auxTransform;
+    public List<Transform> auxTransform;
+    public GameObject auxTransformContainer;
 
     //Control de personajes y turnos
     private int activeCharacterIndex = 0;
@@ -45,7 +46,17 @@ public class GameMaster : MonoBehaviour
         charactersList = generateList(allies, enemies);
         UpdateTurnText();
         StartTurn();
-        auxTransform = new GameObject("auxTransform").transform;
+        for(int i = 0; i<charactersList.Count; i++)
+        {
+            Transform aux = new GameObject("auxTransform"+i).transform;
+            aux.SetParent(auxTransformContainer.transform);
+            auxTransform.Add(aux);
+        }
+        for(int i = 0;i<charactersList.Count; i++)
+        {
+            charactersList[i].selectGroundPosition(auxTransform[i]);
+        }
+        
     }
 
     private void Update()
@@ -59,14 +70,18 @@ public class GameMaster : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit, 100f, ground))
                 {
-                    auxTransform.position = hit.point;
-                    auxTransform.rotation = Quaternion.identity;
+                    auxTransform[activeCharacterIndex].position = hit.point;
+                    auxTransform[activeCharacterIndex].rotation = Quaternion.identity;
 
-                    GetCurrentCharacter().selectGroundPosition(auxTransform);
+                    GetCurrentCharacter().selectGroundPosition(auxTransform[activeCharacterIndex]);
                     
                     changeState(state.neutral);
                     GetCurrentCharacter().Move();
                 }
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                changeState(state.neutral);
             }
         }     
             
@@ -164,7 +179,7 @@ public class GameMaster : MonoBehaviour
     public void Move()
     {
         changeState(state.Moving);
-        //print("Hola estoy en el move de GameMaster");
+        
         GetCurrentCharacter().WarnMove();
         
         

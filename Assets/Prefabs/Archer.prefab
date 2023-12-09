@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3905204312611476091}
   - component: {fileID: 3905204312611476086}
   - component: {fileID: 3905204312611476087}
-  - component: {fileID: 7641528819271652492}
   - component: {fileID: 8176104301287183761}
   - component: {fileID: 2659746556219760186}
   m_Layer: 0
@@ -34,7 +33,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7451483616826734532}
-  - {fileID: 3905204312810606394}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -53,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3905204312611476088}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -88,20 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7641528819271652492
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3905204312611476088}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8176104301287183761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +107,7 @@ MonoBehaviour:
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
   health: 100
+  rend: {fileID: 0}
 --- !u!114 &2659746556219760186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,12 +153,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3905204312810606395}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.453, z: 0.482}
+  m_LocalPosition: {x: 0, y: 0.45300007, z: 0.48200035}
   m_LocalScale: {x: 0.49801, y: 0.32149, z: 0.31651}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3905204312611476091}
-  m_RootOrder: 1
+  m_Father: {fileID: 7451483616826734532}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3905204312810606391
 MeshFilter:
@@ -268,7 +253,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3905204312810606394}
   m_Father: {fileID: 3905204312611476091}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -300,7 +286,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 20bee1aca8c14774da340da0408f1fc8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
