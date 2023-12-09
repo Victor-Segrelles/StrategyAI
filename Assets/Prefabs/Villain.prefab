@@ -109,8 +109,8 @@ GameObject:
   - component: {fileID: 949910342587815086}
   - component: {fileID: 949910342587815081}
   - component: {fileID: 949910342587815080}
-  - component: {fileID: 949910342587815083}
-  - component: {fileID: 2107207556398051385}
+  - component: {fileID: 2733151437379340967}
+  - component: {fileID: 6901285522226182312}
   m_Layer: 0
   m_Name: Villain
   m_TagString: Untagged
@@ -198,25 +198,28 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!143 &949910342587815083
-CharacterController:
+--- !u!114 &2733151437379340967
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949910342587815077}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2107207556398051385
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 077b4444e1cb7e84a9b5314cc14ec10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  speed: 20
+  waypoints: []
+  player: {fileID: 0}
+  enemies: []
+  audio: {fileID: 0}
+  warned: 0
+  warnedEnemies: []
+  hijo: {fileID: 0}
+--- !u!114 &6901285522226182312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,8 +228,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 949910342587815077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9950851ba5853da4b803924af2eefb2c, type: 3}
+  m_Script: {fileID: 11500000, guid: d1a835053edbc46a49632fe2e02620d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  advanceDistance: 5
-  movementSpeed: 5
+  characterName: Enemigo 1
+  firstSkill: 
+  secondSkill: 
+  thirdSkill: 
+  isPlayerControlled: 0
+  selectedCharacters: []
+  selectedGroundPosition: {fileID: 0}
+  selectionFinished: 0
+  health: 100

@@ -5,25 +5,67 @@ using UnityEngine;
 public class Mage : Character
 {
 
-    public GameObject fireballVFX;
+    public GameObject firestormVFX;
     public GameObject arcanemissileVFX;
-    private GameObject currentFireballVFX;
+    private GameObject currentFirestormVFX;
     private GameObject currentArcaneMissile1VFX;
     private GameObject currentArcaneMissile2VFX;
     private GameObject currentArcaneMissile3VFX;
 
-    const int fireballDamage = 10;
+    public GameObject elementalPrefab;
+
+    const int firestormDamage = 10;
     const int arcaneMissileDamage = 8;
+
+    // ACTION 1 - FIRESTORM
     public override void PerformAction1()
     {
         ResetSelected();
+        Debug.Log("Waiting for target position to be selected.");
+        StartCoroutine(WaitForGroundTargetSelection());
+        StartCoroutine(WaitForFirestormTargetSelection());
     }
 
+    private IEnumerator WaitForFirestormTargetSelection()
+    {
+        while (!selectionFinished)
+        {
+            yield return null;
+        }
+        Firestorm(selectedGroundPosition);
+    }
+
+    public void Firestorm(Transform target)
+    {
+        Debug.Log("Mage casts a firestorm.");
+        currentFirestormVFX = Instantiate(firestormVFX, target.transform.position, Quaternion.identity);
+        currentFirestormVFX.SetActive(true);
+        StartCoroutine(PlayFirestormVFX(target));
+    }
+
+    private IEnumerator PlayFirestormVFX(Transform target)
+    {
+        yield return new WaitForSeconds(1.2f);
+        Destroy(currentFirestormVFX);
+        // TODO: Find enemies en area and damage them
+    }
+
+    // ACTION 2 - SUMMON ELEMENTAL
     public override void PerformAction2()
     {
         ResetSelected();
+        Debug.Log("Waiting for point on ground to be selected.");
+        StartCoroutine(WaitForGroundTargetSelection());
     }
 
+    public void SummonElemental()
+    {
+        Debug.Log("Mage summons an elemental.");
+        Instantiate(elementalPrefab, transform, selectedGroundPosition);
+
+    }
+
+    // ACTION 3 - ARCANE MISSILES
     public override void PerformAction3()
     {
         ResetSelected();
@@ -40,15 +82,6 @@ public class Mage : Character
         }
         ArcaneMissiles(selectedCharacters[0], selectedCharacters[1], selectedCharacters[2]);
     }
-    public void Fireball(Transform target)
-    {
-        Debug.Log("Mage casts a fireball.");
-    }
-
-    public void SummonElemental()
-    {
-        Debug.Log("Mage summons an elemental.");
-    }
 
     public void ArcaneMissiles(Character target1, Character target2, Character target3)
     {
@@ -62,7 +95,7 @@ public class Mage : Character
         currentArcaneMissile3VFX.SetActive(true);
 
         StartCoroutine(PlayArcaneMissileVFXAndHit(target1, target2, target3));
-        Debug.Log("Mage casts arcane missiles to up to three different targets.");
+        Debug.Log("Mage casts arcane missiles.");
     }
 
     private IEnumerator PlayArcaneMissileVFXAndHit(Character target1, Character target2, Character target3)
@@ -99,10 +132,13 @@ public class Mage : Character
         target2.ReceiveDamage(arcaneMissileDamage);
         target3.ReceiveDamage(arcaneMissileDamage);
         // TODO: if missile arcanes can hit same character might overkill and crash game
+    }
 
-        Debug.Log("Target health: " + target1.health);
-        Debug.Log("Target health: " + target2.health);
-        Debug.Log("Target health: " + target3.health);
 
+    public override void setNames()
+    {
+        firstSkill = "Firestorm";
+        secondSkill = "Summon elemental";
+        thirdSkill = "Arcane missiles";
     }
 }

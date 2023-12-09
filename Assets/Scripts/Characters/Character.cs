@@ -4,61 +4,132 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    #region Variables
+
+    //Nombres
+    public string characterName;
+    public string firstSkill;
+    public string secondSkill;
+    public string thirdSkill;
+
+
+    private bool skillCompleted = false;
+
+    //Comprobante del tipo de personaje
     public bool isPlayerControlled;
 
-	public Unit parent;
-
+    //Variables de selección
     public List<Character> selectedCharacters = new List<Character>();
     public Transform selectedGroundPosition;
     public bool selectionFinished = false;
+
+    //Control de salud
     const int MaxHealth = 100;
-    // const int MaxMovementAmount = 100;
-
     public int health = MaxHealth;
-    // int movementAmountLeft = 0;
 
-    GameMaster gm;
-    private Renderer rend;
+    //Importar otros scripts
+    private GameMaster gm;
+    private Unit unit;
+
+    //Código gráfico para resaltar color
+    public Renderer rend;
     Color highlightedColor = Color.green;
+    Color actualColor;
 
+
+    //Comprobantes del movimiento
+    private bool isMoving = false;
+    private bool movementCompleted = false;
+
+
+    //Comprobantes de la accion
+    private bool isCastingSkill = false;
+
+    #endregion
+
+    #region Métodos
+
+    #region Inicializadores
+    private void Awake()
+    {
+        setNames();
+
+
+    }
     void Start()
     {
+        
         rend = GetComponent<Renderer>();
+        actualColor = rend.material.color;
         gm = FindObjectOfType<GameMaster>();
+        unit = GetComponent<Unit>();
+        //selectedGroundPosition = this.transform;
+
+
     }
 
-    public void StartTurn()
+    #endregion
+
+    #region Movement
+    //Código de movimiento
+    public void ResetMovementStatus()
     {
-        // movementAmountLeft = MaxMovementAmount;
-        if (isPlayerControlled)
+        //selectedGroundPosition = null;
+        isMoving = false;
+        movementCompleted = false;
+
+    }
+    
+    public void Move()
+    {
+        //
+        ////// Preguntar si el Unit puede ir allí
+        //
+        unit.ChangeTarget(selectedGroundPosition);
+        print("Jejeje, me moví a " + selectedGroundPosition);
+        
+
+        StartCoroutine(CheckMovement());
+
+    }
+
+    public void WarnMove()
+    {
+        ResetMovementStatus();
+        print("Is going to move");
+    }
+
+    //Comprueba si el personaje se está moviendo o ejecutando la acción
+    public bool IsMoving()
+    {
+        return isMoving;
+    }
+
+    //Comprueba si se ha terminado el movimiento
+    public bool IsMovementCompleted()
+    {
+        return movementCompleted;
+    }
+
+    IEnumerator CheckMovement()
+    {
+        isMoving = true;
+
+        while (Mathf.Abs(Vector3.Distance(transform.position, selectedGroundPosition.position)) >= 4f)
         {
-            // show control interface
-        }
-    }
-
-    public void Move() // should be limited by movementAmountLeft
-    {
-        ResetSelected();
-        Debug.Log("Waiting for either target position or target character to be selected.");
-        StartCoroutine(WaitForMoveTargetSelection());
-    }
-
-    protected IEnumerator WaitForMoveTargetSelection()
-    {
-        while (selectedCharacters.Count == 0 && selectedGroundPosition == null)
-        {
+            //print(Mathf.Abs(Vector3.Distance(transform.position, selectedGroundPosition.position)));
+            print("Me estoy moviendo todavia churrita");
             yield return null;
         }
 
-        if (selectedCharacters.Count > 0)
-        {
-            parent.ChangeTarget(selectedCharacters[0].transform);
-        }
-        else if (selectedGroundPosition != null)
-        {
-            parent.ChangeTarget(selectedGroundPosition);
-        }
+        isMoving = false;
+        movementCompleted = true;
+        //print("Me terminé de mover");
+
     }
+
+    #endregion
+
 
     protected IEnumerator WaitForEnemyTargetSelection() // TODO: fix missing enemy confirmation functionality
     {
@@ -106,34 +177,16 @@ public class Character : MonoBehaviour
 
     }
 
-    public virtual void PerformAction1() {}
-    public virtual void PerformAction2() {}
-    public virtual void PerformAction3() {}
-
-    private void OnMouseEnter()
+    //Setear la variable selectedGroundPosition
+    public void selectGroundPosition(Transform pos)
     {
-        Highlight();
+        selectedGroundPosition = pos;
     }
 
-    private void OnMouseExit() {
-        Reset();
-    }
 
-    private void OnMouseDown()
-    {
-        gm.activeCharacter.selectedCharacters.Add(this);
-    }
 
-    public void Highlight()
-    {
-        rend.material.color = highlightedColor;
-    }
 
-    public void Reset()
-    {
-        rend.material.color = Color.white;
-    }
-
+    //
     public void ResetSelected()
     {
         selectedCharacters.Clear();
@@ -141,6 +194,65 @@ public class Character : MonoBehaviour
         selectionFinished = false;
     }
 
+
+    //Actions
+    public bool IsCastingsSkill()
+    {
+        return isCastingSkill;
+    }
+
+
+    public virtual void PerformAction1()
+    {
+
+    }
+
+    public virtual void PerformAction2()
+    {
+
+    }
+
+    public virtual void PerformAction3()
+    {
+
+    }
+
+    public virtual void setNames()
+    {
+        //this.characterName = "Character";
+        this.firstSkill = "1º skill";
+        this.secondSkill = "2º skill";
+        this.thirdSkill = "3º skill";
+    }
+
+    public void Highlight()
+    {
+        rend.material.color = highlightedColor;
+    }
+
+    private void OnMouseEnter()
+    {
+        Highlight();
+    }
+
+    private void OnMouseExit()
+    {
+        Reset();
+    }
+
+    public void Reset()
+    {
+        rend.material.color = actualColor;
+    }
+
+
+    private void OnMouseDown()
+    {
+
+        gm.GetCurrentCharacter().selectedCharacters.Add(this);
+    }
+
+    #region Control de daño
     public void ReceiveDamage(int damage)
     {
         int newHealth = health - damage;
@@ -171,5 +283,19 @@ public class Character : MonoBehaviour
     public void Die()
     {
         Debug.Log("Character died.");
+        gm.charactersList.Remove(this);
+        gm.auxTransform.Remove(selectedGroundPosition);
+        Destroy(selectedGroundPosition.gameObject);
+        Destroy(this.gameObject);
     }
+
+    #endregion
+
+    #endregion
+
+
+
+
+
+
 }

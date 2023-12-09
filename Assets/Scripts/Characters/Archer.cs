@@ -4,19 +4,11 @@ using UnityEngine;
 
 public class Archer : Character
 {
+    // ACTION 1 - SINGLE SHOT
     public override void PerformAction1()
     {
         ResetSelected();
-    }
-
-    public override void PerformAction2()
-    {
-        ResetSelected();
-    }
-
-    public override void PerformAction3()
-    {
-        ResetSelected();
+        SingleShot(this);
     }
 
     public void SingleShot(Character target)
@@ -24,13 +16,35 @@ public class Archer : Character
         Debug.Log("Archer shoots 1 arrow");
     }
 
+    // ACTION 2 - TWIN SHOT
+    public override void PerformAction2()
+    {
+        ResetSelected();
+        TwinShot(this, this);
+    }
+
     public void TwinShot(Character target1, Character target2)
     {
         Debug.Log("Archer shoots 2 arrows");
     }
 
+    // ACTION 3 - EVADE
+    public override void PerformAction3()
+    {
+        ResetSelected();
+        Evade();
+    }
+
     public void Evade()
     {
         Debug.Log("Archer improves their evasion");
+    }
+
+    public override void setNames()
+    {
+        //characterName = "Arquero";
+        firstSkill = "Single Shot";
+        secondSkill = "Twin Shot";
+        thirdSkill = "Evade";
     }
 }
