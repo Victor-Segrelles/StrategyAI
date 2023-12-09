@@ -26,6 +26,7 @@ public class Unit : MonoBehaviour {
 	
 	bool chasing = false;
 	public Transform hijo;
+	public LayerMask ignored;
 
 	void Awake() {
        
@@ -39,7 +40,7 @@ public class Unit : MonoBehaviour {
 
         Ray ray = new Ray(transform.position + new Vector3(0, 100, 0), Vector3.down);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100))
+        if (Physics.Raycast(ray, out hit, 100, ~ignored))
         {
             var distanceToGround = hit.distance;
             //Debug.Log(distanceToGround);
