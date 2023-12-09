@@ -27,6 +27,7 @@ public class Unit : MonoBehaviour {
 	bool chasing = false;
 	public Transform hijo;
 	public LayerMask ignored;
+	public int heightoffset;
 
 	void Awake() {
        
@@ -44,7 +45,7 @@ public class Unit : MonoBehaviour {
         {
             var distanceToGround = hit.distance;
             //Debug.Log(distanceToGround);
-            hijo.position = new Vector3(hijo.position.x, transform.position.y+100-distanceToGround+1, hijo.position.z);
+            hijo.position = new Vector3(hijo.position.x, transform.position.y+100-distanceToGround+heightoffset, hijo.position.z);
         }
 
         /*RaycastHit hit;
