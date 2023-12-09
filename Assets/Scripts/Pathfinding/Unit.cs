@@ -28,18 +28,24 @@ public class Unit : MonoBehaviour {
 	public Transform hijo;
 	public LayerMask ignored;
 	public int heightoffset;
+	MageBT mageBT;
+	public int life;
 
 	void Awake() {
        
     }
 	void Start(){
+		mageBT = GetComponent<MageBT>();
 		//PathRequestManager.RequestPath(transform.position, waypoints[currentIndex].position, OnPathFound);
 		StartCoroutine (UpdatePath ());
 	}
 
     private void Update() {
+		mageBT = GetComponent<MageBT>();
+		mageBT.life = life;
 
-        Ray ray = new Ray(transform.position + new Vector3(0, 100, 0), Vector3.down);
+
+		Ray ray = new Ray(transform.position + new Vector3(0, 100, 0), Vector3.down);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100, ~ignored))
         {

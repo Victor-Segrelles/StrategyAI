@@ -7,6 +7,7 @@ public class MageBT : Tree
 
     protected override NodeBT SetupTree()
     {
+        UnityEngine.Debug.Log(life);
         NodeBT root = new Selector(new List<NodeBT>
         {
             new Sequence(new List<NodeBT>
@@ -18,7 +19,8 @@ public class MageBT : Tree
             {
                 new CheckDead80(life),
                 new ImDead(life),
-            })
+            }),
+            new ImInLimbo(),
         });
 
         return root;

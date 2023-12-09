@@ -21,6 +21,7 @@ public class CheckLife80 : NodeBT
 
             if (_life > 80)
             {
+                Debug.Log(_life);
                 parent.parent.SetData("target", _life);
                 state = NodeState.SUCCESS;
                 return state;
@@ -29,7 +30,7 @@ public class CheckLife80 : NodeBT
             state = NodeState.FAILURE;
             return state;
         }
-
+        Debug.Log(_life);
         state = NodeState.SUCCESS;
         return state;
     }
