@@ -112,6 +112,8 @@ public class Cleric : Character
         yield return new WaitForSeconds(1.2f);
         Destroy(currentHealingAreaVFX);
         // TODO: Find allies in area and heal them
+        // recorrer lista de aliados
+        // si aliado en rango curar "healingAreaPower"
     }
 
 
@@ -121,5 +123,21 @@ public class Cleric : Character
         firstSkill = ("Smite", GameMaster.ActionType.oneTarget);
         secondSkill = ("Heal", GameMaster.ActionType.allieTarget);
         thirdSkill = ("Healing area", GameMaster.ActionType.groundTarget);
+    }
+
+    // TODO: DELETE AFTER TESTING
+    public void TestSkill1()
+    {
+        Smite(selectedCharacters[0]);
+    }
+
+    public void TestSkill2()
+    {
+        Heal(selectedCharacters[0]);
+    }
+
+    public void TestSkill3()
+    {
+        healingArea(selectedCharacters[0].transform);
     }
 }

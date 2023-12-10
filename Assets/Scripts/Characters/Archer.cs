@@ -11,10 +11,11 @@ public class Archer : Character
 
     public GameObject TwinArrowVFX1;
     private GameObject currentTwinArrowVFX1;
-    public GameObject TwinArrowVFX2;
     private GameObject currentTwinArrowVFX2;
 
-    const int arrowDamage = 10;
+    const int singleShotDamage = 10;
+    const int twinShotDamage = 8;
+
     public override void PerformAction1()
     {
         ResetSelected();
@@ -48,17 +49,14 @@ public class Archer : Character
 
         while (elapsedTime < duration)
         {
-            //Vector3 target1Position = target1.transform.position;
             currentArrowVFX.transform.position = Vector3.Lerp(transform.position, target.transform.position, elapsedTime / duration);
-            //Vector3 directionToTarget1 = (target1Position - currentArcaneMissile1VFX.transform.position).normalized;
-            //currentArcaneMissile1VFX.transform.rotation = Quaternion.LookRotation(directionToTarget1);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         Destroy(currentArrowVFX);
 
-        target.ReceiveDamage(arrowDamage);
+        target.ReceiveDamage(singleShotDamage);
     }
 
     // ACTION 2 - TWIN SHOT
@@ -83,7 +81,7 @@ public class Archer : Character
     {
         Debug.Log("Archer shoots 2 arrows");
         currentTwinArrowVFX1 = Instantiate(TwinArrowVFX1, target1.transform.position, Quaternion.identity);
-        currentTwinArrowVFX2 = Instantiate(TwinArrowVFX2, target2.transform.position, Quaternion.identity);
+        currentTwinArrowVFX2 = Instantiate(TwinArrowVFX1, target2.transform.position, Quaternion.identity);
         currentTwinArrowVFX1.SetActive(true);
         currentTwinArrowVFX2.SetActive(true);
         StartCoroutine(PlayTwinArrowVFXAndHit(target1, target2));
@@ -97,30 +95,22 @@ public class Archer : Character
 
         while (elapsedTime < duration)
         {
-            //Vector3 target1Position = target1.transform.position;
             currentTwinArrowVFX1.transform.position = Vector3.Lerp(transform.position, target1.transform.position, elapsedTime / duration);
-            //Vector3 directionToTarget1 = (target1Position - currentArcaneMissile1VFX.transform.position).normalized;
-            //currentArcaneMissile1VFX.transform.rotation = Quaternion.LookRotation(directionToTarget1);
-            //Vector3 target1Position = target1.transform.position;
             currentTwinArrowVFX2.transform.position = Vector3.Lerp(transform.position, target2.transform.position, elapsedTime / duration);
-            //Vector3 directionToTarget1 = (target1Position - currentArcaneMissile1VFX.transform.position).normalized;
-            //currentArcaneMissile1VFX.transform.rotation = Quaternion.LookRotation(directionToTarget1);
-
-
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-         elapsedTime = 0f;
-         duration = 3f;
-
-
         Destroy(currentTwinArrowVFX1);
         Destroy(currentTwinArrowVFX2);
 
-        target1.ReceiveDamage(arrowDamage);
-        target2.ReceiveDamage(arrowDamage);
+        if(target1 != null) {
+            target1.ReceiveDamage(twinShotDamage);
+        }
+        if(target2 != null) {
+            target2.ReceiveDamage(twinShotDamage);
+        } 
     }
 
     // ACTION 3 - EVADE
@@ -141,5 +131,22 @@ public class Archer : Character
         firstSkill = ("Single Shot", GameMaster.ActionType.oneTarget);
         secondSkill = ("Twin Shot", GameMaster.ActionType.twoTarget);
         thirdSkill = ("Evade", GameMaster.ActionType.selfTarget);
+    }
+
+    // TODO: DELETE AFTER TESTING
+    public void TestSkill1()
+    {
+        SingleShot(selectedCharacters[0]);
+    }
+
+    public void TestSkill2()
+    {
+        TwinShot(selectedCharacters[0], selectedCharacters[1]);
+
+    }
+
+    public void TestSkill3()
+    {
+        Debug.Log("HA!");
     }
 }

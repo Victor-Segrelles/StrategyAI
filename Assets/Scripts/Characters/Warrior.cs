@@ -58,6 +58,18 @@ public class Warrior : Character
     public void Cleave(Transform target)
     {
         Debug.Log("Warrior cleaves target location (melee range)");
+        currentCleaveVFX = Instantiate(cleaveVFX, target.transform.position, Quaternion.identity);
+        currentCleaveVFX.SetActive(true);
+        StartCoroutine(PlayCleaveVFX(target));
+    }
+
+    private IEnumerator PlayCleaveVFX(Transform target)
+    {
+        yield return new WaitForSeconds(1.2f);
+        Destroy(currentCleaveVFX);
+        // TODO: Find enemies en area and damage them
+        // recorrer lista de enemigos
+        // si enemigo en rango hacer "cleaveDamage" de daño
     }
 
     // ACTION 3 - TAUNT
@@ -79,26 +91,41 @@ public class Warrior : Character
 
     public void Taunt(Character target)
     {
-        currentSlashVFX = Instantiate(tauntVFX, target.transform.position, Quaternion.identity);
-        currentSlashVFX.SetActive(true);
+        currentTauntVFX = Instantiate(tauntVFX, target.transform.position, Quaternion.identity);
+        currentTauntVFX.SetActive(true);
         StartCoroutine(PlayTauntVFX(target));
         Debug.Log("Warrior Taunts target enemy");
     }
 
     private IEnumerator PlayTauntVFX(Character target)
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1.3f);
         Destroy(currentTauntVFX);
-
-        //target.ReceiveDamage(slashDamage);
-        //TODO Change enemy target position to warrior position
+        // TODO: code taunt functionality
+        // VFX should be played as long as enemy is taunted
     }
 
     public override void setNames()
     {
-        //characterName = "Arquero";
+        //characterName = "Guerrero";
         firstSkill = ("Slash", GameMaster.ActionType.oneTarget);
         secondSkill = ("Cleave", GameMaster.ActionType.groundTarget);
         thirdSkill = ("Taunt", GameMaster.ActionType.oneTarget);
+    }
+
+    // TODO: DELETE AFTER TESTING
+    public void TestSkill1()
+    {
+        Slash(selectedCharacters[0]);
+    }
+
+    public void TestSkill2()
+    {
+        Cleave(selectedCharacters[0].transform);
+    }
+
+    public void TestSkill3()
+    {
+        Taunt(selectedCharacters[0]);
     }
 }

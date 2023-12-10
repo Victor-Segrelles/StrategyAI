@@ -48,6 +48,8 @@ public class Mage : Character
         yield return new WaitForSeconds(1.2f);
         Destroy(currentFirestormVFX);
         // TODO: Find enemies en area and damage them
+        // recorrer lista de enemigos
+        // si enemigo en rango hacer "firestormDamage" de daño
     }
 
     // ACTION 2 - SUMMON ELEMENTAL
@@ -128,7 +130,7 @@ public class Mage : Character
         Destroy(currentArcaneMissile2VFX);
         Destroy(currentArcaneMissile3VFX);
 
-        if(target1!= null) {
+        if (target1 != null) {
             target1.ReceiveDamage(arcaneMissileDamage);
         }
         if (target2 != null)
@@ -147,5 +149,21 @@ public class Mage : Character
         firstSkill = ("Firestorm", GameMaster.ActionType.oneTarget);
         secondSkill = ("Summon elemental", GameMaster.ActionType.selfTarget);
         thirdSkill = ("Arcane missiles", GameMaster.ActionType.threeTarget);
+    }
+
+    // TODO: DELETE AFTER TESTING
+    public void TestSkill1()
+    {
+        Firestorm(selectedCharacters[0].transform);
+    }
+
+    public void TestSkill2()
+    {
+        Debug.Log("HA!");
+    }
+
+    public void TestSkill3()
+    {
+        ArcaneMissiles(selectedCharacters[0], selectedCharacters[1], selectedCharacters[2]);
     }
 }
