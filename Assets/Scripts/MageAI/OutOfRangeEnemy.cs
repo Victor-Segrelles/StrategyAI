@@ -15,6 +15,7 @@ public class OutOfRangeEnemy : NodeBT
 
     public override NodeState Evaluate()
     {
+        Debug.Log("cafetera");
         if (!unit.moved)
         {
             unit.move2(unit.attackTarget.gameObject.transform);
