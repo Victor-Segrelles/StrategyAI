@@ -42,7 +42,7 @@ public class Character : MonoBehaviour
     private Unit unit;
 
     //C�digo gr�fico para resaltar color
-    public Renderer rend;
+    //public Renderer rend;
     Color highlightedColor = Color.green;
     Color actualColor;
 
@@ -71,8 +71,8 @@ public class Character : MonoBehaviour
     void Start()
     {
         
-        rend = GetComponent<Renderer>();
-        actualColor = rend.material.color;
+        //rend = GetComponent<Renderer>();
+        //actualColor = rend.material.color;
         gm = FindObjectOfType<GameMaster>();
         unit = GetComponent<Unit>();
         //selectedGroundPosition = this.transform;

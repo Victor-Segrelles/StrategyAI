@@ -3,11 +3,8 @@ using BehaviorTree;
 
 public class MageBT : Tree
 {
-    public int life;
-
     protected override NodeBT SetupTree()
     {
-        UnityEngine.Debug.Log(life);
         NodeBT root = new Selector(new List<NodeBT>
         {
             new Sequence(new List<NodeBT>
