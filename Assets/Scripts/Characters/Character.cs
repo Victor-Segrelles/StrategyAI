@@ -41,6 +41,8 @@ public class Character : MonoBehaviour
     private bool isMoving = false;
     private bool movementCompleted = false;
 
+    public float movementDistance = 15f;
+
 
     //Comprobantes de la accion
     private bool isCastingSkill = false;
@@ -85,12 +87,17 @@ public class Character : MonoBehaviour
         //
         ////// Preguntar si el Unit puede ir allí
         //
-        unit.ChangeTarget(selectedGroundPosition);
-        print("Jejeje, me moví a " + selectedGroundPosition);
-        
-
-        StartCoroutine(CheckMovement());
-
+        if(Mathf.Abs(Vector3.Distance(transform.position, selectedGroundPosition.position)) <= movementDistance)
+        {
+            unit.ChangeTarget(selectedGroundPosition);
+            StartCoroutine(CheckImpasse());
+            
+        }
+        else
+        {
+            print("Prueba otro sitio, que ese está muy lejos");
+        }
+       
     }
 
     public void WarnMove()
@@ -127,6 +134,29 @@ public class Character : MonoBehaviour
         //print("Me terminé de mover");
 
     }
+
+    IEnumerator CheckImpasse()
+    {
+        Vector3 posicionInicial = transform.position;
+
+        yield return new WaitForSeconds(0.25f);
+
+
+        if (Vector3.Distance(posicionInicial, transform.position) > 0.01f)
+        {
+            // Si se ha movido, imprimir un mensaje y salir de la corrutina
+            Debug.Log("El objeto se ha movido durante la espera. Saliendo de la corrutina.");
+            StartCoroutine(CheckMovement());
+            yield break;
+        }
+        else
+        {
+            // Si no se ha movido, imprimir un mensaje
+            Debug.Log("Prueba otro sitio, que eso es terreno inaccesible");
+        }
+
+    }
+
 
     #endregion
 
