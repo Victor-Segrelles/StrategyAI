@@ -44,16 +44,20 @@ public class GameMaster : MonoBehaviour
         Action
     }
 
+    public enum ActionType
+    {
+        neutral,
+        oneTarget,
+        twoTarget,
+        threeTarget,
+        groundTarget,
+        selfTarget,
+        allieTarget
+    }
+
     public state currentState = state.neutral;
 
-
-    ///Pruebas graficas
-    public Transform personaje; // Asigna la transformación de tu personaje en el Inspector
-    public Material materialCircunferencia; // Asigna el material rojo en el Inspector
-    public int numeroPuntos = 36; // Número de puntos en la circunferencia
-    public float radioCircunferencia = 15f; // Radio de la circunferencia
-    private LineRenderer lineRenderer;
-    public float alturaDesdeImpacto = 1f;
+    public ActionType currentActionType = ActionType.neutral;
 
     #endregion
 
@@ -188,9 +192,9 @@ public class GameMaster : MonoBehaviour
 
     private void skillsNaming()
     {
-        firstSkill.GetComponentInChildren<TMP_Text>().text = GetCurrentCharacter().firstSkill;
-        secondSkill.GetComponentInChildren<TMP_Text>().text = GetCurrentCharacter().secondSkill;
-        thirdSkill.GetComponentInChildren<TMP_Text>().text = GetCurrentCharacter().thirdSkill;
+        firstSkill.GetComponentInChildren<TMP_Text>().text = GetCurrentCharacter().firstSkill.Item1;
+        secondSkill.GetComponentInChildren<TMP_Text>().text = GetCurrentCharacter().secondSkill.Item1;
+        thirdSkill.GetComponentInChildren<TMP_Text>().text = GetCurrentCharacter().thirdSkill.Item1;
     }
 
     //Esta función se ocupa de coger todos los nombres de Character, bien su nombre principal o bien sus habilidades

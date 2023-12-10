@@ -97,8 +97,8 @@ public class Warrior : Character
     public override void setNames()
     {
         //characterName = "Arquero";
-        firstSkill = "Slash";
-        secondSkill = "Cleave";
-        thirdSkill = "Taunt";
+        firstSkill = ("Slash", GameMaster.ActionType.oneTarget);
+        secondSkill = ("Cleave", GameMaster.ActionType.groundTarget);
+        thirdSkill = ("Taunt", GameMaster.ActionType.oneTarget);
     }
 }
