@@ -829,7 +829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3905204312611476091, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3905204312611476091, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -871,6 +871,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8176104301287183761, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
+      propertyPath: arrowVFX
+      value: 
+      objectReference: {fileID: 2848879832317148144, guid: fece8a1e03d1ecd45bcd753f3df3e59b, type: 3}
+    - target: {fileID: 8176104301287183761, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
+      propertyPath: TwinArrowVFX1
+      value: 
+      objectReference: {fileID: 2848879832317148144, guid: fece8a1e03d1ecd45bcd753f3df3e59b, type: 3}
+    - target: {fileID: 8176104301287183761, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
+      propertyPath: TwinArrowVFX2
+      value: 
+      objectReference: {fileID: 2848879832317148144, guid: fece8a1e03d1ecd45bcd753f3df3e59b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
 --- !u!4 &289802006 stripped
@@ -2525,10 +2537,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 289802006}
-  - {fileID: 1871474305}
-  - {fileID: 424955825}
   - {fileID: 1784592585}
+  - {fileID: 289802006}
+  - {fileID: 424955825}
+  - {fileID: 1871474305}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3102,6 +3114,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 128
+  currentState: 0
 --- !u!4 &1263696652
 Transform:
   m_ObjectHideFlags: 0
@@ -3876,11 +3889,8 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 5
   waypoints: []
-  player: {fileID: 0}
-  enemies: []
   audio: {fileID: 0}
   warned: 0
-  warnedEnemies: []
   hijo: {fileID: 252538254}
 --- !u!4 &1545135127
 Transform:
@@ -4669,7 +4679,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5691484240784449073, guid: 5e5f47cb25cc26549be80bbb73566250, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5691484240784449073, guid: 5e5f47cb25cc26549be80bbb73566250, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4873,7 +4883,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7265527248713835928, guid: 386df07ce0d48d04f89331ddc012e1bf, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7265527248713835928, guid: 386df07ce0d48d04f89331ddc012e1bf, type: 3}
       propertyPath: m_LocalPosition.x

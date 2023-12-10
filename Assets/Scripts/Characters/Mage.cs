@@ -128,10 +128,17 @@ public class Mage : Character
         Destroy(currentArcaneMissile2VFX);
         Destroy(currentArcaneMissile3VFX);
 
-        target1.ReceiveDamage(arcaneMissileDamage);
-        target2.ReceiveDamage(arcaneMissileDamage);
-        target3.ReceiveDamage(arcaneMissileDamage);
-        // TODO: if missile arcanes can hit same character might overkill and crash game
+        if(target1!= null) {
+            target1.ReceiveDamage(arcaneMissileDamage);
+        }
+        if (target2 != null)
+        {
+            target2.ReceiveDamage(arcaneMissileDamage);
+        }
+        if (target3 != null)
+        {
+            target3.ReceiveDamage(arcaneMissileDamage);
+        }
     }
 
 

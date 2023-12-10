@@ -122,10 +122,12 @@ MonoBehaviour:
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
   health: 100
+  gm: {fileID: 0}
+  parent: {fileID: 0}
   rend: {fileID: 0}
   firestormVFX: {fileID: 7957833072274404953, guid: 44f68e3d5c75a495ebb52825b092791e, type: 3}
   arcanemissileVFX: {fileID: 3591305668869986075, guid: 5389e1c7b2c6b4e06a0faa77eedffba6, type: 3}
-  elementalPrefab: {fileID: 0}
+  elementalPrefab: {fileID: 7459665164033792588, guid: dfbfc003135d2d742a7d303fea8fbc93, type: 3}
 --- !u!114 &3821760042218716304
 MonoBehaviour:
   m_ObjectHideFlags: 0

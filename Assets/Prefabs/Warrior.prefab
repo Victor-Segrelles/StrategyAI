@@ -122,10 +122,12 @@ MonoBehaviour:
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
   health: 100
+  gm: {fileID: 0}
+  parent: {fileID: 0}
   rend: {fileID: 0}
   slashVFX: {fileID: 5284079036507001202, guid: 7879368136f1c4486a0c02d608050903, type: 3}
   cleaveVFX: {fileID: 3153472991145048103, guid: 61d43b9ca4ef24ce1ae3bfcbc889813b, type: 3}
-  tauntVFX: {fileID: 0}
+  tauntVFX: {fileID: 6386418815473215746, guid: 372943fbc3441a54493687bcdac0ae38, type: 3}
 --- !u!114 &8791387274643596005
 MonoBehaviour:
   m_ObjectHideFlags: 0

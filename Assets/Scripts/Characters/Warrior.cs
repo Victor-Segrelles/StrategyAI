@@ -64,12 +64,34 @@ public class Warrior : Character
     public override void PerformAction3()
     {
         ResetSelected();
-        Taunt(this);
+        StartCoroutine(WaitForEnemyTargetSelection());
+        StartCoroutine(WaitForTauntTargetSelection());
+    }
+
+    private IEnumerator WaitForTauntTargetSelection()
+    {
+        while (!selectionFinished)
+        {
+            yield return null;
+        }
+        Taunt(selectedCharacters[0]);
     }
 
     public void Taunt(Character target)
     {
-        Debug.Log("Warrior taunts target enemy");
+        currentSlashVFX = Instantiate(tauntVFX, target.transform.position, Quaternion.identity);
+        currentSlashVFX.SetActive(true);
+        StartCoroutine(PlayTauntVFX(target));
+        Debug.Log("Warrior Taunts target enemy");
+    }
+
+    private IEnumerator PlayTauntVFX(Character target)
+    {
+        yield return new WaitForSeconds(0.3f);
+        Destroy(currentTauntVFX);
+
+        //target.ReceiveDamage(slashDamage);
+        //TODO Change enemy target position to warrior position
     }
 
     public override void setNames()

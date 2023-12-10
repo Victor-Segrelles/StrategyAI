@@ -199,6 +199,8 @@ public class Character : MonoBehaviour
 
     protected IEnumerator WaitForGroundTargetSelection()
     {
+        print("entered the ground selection");
+
         while (selectedGroundPosition == null)
         {
             yield return null;
