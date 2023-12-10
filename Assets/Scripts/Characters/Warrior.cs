@@ -50,20 +50,20 @@ public class Warrior : Character
     public override void PerformAction2()
     {
         ResetSelected();
-        Cleave(this.transform);
+        Cleave();
     }
 
-    public void Cleave(Transform target)
+    public void Cleave()
     {
         Debug.Log("Warrior cleaves target location (melee range)");
-        currentCleaveVFX = Instantiate(cleaveVFX, target.transform.position, Quaternion.identity);
+        currentCleaveVFX = Instantiate(cleaveVFX, transform.position, Quaternion.identity);
         currentCleaveVFX.SetActive(true);
-        StartCoroutine(PlayCleaveVFX(target));
+        StartCoroutine(PlayCleaveVFX());
     }
 
-    private IEnumerator PlayCleaveVFX(Transform target)
+    private IEnumerator PlayCleaveVFX()
     {
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.3f);
         Destroy(currentCleaveVFX);
         // TODO: Find enemies en area and damage them
         // recorrer lista de enemigos
@@ -97,7 +97,7 @@ public class Warrior : Character
     {
         //characterName = "Guerrero";
         firstSkill = ("Slash", GameMaster.ActionType.oneTarget);
-        secondSkill = ("Cleave", GameMaster.ActionType.groundTarget);
+        secondSkill = ("Cleave", GameMaster.ActionType.selfTarget);
         thirdSkill = ("Stun", GameMaster.ActionType.oneTarget);
     }
 
@@ -109,7 +109,7 @@ public class Warrior : Character
 
     public void TestSkill2()
     {
-        Cleave(selectedCharacters[0].transform);
+        Cleave();
     }
 
     public void TestSkill3()

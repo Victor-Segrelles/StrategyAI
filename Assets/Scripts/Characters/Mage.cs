@@ -48,16 +48,16 @@ public class Mage : Character
         Debug.Log("Mage casts a firestorm.");
         currentFirestormVFX = Instantiate(firestormVFX, target.transform.position, Quaternion.identity);
         currentFirestormVFX.SetActive(true);
-        StartCoroutine(PlayFirestormVFX(target));
+        StartCoroutine(PlayFirestormVFXAndHit(target));
     }
 
-    private IEnumerator PlayFirestormVFX(Transform target)
+    private IEnumerator PlayFirestormVFXAndHit(Transform target)
     {
         yield return new WaitForSeconds(1.2f);
         Destroy(currentFirestormVFX);
         // TODO: Find enemies en area and damage them
         // recorrer lista de enemigos
-        // si enemigo en rango hacer "firestormDamage" de daño
+        // si enemigo en rango (entre target) hacer "firestormDamage" de daño
     }
 
     // ACTION 2 - SHIELD
