@@ -935,38 +935,14 @@ PrefabInstance:
     - target: {fileID: 2659746556219760186, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
       propertyPath: hijo
       value: 
-      objectReference: {fileID: 1861710027}
-    - target: {fileID: 2659746556219760186, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: target
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069712920420314060, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
+      propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 289802006}
-    - target: {fileID: 2659746556219760186, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2659746556219760186, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: heightoffset
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2659746556219760186, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: ignored.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 3905204312611476087, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9100000, guid: 2890c9060ce4f6b45b4082d87f47b27e, type: 2}
     - target: {fileID: 3905204312611476088, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
       propertyPath: m_Name
       value: Archer
-      objectReference: {fileID: 0}
-    - target: {fileID: 3905204312611476088, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3905204312611476088, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3905204312611476091, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
       propertyPath: m_RootOrder
@@ -1012,38 +988,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3905204312810606395, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3905204312810606395, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5691416946747976112, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5691416946747976112, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5883686254462830568, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7451483616826734532, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8483640987250285667, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8483640987250285667, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 20bee1aca8c14774da340da0408f1fc8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
 --- !u!4 &289802006 stripped
@@ -5278,11 +5222,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7642907062037218468, guid: 21018057991ff104ea7eb7f63ed94174, type: 3}
   m_PrefabInstance: {fileID: 1861582762}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1861710027 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7451483616826734532, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
-  m_PrefabInstance: {fileID: 289802005}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1871474304
 PrefabInstance:
