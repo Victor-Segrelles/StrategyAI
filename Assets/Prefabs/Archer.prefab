@@ -107,7 +107,12 @@ MonoBehaviour:
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
   health: 100
+  gm: {fileID: 0}
+  parent: {fileID: 0}
   rend: {fileID: 0}
+  arrowVFX: {fileID: 2848879832317148144, guid: fece8a1e03d1ecd45bcd753f3df3e59b, type: 3}
+  TwinArrowVFX1: {fileID: 2848879832317148144, guid: fece8a1e03d1ecd45bcd753f3df3e59b, type: 3}
+  TwinArrowVFX2: {fileID: 2848879832317148144, guid: fece8a1e03d1ecd45bcd753f3df3e59b, type: 3}
 --- !u!114 &2659746556219760186
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour
 {
+    #region Variables
+    //Cámara
+    public PlayerCamera camera;
+
+    //Interfaz
     public TMP_Text characterText;
     public TMP_Text turnText;
     public Button firstSkill;
@@ -41,6 +46,18 @@ public class GameMaster : MonoBehaviour
 
     public state currentState = state.neutral;
 
+
+    ///Pruebas graficas
+    public Transform personaje; // Asigna la transformación de tu personaje en el Inspector
+    public Material materialCircunferencia; // Asigna el material rojo en el Inspector
+    public int numeroPuntos = 36; // Número de puntos en la circunferencia
+    public float radioCircunferencia = 15f; // Radio de la circunferencia
+    private LineRenderer lineRenderer;
+    public float alturaDesdeImpacto = 1f;
+
+    #endregion
+
+    #region Start y Update
     void Start()
     {
         charactersList = generateList(allies, enemies);
@@ -56,7 +73,6 @@ public class GameMaster : MonoBehaviour
         {
             charactersList[i].selectGroundPosition(auxTransform[i]);
         }
-        
     }
 
     private void Update()
@@ -83,38 +99,22 @@ public class GameMaster : MonoBehaviour
             {
                 changeState(state.neutral);
             }
-        }     
-            
-            
-
-        
-
-        if (IsTurnComplete())
-        {
-            EndTurn();
         }
     }
 
+    #endregion
 
-    //Comprueba si ha terminado el turno
-    private bool IsTurnComplete()
-    {
-        return GetCurrentCharacter().IsMovementCompleted();
-    }
-
+    #region Controladores de turno
     //Inicia un nuevo turno
     private void StartTurn()
     {
         // Reiniciar el estado de movimiento solo para el personaje actual
         GetCurrentCharacter().ResetMovementStatus();
-
-        
-
-
+        camera.FocusCharacter(GetCurrentCharacter());
     }
 
     //Termina el turno y pasa al siguiente
-    private void EndTurn()
+    public void EndTurn()
     {
         // Pasar al siguiente personaje
         activeCharacterIndex++;
@@ -130,6 +130,15 @@ public class GameMaster : MonoBehaviour
         StartTurn();
     }
 
+    //Esta función devuelve el personaje actual
+    public Character GetCurrentCharacter()
+    {
+        return charactersList[activeCharacterIndex];
+    }
+
+    #endregion
+
+    #region Metodos de listas
     //Genera la lista de personajes
     private List<Character> generateList(List<Character> list1, List<Character> list2)
     {
@@ -137,7 +146,7 @@ public class GameMaster : MonoBehaviour
         PopulateList(enemiesContainer, enemies);
         List<Character> list = new List<Character>(list1);
         list.AddRange(list2);
-        ShuffleList(list);
+        //ShuffleList(list); TODO descomentar
         return list;
     }
 
@@ -146,6 +155,28 @@ public class GameMaster : MonoBehaviour
         Character[] characters = container.GetComponentsInChildren<Character>();
         list.AddRange(characters);
     }
+
+    //Algoritmo para ordenar de forma aleatoria una lista
+
+    void ShuffleList<T>(List<T> lista)
+    {
+        int n = lista.Count;
+        System.Random rng = new System.Random();
+
+        // Aplicar el algoritmo de Fisher-Yates para mezclar la lista
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            T valor = lista[k];
+            lista[k] = lista[n];
+            lista[n] = valor;
+        }
+    }
+
+    #endregion
+
+    #region Controladores de texto
 
     //Esta función se encarga de poner el texto por pantalla
     private void UpdateTurnText()
@@ -168,13 +199,10 @@ public class GameMaster : MonoBehaviour
         return charactersList[activeCharacterIndex].characterName;
     }
 
-    //Esta función devuelve el personaje actual
-    public Character GetCurrentCharacter()
-    {
+    #endregion
 
-        return charactersList[activeCharacterIndex];
-    }
 
+    #region Ejecutoras de acciones
     //Estas funciones se "comunican" con el personaje y les da instrucciones de lo que hacer
     public void Move()
     {
@@ -205,6 +233,8 @@ public class GameMaster : MonoBehaviour
         changeState(state.Action);
     }
 
+    #endregion
+
     //Cambio de estado
     public void changeState(state st)
     {
@@ -213,24 +243,5 @@ public class GameMaster : MonoBehaviour
             currentState = st;
         }
     }
-
-    //Algoritmo para ordenar de forma aleatoria una lista
-
-    void ShuffleList<T>(List<T> lista)
-    {
-        int n = lista.Count;
-        System.Random rng = new System.Random();
-
-        // Aplicar el algoritmo de Fisher-Yates para mezclar la lista
-        while (n > 1)
-        {
-            n--;
-            int k = rng.Next(n + 1);
-            T valor = lista[k];
-            lista[k] = lista[n];
-            lista[n] = valor;
-        }
-    }
-
 
 }
