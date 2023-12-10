@@ -21,8 +21,8 @@ public class GameMaster : MonoBehaviour
     public GameObject alliesContainer;
     public GameObject enemiesContainer;
 
-    private List<Character> allies = new List<Character>();
-    private List<Character> enemies = new List<Character>();
+    public List<Character> allies = new List<Character>();
+    public List<Character> enemies = new List<Character>();
 
     public List<Character> charactersList;
 

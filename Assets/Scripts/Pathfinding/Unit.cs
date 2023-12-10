@@ -30,17 +30,27 @@ public class Unit : MonoBehaviour {
 	public int heightoffset;
 	MageBT mageBT;
 	public int life;
+	public GameMaster gm;
+	public float attackRange = 15;
+	public Character attackTarget;
+	public bool moved = false;
+	public Vector3 lastPosition;
+	public float moveDistance;
 
 	void Awake() {
        
     }
 	void Start(){
-
+		gm = FindObjectOfType<GameMaster>();
 		//PathRequestManager.RequestPath(transform.position, waypoints[currentIndex].position, OnPathFound);
 		StartCoroutine (UpdatePath ());
 	}
 
     private void Update() {
+
+
+		
+		moveLimited();
 
 
 		Ray ray = new Ray(transform.position + new Vector3(0, 100, 0), Vector3.down);
@@ -169,4 +179,25 @@ public class Unit : MonoBehaviour {
 		debug_recentstun=true;
 		Debug.Log("cafetera");
 	}
+
+	public void move2(Transform target2)
+    {
+		moved = true;   //Esto hay que ponerlo a false al terminar el turno
+		target = target2;
+    }
+
+	public void moveLimited()
+    {
+		if (Vector3.Distance(lastPosition, transform.position) >= moveDistance)
+        {
+			target = transform;
+        }
+    }
+
+	public void endTurn()	//Se ha de llamar aquí al final de cada turno
+    {
+		lastPosition = transform.position;
+		moved = false;
+		attackTarget = null;
+    }
 }

@@ -4,24 +4,18 @@ using UnityEngine;
 
 using BehaviorTree;
 
-public class ImDead : NodeBT
+public class RangeEnemy : NodeBT
 {
     private Unit unit;
 
-    public ImDead(Unit obj)
+    public RangeEnemy(Unit obj)
     {
-        unit=obj;
+        unit = obj;
     }
 
     public override NodeState Evaluate()
     {
-        int amount = (int)GetData("target");
-
-        if (amount < 80)
-        {
-            Debug.Log("NOOOO TOY MUERTOOOOOOO"+amount);
-        }
-
+        Debug.Log("sexo");
         state = NodeState.RUNNING;
         return state;
     }

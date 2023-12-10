@@ -9,15 +9,24 @@ public class MageBT : Tree
         {
             new Sequence(new List<NodeBT>
             {
-                new CheckLife80(GetComponent<Unit>()),
-                new ImAlive(GetComponent<Unit>()),
+                new CheckLifeOver50(GetComponent<Unit>()),
+                new Selector(new List<NodeBT>{
+                    new Sequence(new List<NodeBT>{
+                        new CheckRangeEnemy(GetComponent<Unit>()),
+                        new RangeEnemy(GetComponent<Unit>()),
+                    }),
+                    new Sequence(new List<NodeBT>
+                    {
+                        new CheckOutOfRangeEnemy(GetComponent<Unit>()),
+                        new OutOfRangeEnemy(GetComponent<Unit>()),
+                    }),
+                }),
             }),
             new Sequence(new List<NodeBT>
             {
-                new CheckDead80(GetComponent<Unit>()),
-                new ImDead(GetComponent<Unit>()),
+                new CheckLifeUnder50(GetComponent<Unit>()),
+                new ImUnder50(GetComponent<Unit>()),
             }),
-            new ImInLimbo(),
         });
 
         return root;

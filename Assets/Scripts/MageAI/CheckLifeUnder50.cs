@@ -4,11 +4,11 @@ using UnityEngine;
 
 using BehaviorTree;
 
-public class CheckDead80 : NodeBT
+public class CheckLifeUnder50 : NodeBT
 {
     private Unit unit;
 
-    public CheckDead80(Unit obj)
+    public CheckLifeUnder50(Unit obj)
     {
         unit=obj;
     }
@@ -19,7 +19,7 @@ public class CheckDead80 : NodeBT
         if(t==null || (int)t!=unit.life){
         
 
-            if (unit.life < 80)
+            if (unit.life < 50)
             {
                 parent.parent.SetData("target", unit.life);
                 state = NodeState.SUCCESS;
