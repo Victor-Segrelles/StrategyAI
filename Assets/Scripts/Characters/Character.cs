@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameMaster;
 
 public class Character : MonoBehaviour
 {
@@ -8,9 +9,13 @@ public class Character : MonoBehaviour
 
     //Nombres
     public string characterName;
-    public string firstSkill;
-    public string secondSkill;
-    public string thirdSkill;
+    public (string, ActionType) firstSkill;
+    public (string, ActionType) secondSkill;
+    public (string, ActionType) thirdSkill;
+
+    //public string firstSkill;
+    //public string secondSkill;
+    //public string thirdSkill;
 
 
     private bool skillCompleted = false;
@@ -252,37 +257,37 @@ public class Character : MonoBehaviour
     public virtual void setNames()
     {
         //this.characterName = "Character";
-        this.firstSkill = "1º skill";
-        this.secondSkill = "2º skill";
-        this.thirdSkill = "3º skill";
+        this.firstSkill = ("1º skill", ActionType.neutral);
+        this.secondSkill = ("2º skill", ActionType.neutral);
+        this.thirdSkill = ("3º skill", ActionType.neutral);
     }
 
-    public void Highlight()
-    {
-        rend.material.color = highlightedColor;
-    }
+    //public void Highlight()
+    //{
+    //    rend.material.color = highlightedColor;
+    //}
 
-    private void OnMouseEnter()
-    {
-        Highlight();
-    }
+    //private void OnMouseEnter()
+    //{
+    //    Highlight();
+    //}
 
-    private void OnMouseExit()
-    {
-        Reset();
-    }
+    //private void OnMouseExit()
+    //{
+    //    Reset();
+    //}
 
-    public void Reset()
-    {
-        rend.material.color = actualColor;
-    }
+    //public void Reset()
+    //{
+    //    rend.material.color = actualColor;
+    //}
 
 
-    private void OnMouseDown()
-    {
+    //private void OnMouseDown()
+    //{
 
-        gm.GetCurrentCharacter().selectedCharacters.Add(this);
-    }
+    //    gm.GetCurrentCharacter().selectedCharacters.Add(this);
+    //}
 
     #region Control de daño
     public void ReceiveDamage(int damage)

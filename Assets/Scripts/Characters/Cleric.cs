@@ -118,8 +118,8 @@ public class Cleric : Character
     public override void setNames()
     {
 
-        firstSkill = "Smite";
-        secondSkill = "Heal";
-        thirdSkill = "Healing area";
+        firstSkill = ("Smite", GameMaster.ActionType.oneTarget);
+        secondSkill = ("Heal", GameMaster.ActionType.allieTarget);
+        thirdSkill = ("Healing area", GameMaster.ActionType.groundTarget);
     }
 }

@@ -138,8 +138,8 @@ public class Archer : Character
     public override void setNames()
     {
         //characterName = "Arquero";
-        firstSkill = "Single Shot";
-        secondSkill = "Twin Shot";
-        thirdSkill = "Evade";
+        firstSkill = ("Single Shot", GameMaster.ActionType.oneTarget);
+        secondSkill = ("Twin Shot", GameMaster.ActionType.twoTarget);
+        thirdSkill = ("Evade", GameMaster.ActionType.selfTarget);
     }
 }
