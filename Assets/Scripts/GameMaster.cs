@@ -220,20 +220,23 @@ public class GameMaster : MonoBehaviour
 
     public void PerformAction1()
     {
-        GetCurrentCharacter().PerformAction1();
+        print(GetCurrentCharacter().firstSkill.Item2);
+        //GetCurrentCharacter().PerformAction1();
         changeState(state.Action);
     }
 
     public void PerformAction2()
     {
-        GetCurrentCharacter().PerformAction2();
+        print(GetCurrentCharacter().secondSkill.Item2);
+        //GetCurrentCharacter().PerformAction2();
         changeState(state.Action);
 
     }
 
     public void PerformAction3()
     {
-        GetCurrentCharacter().PerformAction3();
+        print(GetCurrentCharacter().thirdSkill.Item2);
+        //GetCurrentCharacter().PerformAction3();
         changeState(state.Action);
     }
 
