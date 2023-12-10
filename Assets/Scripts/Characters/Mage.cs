@@ -14,6 +14,7 @@ public class Mage : Character
     private GameObject currentArcaneMissile3VFX;
     private GameObject currentShieldVFX;
     const int firestormDamage = 10;
+    const int firestormRadius = 100;
     const int arcaneMissileDamage = 8;
     bool hasShield = false;
 
@@ -55,7 +56,27 @@ public class Mage : Character
     {
         yield return new WaitForSeconds(1.2f);
         Destroy(currentFirestormVFX);
+
+
         // TODO: Find enemies en area and damage them
+        if (isPlayerControlled) {
+            foreach (Character enemy in gm.enemies) {
+                if (Vector3.Distance(target.position, enemy.transform.position) < firestormRadius) {
+                    enemy.ReceiveDamage(firestormDamage);
+                }
+            }
+        }
+        else
+        {
+            foreach (Character enemy in gm.allies)
+            {
+                if (Vector3.Distance(target.position, enemy.transform.position) < firestormRadius)
+                {
+                    enemy.ReceiveDamage(firestormDamage);
+                }
+            }
+        }
+
         // recorrer lista de enemigos
         // si enemigo en rango (entre target) hacer "firestormDamage" de daño
     }
