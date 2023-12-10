@@ -7,15 +7,23 @@ public class Mage : Character
 
     public GameObject firestormVFX;
     public GameObject arcanemissileVFX;
+    public GameObject shieldVFX;
     private GameObject currentFirestormVFX;
     private GameObject currentArcaneMissile1VFX;
     private GameObject currentArcaneMissile2VFX;
     private GameObject currentArcaneMissile3VFX;
-
-    public GameObject elementalPrefab;
-
+    private GameObject currentShieldVFX;
     const int firestormDamage = 10;
     const int arcaneMissileDamage = 8;
+    bool hasShield = false;
+
+    private void Update()
+    {
+        if (currentShieldVFX != null)
+        {
+            currentShieldVFX.transform.position = transform.position;
+        }
+    }
 
     // ACTION 1 - FIRESTORM
     public override void PerformAction1()
@@ -40,28 +48,32 @@ public class Mage : Character
         Debug.Log("Mage casts a firestorm.");
         currentFirestormVFX = Instantiate(firestormVFX, target.transform.position, Quaternion.identity);
         currentFirestormVFX.SetActive(true);
-        StartCoroutine(PlayFirestormVFX(target));
+        StartCoroutine(PlayFirestormVFXAndHit(target));
     }
 
-    private IEnumerator PlayFirestormVFX(Transform target)
+    private IEnumerator PlayFirestormVFXAndHit(Transform target)
     {
         yield return new WaitForSeconds(1.2f);
         Destroy(currentFirestormVFX);
         // TODO: Find enemies en area and damage them
+        // recorrer lista de enemigos
+        // si enemigo en rango (entre target) hacer "firestormDamage" de daño
     }
 
-    // ACTION 2 - SUMMON ELEMENTAL
+    // ACTION 2 - SHIELD
     public override void PerformAction2()
     {
-        ResetSelected();
-        Debug.Log("Waiting for point on ground to be selected.");
-        StartCoroutine(WaitForGroundTargetSelection());
+        Shield();
     }
 
-    public void SummonElemental()
+    public void Shield()
     {
-        Debug.Log("Mage summons an elemental.");
-        Instantiate(elementalPrefab, transform, selectedGroundPosition);
+        if (!hasShield)
+        {
+            currentShieldVFX = Instantiate(shieldVFX, transform.position, Quaternion.identity);
+            hasShield = true;
+            Debug.Log("Mage envelops themselves in a shield.");
+        }
 
     }
 
@@ -128,7 +140,7 @@ public class Mage : Character
         Destroy(currentArcaneMissile2VFX);
         Destroy(currentArcaneMissile3VFX);
 
-        if(target1!= null) {
+        if (target1 != null) {
             target1.ReceiveDamage(arcaneMissileDamage);
         }
         if (target2 != null)
@@ -145,7 +157,48 @@ public class Mage : Character
     public override void setNames()
     {
         firstSkill = ("Firestorm", GameMaster.ActionType.oneTarget);
-        secondSkill = ("Summon elemental", GameMaster.ActionType.selfTarget);
+        secondSkill = ("Shield", GameMaster.ActionType.selfTarget);
         thirdSkill = ("Arcane missiles", GameMaster.ActionType.threeTarget);
+    }
+
+    public override void ReceiveDamage(int damage)
+    {
+        Debug.Log("My health before the attack: " + health);
+        float randomValue = Random.value;
+        if (!hasShield) // failed evasion
+        {
+            int newHealth = health - damage;
+            if (newHealth < 1)
+            {
+                health = 0;
+                Die();
+            }
+            else
+            {
+                health = newHealth;
+            }
+        }
+        else
+        {
+            hasShield = false;
+            Destroy(currentShieldVFX);
+        }
+        Debug.Log("My health after the attack: " + health);
+    }
+
+    // TODO: DELETE AFTER TESTING
+    public void TestSkill1()
+    {
+        Firestorm(selectedCharacters[0].transform);
+    }
+
+    public void TestSkill2()
+    {
+        Shield();
+    }
+
+    public void TestSkill3()
+    {
+        ArcaneMissiles(selectedCharacters[0], selectedCharacters[1], selectedCharacters[2]);
     }
 }

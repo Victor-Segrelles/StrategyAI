@@ -7,6 +7,9 @@ public class Character : MonoBehaviour
 {
     #region Variables
 
+    public GameObject stunVFX;
+    private GameObject currentStunVFX;
+
     //Nombres
     public string characterName;
     public (string, ActionType) firstSkill;
@@ -23,7 +26,7 @@ public class Character : MonoBehaviour
     //Comprobante del tipo de personaje
     public bool isPlayerControlled;
 
-    //Variables de selección
+    //Variables de selecciï¿½n
     public List<Character> selectedCharacters = new List<Character>();
     public Transform selectedGroundPosition;
     public bool selectionFinished = false;
@@ -32,12 +35,14 @@ public class Character : MonoBehaviour
     const int MaxHealth = 100;
     public int health = MaxHealth;
 
+    bool isStunned = false;
+
     //Importar otros scripts
     private GameMaster gm;
     private Unit unit;
 
-    //Código gráfico para resaltar color
-    public Renderer rend;
+    //Cï¿½digo grï¿½fico para resaltar color
+    //public Renderer rend;
     Color highlightedColor = Color.green;
     Color actualColor;
 
@@ -54,7 +59,7 @@ public class Character : MonoBehaviour
 
     #endregion
 
-    #region Métodos
+    #region Mï¿½todos
 
     #region Inicializadores
     private void Awake()
@@ -66,8 +71,8 @@ public class Character : MonoBehaviour
     void Start()
     {
         
-        rend = GetComponent<Renderer>();
-        actualColor = rend.material.color;
+        //rend = GetComponent<Renderer>();
+        //actualColor = rend.material.color;
         gm = FindObjectOfType<GameMaster>();
         unit = GetComponent<Unit>();
         //selectedGroundPosition = this.transform;
@@ -75,10 +80,23 @@ public class Character : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if (currentStunVFX != null)
+        {
+            currentStunVFX.transform.position = transform.position;
+        }
+
+        if (!isStunned && currentStunVFX != null)
+        {
+            Destroy(currentStunVFX);
+        }
+    }
+
     #endregion
 
     #region Movement
-    //Código de movimiento
+    //Cï¿½digo de movimiento
     public void ResetMovementStatus()
     {
         //selectedGroundPosition = null;
@@ -90,7 +108,7 @@ public class Character : MonoBehaviour
     public void Move()
     {
         //
-        ////// Preguntar si el Unit puede ir allí
+        ////// Preguntar si el Unit puede ir allï¿½
         //
         if(Mathf.Abs(Vector3.Distance(transform.position, selectedGroundPosition.position)) <= movementDistance)
         {
@@ -100,7 +118,7 @@ public class Character : MonoBehaviour
         }
         else
         {
-            print("Prueba otro sitio, que ese está muy lejos");
+            print("Prueba otro sitio, que ese estï¿½ muy lejos");
         }
        
     }
@@ -111,7 +129,7 @@ public class Character : MonoBehaviour
         print("Is going to move");
     }
 
-    //Comprueba si el personaje se está moviendo o ejecutando la acción
+    //Comprueba si el personaje se estï¿½ moviendo o ejecutando la acciï¿½n
     public bool IsMoving()
     {
         return isMoving;
@@ -136,7 +154,7 @@ public class Character : MonoBehaviour
 
         isMoving = false;
         movementCompleted = true;
-        //print("Me terminé de mover");
+        //print("Me terminï¿½ de mover");
 
     }
 
@@ -257,9 +275,9 @@ public class Character : MonoBehaviour
     public virtual void setNames()
     {
         //this.characterName = "Character";
-        this.firstSkill = ("1º skill", ActionType.neutral);
-        this.secondSkill = ("2º skill", ActionType.neutral);
-        this.thirdSkill = ("3º skill", ActionType.neutral);
+        this.firstSkill = ("1ï¿½ skill", ActionType.neutral);
+        this.secondSkill = ("2ï¿½ skill", ActionType.neutral);
+        this.thirdSkill = ("3ï¿½ skill", ActionType.neutral);
     }
 
     //public void Highlight()
@@ -289,9 +307,10 @@ public class Character : MonoBehaviour
     //    gm.GetCurrentCharacter().selectedCharacters.Add(this);
     //}
 
-    #region Control de daño
-    public void ReceiveDamage(int damage)
+    #region Control de daï¿½o
+    public virtual void ReceiveDamage(int damage) // If changed: reflect in Archer and Mage override
     {
+        Debug.Log("My health before the attack: " + health);
         int newHealth = health - damage;
         if (newHealth < 1)
         {
@@ -302,10 +321,13 @@ public class Character : MonoBehaviour
         {
             health = newHealth;
         }
+        Debug.Log("My health after the attack: " + health);
     }
 
     public void ReceiveHealing(int heal)
     {
+        Debug.Log("My health before the healing: " + health);
+
         int newHealth = health + heal;
         if (newHealth > MaxHealth)
         {
@@ -315,6 +337,7 @@ public class Character : MonoBehaviour
         {
             health = newHealth;
         }
+        Debug.Log("My health after the healing: " + health);
     }
 
     public void Die()
@@ -324,6 +347,15 @@ public class Character : MonoBehaviour
         gm.auxTransform.Remove(selectedGroundPosition);
         Destroy(selectedGroundPosition.gameObject);
         Destroy(this.gameObject);
+    }
+
+    public void GetStunned()
+    {
+        if (currentStunVFX == null)
+        {
+            currentStunVFX = Instantiate(stunVFX, transform.position, Quaternion.identity);
+        }
+        isStunned = true;
     }
 
     #endregion

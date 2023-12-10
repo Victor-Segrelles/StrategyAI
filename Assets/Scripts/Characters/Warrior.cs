@@ -6,10 +6,8 @@ public class Warrior : Character
 {
     public GameObject slashVFX;
     public GameObject cleaveVFX;
-    public GameObject tauntVFX;
     private GameObject currentSlashVFX;
     private GameObject currentCleaveVFX;
-    private GameObject currentTauntVFX;
 
     int slashDamage = 10;
     int cleaveDamage = 8;
@@ -52,53 +50,70 @@ public class Warrior : Character
     public override void PerformAction2()
     {
         ResetSelected();
-        Cleave(this.transform);
+        Cleave();
     }
 
-    public void Cleave(Transform target)
+    public void Cleave()
     {
         Debug.Log("Warrior cleaves target location (melee range)");
+        currentCleaveVFX = Instantiate(cleaveVFX, transform.position, Quaternion.identity);
+        currentCleaveVFX.SetActive(true);
+        StartCoroutine(PlayCleaveVFX());
     }
 
-    // ACTION 3 - TAUNT
+    private IEnumerator PlayCleaveVFX()
+    {
+        yield return new WaitForSeconds(0.3f);
+        Destroy(currentCleaveVFX);
+        // TODO: Find enemies en area and damage them
+        // recorrer lista de enemigos
+        // si enemigo en rango hacer "cleaveDamage" de daño
+    }
+
+    // ACTION 3 - STUN
     public override void PerformAction3()
     {
         ResetSelected();
         StartCoroutine(WaitForEnemyTargetSelection());
-        StartCoroutine(WaitForTauntTargetSelection());
+        StartCoroutine(WaitForStunTargetSelection());
     }
 
-    private IEnumerator WaitForTauntTargetSelection()
+    private IEnumerator WaitForStunTargetSelection()
     {
         while (!selectionFinished)
         {
             yield return null;
         }
-        Taunt(selectedCharacters[0]);
+        Stun(selectedCharacters[0]);
     }
 
-    public void Taunt(Character target)
+    public void Stun(Character target)
     {
-        currentSlashVFX = Instantiate(tauntVFX, target.transform.position, Quaternion.identity);
-        currentSlashVFX.SetActive(true);
-        StartCoroutine(PlayTauntVFX(target));
-        Debug.Log("Warrior Taunts target enemy");
-    }
-
-    private IEnumerator PlayTauntVFX(Character target)
-    {
-        yield return new WaitForSeconds(0.3f);
-        Destroy(currentTauntVFX);
-
-        //target.ReceiveDamage(slashDamage);
-        //TODO Change enemy target position to warrior position
+        Debug.Log("Warrior stuns target enemy");
+        target.GetStunned();
     }
 
     public override void setNames()
     {
-        //characterName = "Arquero";
+        //characterName = "Guerrero";
         firstSkill = ("Slash", GameMaster.ActionType.oneTarget);
-        secondSkill = ("Cleave", GameMaster.ActionType.groundTarget);
-        thirdSkill = ("Taunt", GameMaster.ActionType.oneTarget);
+        secondSkill = ("Cleave", GameMaster.ActionType.selfTarget);
+        thirdSkill = ("Stun", GameMaster.ActionType.oneTarget);
+    }
+
+    // TODO: DELETE AFTER TESTING
+    public void TestSkill1()
+    {
+        Slash(selectedCharacters[0]);
+    }
+
+    public void TestSkill2()
+    {
+        Cleave();
+    }
+
+    public void TestSkill3()
+    {
+        Stun(selectedCharacters[0]);
     }
 }

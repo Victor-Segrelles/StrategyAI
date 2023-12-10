@@ -26,24 +26,30 @@ public class Unit : MonoBehaviour {
 	
 	bool chasing = false;
 	public Transform hijo;
+	public LayerMask ignored;
+	public int heightoffset;
+	MageBT mageBT;
+	public int life;
 
 	void Awake() {
        
     }
 	void Start(){
+
 		//PathRequestManager.RequestPath(transform.position, waypoints[currentIndex].position, OnPathFound);
 		StartCoroutine (UpdatePath ());
 	}
 
     private void Update() {
 
-        Ray ray = new Ray(transform.position + new Vector3(0, 100, 0), Vector3.down);
+
+		Ray ray = new Ray(transform.position + new Vector3(0, 100, 0), Vector3.down);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100))
+        if (Physics.Raycast(ray, out hit, 100, ~ignored))
         {
             var distanceToGround = hit.distance;
             //Debug.Log(distanceToGround);
-            hijo.position = new Vector3(hijo.position.x, transform.position.y+100-distanceToGround+1, hijo.position.z);
+            hijo.position = new Vector3(hijo.position.x, transform.position.y+100-distanceToGround+heightoffset, hijo.position.z);
         }
 
         /*RaycastHit hit;
