@@ -7,14 +7,27 @@ public class Archer : Character
 {
 
     public GameObject arrowVFX;
-    private GameObject currentArrowVFX;
-
-    public GameObject TwinArrowVFX1;
-    private GameObject currentTwinArrowVFX1;
-    private GameObject currentTwinArrowVFX2;
-
+    private GameObject currentArrowVFX1;
+    private GameObject currentArrowVFX2;
+    public GameObject evadeVFX;
+    private GameObject currentEvadeVFX;
     const int singleShotDamage = 10;
     const int twinShotDamage = 8;
+    const float evasionChance = 0.6f;
+    private int turnsWithEvasion = 0;
+
+    private void Update()
+    {
+        if (currentEvadeVFX != null)
+        {
+            currentEvadeVFX.transform.position = transform.position;
+        }
+
+        if (currentEvadeVFX != null && turnsWithEvasion == 0)
+        {
+            Destroy(currentEvadeVFX);
+        }
+    }
 
     public override void PerformAction1()
     {
@@ -36,8 +49,8 @@ public class Archer : Character
     public void SingleShot(Character target)
     {
         Debug.Log("Archer shoots 1 arrow");
-        currentArrowVFX = Instantiate(arrowVFX, target.transform.position, Quaternion.identity);
-        currentArrowVFX.SetActive(true);
+        currentArrowVFX1 = Instantiate(arrowVFX, target.transform.position, Quaternion.identity);
+        currentArrowVFX1.SetActive(true);
         StartCoroutine(PlayArrowVFXAndHit(target));
     }
 
@@ -49,12 +62,12 @@ public class Archer : Character
 
         while (elapsedTime < duration)
         {
-            currentArrowVFX.transform.position = Vector3.Lerp(transform.position, target.transform.position, elapsedTime / duration);
+            currentArrowVFX1.transform.position = Vector3.Lerp(transform.position, target.transform.position, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        Destroy(currentArrowVFX);
+        Destroy(currentArrowVFX1);
 
         target.ReceiveDamage(singleShotDamage);
     }
@@ -80,10 +93,10 @@ public class Archer : Character
     public void TwinShot(Character target1, Character target2)
     {
         Debug.Log("Archer shoots 2 arrows");
-        currentTwinArrowVFX1 = Instantiate(TwinArrowVFX1, target1.transform.position, Quaternion.identity);
-        currentTwinArrowVFX2 = Instantiate(TwinArrowVFX1, target2.transform.position, Quaternion.identity);
-        currentTwinArrowVFX1.SetActive(true);
-        currentTwinArrowVFX2.SetActive(true);
+        currentArrowVFX1 = Instantiate(arrowVFX, target1.transform.position, Quaternion.identity);
+        currentArrowVFX2 = Instantiate(arrowVFX, target2.transform.position, Quaternion.identity);
+        currentArrowVFX1.SetActive(true);
+        currentArrowVFX2.SetActive(true);
         StartCoroutine(PlayTwinArrowVFXAndHit(target1, target2));
     }
 
@@ -95,15 +108,15 @@ public class Archer : Character
 
         while (elapsedTime < duration)
         {
-            currentTwinArrowVFX1.transform.position = Vector3.Lerp(transform.position, target1.transform.position, elapsedTime / duration);
-            currentTwinArrowVFX2.transform.position = Vector3.Lerp(transform.position, target2.transform.position, elapsedTime / duration);
+            currentArrowVFX1.transform.position = Vector3.Lerp(transform.position, target1.transform.position, elapsedTime / duration);
+            currentArrowVFX2.transform.position = Vector3.Lerp(transform.position, target2.transform.position, elapsedTime / duration);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        Destroy(currentTwinArrowVFX1);
-        Destroy(currentTwinArrowVFX2);
+        Destroy(currentArrowVFX1);
+        Destroy(currentArrowVFX2);
 
         if(target1 != null) {
             target1.ReceiveDamage(twinShotDamage);
@@ -116,12 +129,16 @@ public class Archer : Character
     // ACTION 3 - EVADE
     public override void PerformAction3()
     {
-        ResetSelected();
         Evade();
     }
 
     public void Evade()
     {
+        turnsWithEvasion = 2;
+        if (currentEvadeVFX == null)
+        {
+            currentEvadeVFX = Instantiate(evadeVFX, transform.position, Quaternion.identity);
+        }
         Debug.Log("Archer improves their evasion");
     }
 
@@ -131,6 +148,26 @@ public class Archer : Character
         firstSkill = ("Single Shot", GameMaster.ActionType.oneTarget);
         secondSkill = ("Twin Shot", GameMaster.ActionType.twoTarget);
         thirdSkill = ("Evade", GameMaster.ActionType.selfTarget);
+    }
+
+    public override void ReceiveDamage(int damage)
+    {
+        Debug.Log("My health before the attack: " + health);
+        float randomValue = Random.value;
+        if (randomValue > evasionChance) // failed evasion
+        {
+            int newHealth = health - damage;
+            if (newHealth < 1)
+            {
+                health = 0;
+                Die();
+            }
+            else
+            {
+                health = newHealth;
+            }
+        }
+        Debug.Log("My health after the attack: " + health);
     }
 
     // TODO: DELETE AFTER TESTING
@@ -147,6 +184,6 @@ public class Archer : Character
 
     public void TestSkill3()
     {
-        Debug.Log("HA!");
+        Evade();
     }
 }

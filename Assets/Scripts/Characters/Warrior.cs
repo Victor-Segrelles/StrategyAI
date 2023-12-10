@@ -6,10 +6,8 @@ public class Warrior : Character
 {
     public GameObject slashVFX;
     public GameObject cleaveVFX;
-    public GameObject tauntVFX;
     private GameObject currentSlashVFX;
     private GameObject currentCleaveVFX;
-    private GameObject currentTauntVFX;
 
     int slashDamage = 10;
     int cleaveDamage = 8;
@@ -72,37 +70,27 @@ public class Warrior : Character
         // si enemigo en rango hacer "cleaveDamage" de daño
     }
 
-    // ACTION 3 - TAUNT
+    // ACTION 3 - STUN
     public override void PerformAction3()
     {
         ResetSelected();
         StartCoroutine(WaitForEnemyTargetSelection());
-        StartCoroutine(WaitForTauntTargetSelection());
+        StartCoroutine(WaitForStunTargetSelection());
     }
 
-    private IEnumerator WaitForTauntTargetSelection()
+    private IEnumerator WaitForStunTargetSelection()
     {
         while (!selectionFinished)
         {
             yield return null;
         }
-        Taunt(selectedCharacters[0]);
+        Stun(selectedCharacters[0]);
     }
 
-    public void Taunt(Character target)
+    public void Stun(Character target)
     {
-        currentTauntVFX = Instantiate(tauntVFX, target.transform.position, Quaternion.identity);
-        currentTauntVFX.SetActive(true);
-        StartCoroutine(PlayTauntVFX(target));
-        Debug.Log("Warrior Taunts target enemy");
-    }
-
-    private IEnumerator PlayTauntVFX(Character target)
-    {
-        yield return new WaitForSeconds(1.3f);
-        Destroy(currentTauntVFX);
-        // TODO: code taunt functionality
-        // VFX should be played as long as enemy is taunted
+        Debug.Log("Warrior stuns target enemy");
+        target.GetStunned();
     }
 
     public override void setNames()
@@ -110,7 +98,7 @@ public class Warrior : Character
         //characterName = "Guerrero";
         firstSkill = ("Slash", GameMaster.ActionType.oneTarget);
         secondSkill = ("Cleave", GameMaster.ActionType.groundTarget);
-        thirdSkill = ("Taunt", GameMaster.ActionType.oneTarget);
+        thirdSkill = ("Stun", GameMaster.ActionType.oneTarget);
     }
 
     // TODO: DELETE AFTER TESTING
@@ -126,6 +114,6 @@ public class Warrior : Character
 
     public void TestSkill3()
     {
-        Taunt(selectedCharacters[0]);
+        Stun(selectedCharacters[0]);
     }
 }

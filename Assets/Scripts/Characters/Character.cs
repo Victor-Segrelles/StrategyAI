@@ -7,6 +7,9 @@ public class Character : MonoBehaviour
 {
     #region Variables
 
+    public GameObject stunVFX;
+    private GameObject currentStunVFX;
+
     //Nombres
     public string characterName;
     public (string, ActionType) firstSkill;
@@ -31,6 +34,8 @@ public class Character : MonoBehaviour
     //Control de salud
     const int MaxHealth = 100;
     public int health = MaxHealth;
+
+    bool isStunned = false;
 
     //Importar otros scripts
     private GameMaster gm;
@@ -73,6 +78,19 @@ public class Character : MonoBehaviour
         //selectedGroundPosition = this.transform;
 
 
+    }
+
+    private void Update()
+    {
+        if (currentStunVFX != null)
+        {
+            currentStunVFX.transform.position = transform.position;
+        }
+
+        if (!isStunned && currentStunVFX != null)
+        {
+            Destroy(currentStunVFX);
+        }
     }
 
     #endregion
@@ -290,7 +308,7 @@ public class Character : MonoBehaviour
     //}
 
     #region Control de da�o
-    public void ReceiveDamage(int damage)
+    public virtual void ReceiveDamage(int damage) // If changed: reflect in Archer and Mage override
     {
         Debug.Log("My health before the attack: " + health);
         int newHealth = health - damage;
@@ -329,6 +347,15 @@ public class Character : MonoBehaviour
         gm.auxTransform.Remove(selectedGroundPosition);
         Destroy(selectedGroundPosition.gameObject);
         Destroy(this.gameObject);
+    }
+
+    public void GetStunned()
+    {
+        if (currentStunVFX == null)
+        {
+            currentStunVFX = Instantiate(stunVFX, transform.position, Quaternion.identity);
+        }
+        isStunned = true;
     }
 
     #endregion
