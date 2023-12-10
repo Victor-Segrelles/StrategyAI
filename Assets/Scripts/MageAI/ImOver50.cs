@@ -19,8 +19,7 @@ public class ImOver50 : NodeBT
 
         if (amount >= 50)
         {
-            //Debug.Log("Tengo más de 80 de vida");
-            Debug.Log(amount + "   Tengo 50 o más de vida");
+
         }
 
         state = NodeState.RUNNING;

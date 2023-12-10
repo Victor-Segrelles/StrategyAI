@@ -10,6 +10,7 @@ public class Unit : MonoBehaviour {
 	const float minPathUpdateTime = 0.2f;
 	const float pathUpdateMoveThreshold = 0.5f;
 	public Transform target;
+	private Transform targetaux;
 	public float speed = 20;
 	float turnSpeed=20;
 	float turnDst=0;
@@ -34,23 +35,29 @@ public class Unit : MonoBehaviour {
 	public float attackRange = 15;
 	public Character attackTarget;
 	public bool moved = false;
+	public bool myturn=false;
+	public bool isAI;
 	public Vector3 lastPosition;
 	public float moveDistance;
+
 
 	void Awake() {
        
     }
 	void Start(){
+		moveDistance=10f;
 		gm = FindObjectOfType<GameMaster>();
 		//PathRequestManager.RequestPath(transform.position, waypoints[currentIndex].position, OnPathFound);
 		StartCoroutine (UpdatePath ());
+		target=transform;
+		targetaux=target;
+		lastPosition=transform.position;
 	}
 
     private void Update() {
 
 
-		
-		moveLimited();
+		Movement();
 
 
 		Ray ray = new Ray(transform.position + new Vector3(0, 100, 0), Vector3.down);
@@ -78,6 +85,13 @@ public class Unit : MonoBehaviour {
 				debug_recentstun=false;
 				target = waypoints[currentIndex];
 			}
+		}
+	}
+	private void Movement(){
+		moveLimited();
+		if(myturn && !moved && isAI){
+			ChangeTarget(targetaux);
+			moved = true;
 		}
 	}
 
@@ -182,22 +196,27 @@ public class Unit : MonoBehaviour {
 
 	public void move2(Transform target2)
     {
-		moved = true;   //Esto hay que ponerlo a false al terminar el turno
-		target = target2;
+		  //Esto hay que ponerlo a false al terminar el turno
+		targetaux = target2;
     }
 
 	public void moveLimited()
     {
 		if (Vector3.Distance(lastPosition, transform.position) >= moveDistance)
         {
+			//Debug.Log("Resultado: "+(Vector3.Distance(lastPosition, transform.position) >= moveDistance).ToString()+"Distancia movimiento: "+moveDistance.ToString()+"distancia a origen"+(Vector3.Distance(lastPosition, transform.position)).ToString());
+
 			target = transform;
+			targetaux=transform;//esto es imprescindible o explota
         }
     }
 
-	public void endTurn()	//Se ha de llamar aquí al final de cada turno
+	public void endTurn()	//Se ha de llamar aquï¿½ al final de cada turno
     {
 		lastPosition = transform.position;
 		moved = false;
 		attackTarget = null;
+		myturn=false;
+		//targetaux=transform;//meter un ismoving
     }
 }

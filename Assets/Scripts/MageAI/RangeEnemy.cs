@@ -15,7 +15,6 @@ public class RangeEnemy : NodeBT
 
     public override NodeState Evaluate()
     {
-        Debug.Log("sexo");
         state = NodeState.RUNNING;
         return state;
     }

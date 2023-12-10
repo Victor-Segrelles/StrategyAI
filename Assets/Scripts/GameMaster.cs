@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameMaster : MonoBehaviour
 {
     #region Variables
-    //Cámara
+    //Cï¿½mara
     public PlayerCamera camera;
 
     //Interfaz
@@ -36,7 +36,7 @@ public class GameMaster : MonoBehaviour
 
     public LayerMask ground;
 
-    //Máquina de estados
+    //Mï¿½quina de estados
     public enum state
     {
         neutral,
@@ -114,12 +114,14 @@ public class GameMaster : MonoBehaviour
     {
         // Reiniciar el estado de movimiento solo para el personaje actual
         GetCurrentCharacter().ResetMovementStatus();
+        GetCurrentCharacter().startTurn();
         camera.FocusCharacter(GetCurrentCharacter());
     }
 
     //Termina el turno y pasa al siguiente
     public void EndTurn()
     {
+        charactersList[activeCharacterIndex].endTurn();
         // Pasar al siguiente personaje
         activeCharacterIndex++;
 
@@ -134,7 +136,7 @@ public class GameMaster : MonoBehaviour
         StartTurn();
     }
 
-    //Esta función devuelve el personaje actual
+    //Esta funciï¿½n devuelve el personaje actual
     public Character GetCurrentCharacter()
     {
         return charactersList[activeCharacterIndex];
@@ -182,7 +184,7 @@ public class GameMaster : MonoBehaviour
 
     #region Controladores de texto
 
-    //Esta función se encarga de poner el texto por pantalla
+    //Esta funciï¿½n se encarga de poner el texto por pantalla
     private void UpdateTurnText()
     {
         characterText.text = $"Turno de: {GetCurrentCharacterName()}";
@@ -197,7 +199,7 @@ public class GameMaster : MonoBehaviour
         thirdSkill.GetComponentInChildren<TMP_Text>().text = GetCurrentCharacter().thirdSkill.Item1;
     }
 
-    //Esta función se ocupa de coger todos los nombres de Character, bien su nombre principal o bien sus habilidades
+    //Esta funciï¿½n se ocupa de coger todos los nombres de Character, bien su nombre principal o bien sus habilidades
     private string GetCurrentCharacterName()
     {
         return charactersList[activeCharacterIndex].characterName;

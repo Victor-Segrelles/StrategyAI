@@ -15,13 +15,12 @@ public class CheckLifeOver50 : NodeBT
 
     public override NodeState Evaluate()
     {
-        Debug.Log(unit.life);
         object t = GetData("target");
         if(t==null || (int)t!=unit.life){
 
             if (unit.life >= 50)
             {
-                //Debug.Log(unit.life + "Tengo 50 o más de vida");
+                //Debug.Log(unit.life + "Tengo 50 o mï¿½s de vida");
                 parent.parent.SetData("target", unit.life);
                 state = NodeState.SUCCESS;
                 return state;
