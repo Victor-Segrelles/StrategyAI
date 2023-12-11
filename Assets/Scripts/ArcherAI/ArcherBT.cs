@@ -24,21 +24,21 @@ public class ArcherBT : Tree
             }),
             new Sequence(new List<NodeBT>
             {
-                new CheckLifeUnder50(GetComponent<Unit>()),
+                new CheckLifeUnder50Archer(GetComponent<Unit>()),
                 new Selector(new List<NodeBT>{
                     new Sequence(new List<NodeBT>{
-                        new CheckHealer(GetComponent<Unit>()),
-                        new GoHealer(GetComponent<Unit>()),
+                        new CheckHealerArcher(GetComponent<Unit>()),
+                        new GoHealerArcher(GetComponent<Unit>()),
                     }),
                     new Selector(new List<NodeBT>{
                         new Sequence(new List<NodeBT>{
-                            new CheckRangeEnemy(GetComponent<Unit>()),
-                            new RangeEnemy(GetComponent<Unit>()),
+                            new CheckRangeEnemyArcher(GetComponent<Unit>()),
+                            new RangeEnemyArcher(GetComponent<Unit>()),
                         }),
                         new Sequence(new List<NodeBT>
                         {
-                            new CheckOutOfRangeEnemy(GetComponent<Unit>()),
-                            new OutOfRangeEnemy(GetComponent<Unit>()),
+                            new CheckOutOfRangeEnemyArcher(GetComponent<Unit>()),
+                            new OutOfRangeEnemyArcher(GetComponent<Unit>()),
                         }),
                     }),
                 }),

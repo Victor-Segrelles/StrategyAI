@@ -335,8 +335,8 @@ public class Character : MonoBehaviour
     {
         Debug.Log("Character died.");
         gm.charactersList.Remove(this);
-        gm.auxTransform.Remove(selectedGroundPosition);
-        Destroy(selectedGroundPosition.gameObject);
+        gm.auxTransform.Remove(selectedMovementPosition);
+        Destroy(selectedMovementPosition.gameObject);
         Destroy(this.gameObject);
     }
 

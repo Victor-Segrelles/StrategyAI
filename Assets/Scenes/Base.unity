@@ -537,7 +537,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -8630,7 +8630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5403026297322083430, guid: e562d757bf45e9b47987388e3a16df62, type: 3}
       propertyPath: life
-      value: 40
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5403026297322083430, guid: e562d757bf45e9b47987388e3a16df62, type: 3}
       propertyPath: healthbar
@@ -15780,8 +15780,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9206594641218113064, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206594641218113064, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206594641218113064, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.99999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206594641218113064, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.69
+      value: 1.6899977
       objectReference: {fileID: 0}
     - target: {fileID: 9206594641218113064, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15826,6 +15838,14 @@ PrefabInstance:
     - target: {fileID: 9206594641218113066, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
       propertyPath: isAI
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206594641218113066, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206594641218113066, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
+      propertyPath: attackRange
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 9206594641218113067, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
       propertyPath: characterName
@@ -18887,6 +18907,14 @@ PrefabInstance:
     - target: {fileID: 9206594641218113065, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
       propertyPath: m_Name
       value: EnemyArcher
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206594641218113066, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206594641218113066, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
+      propertyPath: attackRange
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 9206594641218113067, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
       propertyPath: characterName
