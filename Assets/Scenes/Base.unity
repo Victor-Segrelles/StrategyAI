@@ -15828,6 +15828,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9206594641218113067, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
+      propertyPath: characterName
+      value: archer manual
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206594641218113067, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
       propertyPath: isPlayerControlled
       value: 1
       objectReference: {fileID: 0}
@@ -18756,7 +18760,7 @@ PrefabInstance:
       objectReference: {fileID: 1334461537}
     - target: {fileID: 3671457729047507536, guid: c565cc2194351b544a7cb7fc37267146, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3671457729047507536, guid: c565cc2194351b544a7cb7fc37267146, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18883,6 +18887,10 @@ PrefabInstance:
     - target: {fileID: 9206594641218113065, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
       propertyPath: m_Name
       value: EnemyArcher
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206594641218113067, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
+      propertyPath: characterName
+      value: archer IA
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
