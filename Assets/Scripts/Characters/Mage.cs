@@ -14,7 +14,7 @@ public class Mage : Character
     private GameObject currentArcaneMissile3VFX;
     private GameObject currentShieldVFX;
     const int firestormDamage = 10;
-    const int firestormRadius = 100;
+    const int firestormRadius = 5;
     const int arcaneMissileDamage = 8;
     bool hasShield = false;
 
