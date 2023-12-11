@@ -180,7 +180,7 @@ public class Mage : Character
 
     public override void setNames()
     {
-        firstSkill = ("Firestorm", GameMaster.ActionType.oneTarget);
+        firstSkill = ("Firestorm", GameMaster.ActionType.groundTarget);
         secondSkill = ("Shield", GameMaster.ActionType.selfTarget);
         thirdSkill = ("Arcane missiles", GameMaster.ActionType.threeTarget);
     }

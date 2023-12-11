@@ -57,7 +57,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   heightoffset: 0
-  life: 45
+  life: 100
+  gm: {fileID: 0}
+  attackRange: 25
+  attackTarget: {fileID: 0}
+  moved: 0
+  myturn: 0
+  isAI: 0
+  lastPosition: {x: 0, y: 0, z: 0}
+  moveDistance: 10
 --- !u!114 &5403026297322083425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +73,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5403026297322083429}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2bc21a4b783cffb4eb1649215c69a327, type: 3}
   m_Name: 
@@ -83,13 +91,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stunVFX: {fileID: 7053385775836331393, guid: 97483ac0ba8b141feb03d0d5b63b0d9f, type: 3}
-  characterName: 
+  characterName: mago manual
+  skillCompleted: 0
   isPlayerControlled: 0
   selectedCharacters: []
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
-  health: 100
-  rend: {fileID: 0}
+  selectedMovementPosition: {fileID: 0}
+  isStunned: 0
+  movementCompleted: 0
   movementDistance: 15
   firestormVFX: {fileID: 7957833072274404953, guid: 44f68e3d5c75a495ebb52825b092791e, type: 3}
   arcanemissileVFX: {fileID: 3591305668869986075, guid: 5389e1c7b2c6b4e06a0faa77eedffba6, type: 3}
@@ -1128,7 +1138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6939723544115194076
 Transform:
   m_ObjectHideFlags: 0
@@ -1569,7 +1579,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6940118525647071712
 Transform:
   m_ObjectHideFlags: 0

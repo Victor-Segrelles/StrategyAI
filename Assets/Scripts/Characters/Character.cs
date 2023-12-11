@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
     public Transform selectedMovementPosition;
 
     //Control de salud
-    const int MaxHealth = 40;
+    const int MaxHealth = 100;
 
     public bool isStunned = false;
 
