@@ -16,8 +16,9 @@ public class Character : MonoBehaviour
     public (string, ActionType) secondSkill;
     public (string, ActionType) thirdSkill;
 
-    
-    private bool skillCompleted = false;
+    //Control de skills
+    public bool skillCompleted = false;
+    //private bool evaded;
 
     //Comprobante del tipo de personaje
     public bool isPlayerControlled;
@@ -33,16 +34,11 @@ public class Character : MonoBehaviour
     const int MaxHealth = 100;
     public int health = MaxHealth;
 
-    bool isStunned = false;
+    public bool isStunned = false;
 
     //Importar otros scripts
     private GameMaster gm;
     private Unit unit;
-
-    //C�digo gr�fico para resaltar color
-    //public Renderer rend;
-    Color highlightedColor = Color.green;
-    Color actualColor;
 
 
     //Comprobantes del movimiento
@@ -239,18 +235,14 @@ public class Character : MonoBehaviour
         selectedGroundPosition = pos;
     }
 
-    #endregion
-
-
-
-
-    //
     public void ResetSelected()
     {
         selectedCharacters.Clear();
         selectedGroundPosition = null;
         selectionFinished = false;
     }
+    #endregion
+
 
     #region Skills
     //Actions
@@ -281,7 +273,13 @@ public class Character : MonoBehaviour
         unit.myturn=true;
     }
 
+    public bool SkillCompleted()
+    {
+        return skillCompleted;
+    }
+
     #endregion
+
     public virtual void setNames()
     {
         //this.characterName = "Character";
@@ -290,10 +288,6 @@ public class Character : MonoBehaviour
         this.thirdSkill = ("3� skill", ActionType.neutral);
     }
 
-    public bool SkillCompleted()
-    {
-        return skillCompleted;
-    }
 
     #region Control de da�o
     public virtual void ReceiveDamage(int damage) // If changed: reflect in Archer and Mage override

@@ -977,6 +977,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8176104301287183761, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
+      propertyPath: stunVFX
+      value: 
+      objectReference: {fileID: 7053385775836331393, guid: 97483ac0ba8b141feb03d0d5b63b0d9f, type: 3}
+    - target: {fileID: 8176104301287183761, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
       propertyPath: isPlayerControlled
       value: 1
       objectReference: {fileID: 0}
@@ -1865,6 +1869,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 564668365917868624, guid: bc2a2d2cea686b94b9a5d935732119c6, type: 3}
   m_PrefabInstance: {fileID: 1831553348}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &597475019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 597475020}
+  m_Layer: 0
+  m_Name: ---------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &597475020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597475019}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.55999994, z: -16.419872}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &598825767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2636,6 +2671,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7309796374753753747, guid: 38e80406f81d2cd4db0986b686361fb3, type: 3}
   m_PrefabInstance: {fileID: 1367716847}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &812283172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 812283173}
+  m_Layer: 0
+  m_Name: groundPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &812283173
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812283172}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.7167263, y: 2.277567, z: 1.5626621}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &836385275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2993,6 +3059,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 239166734}
     m_Modifications:
+    - target: {fileID: 2336604542495299676, guid: 5e5f47cb25cc26549be80bbb73566250, type: 3}
+      propertyPath: stunVFX
+      value: 
+      objectReference: {fileID: 7053385775836331393, guid: 97483ac0ba8b141feb03d0d5b63b0d9f, type: 3}
     - target: {fileID: 2336604542495299676, guid: 5e5f47cb25cc26549be80bbb73566250, type: 3}
       propertyPath: characterName
       value: Mage enemy
@@ -3551,6 +3621,8 @@ MonoBehaviour:
   firstSkill: {fileID: 1410074784}
   secondSkill: {fileID: 1636276764}
   thirdSkill: {fileID: 431510287}
+  Movement: {fileID: 549919652}
+  endTurn: {fileID: 1302816627}
   alliesContainer: {fileID: 894669498}
   enemiesContainer: {fileID: 239166733}
   allies: []
@@ -3558,6 +3630,7 @@ MonoBehaviour:
   charactersList: []
   auxTransform: []
   auxTransformContainer: {fileID: 145725046}
+  groundPosition: {fileID: 812283173}
   ground:
     serializedVersion: 2
     m_Bits: 128
@@ -4528,12 +4601,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stunVFX: {fileID: 0}
   characterName: Hola
+  skillCompleted: 0
   isPlayerControlled: 0
   selectedCharacters: []
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
   selectedMovementPosition: {fileID: 0}
   health: 100
+  isStunned: 0
   movementCompleted: 0
   movementDistance: 15
   arrowVFX: {fileID: 0}
@@ -5279,6 +5354,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 799d363f2417e594e8d97318e0fa375c, type: 2}
     - target: {fileID: 5311976664971691011, guid: 386df07ce0d48d04f89331ddc012e1bf, type: 3}
+      propertyPath: stunVFX
+      value: 
+      objectReference: {fileID: 7053385775836331393, guid: 97483ac0ba8b141feb03d0d5b63b0d9f, type: 3}
+    - target: {fileID: 5311976664971691011, guid: 386df07ce0d48d04f89331ddc012e1bf, type: 3}
       propertyPath: characterName
       value: Cleric enemy
       objectReference: {fileID: 0}
@@ -5715,6 +5794,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 799d363f2417e594e8d97318e0fa375c, type: 2}
     - target: {fileID: 5311976664971691011, guid: 386df07ce0d48d04f89331ddc012e1bf, type: 3}
+      propertyPath: stunVFX
+      value: 
+      objectReference: {fileID: 7053385775836331393, guid: 97483ac0ba8b141feb03d0d5b63b0d9f, type: 3}
+    - target: {fileID: 5311976664971691011, guid: 386df07ce0d48d04f89331ddc012e1bf, type: 3}
       propertyPath: isPlayerControlled
       value: 1
       objectReference: {fileID: 0}
@@ -5970,6 +6053,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8176104301287183761, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
+      propertyPath: stunVFX
+      value: 
+      objectReference: {fileID: 7053385775836331393, guid: 97483ac0ba8b141feb03d0d5b63b0d9f, type: 3}
     - target: {fileID: 8176104301287183761, guid: 000bff13d709a714b9d2849c77cd6da8, type: 3}
       propertyPath: characterName
       value: Archer enemy
@@ -6785,6 +6872,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 239166734}
     m_Modifications:
+    - target: {fileID: 782732579876606099, guid: c43e8cb97a7607f479a4714a1aba9aa1, type: 3}
+      propertyPath: stunVFX
+      value: 
+      objectReference: {fileID: 7053385775836331393, guid: 97483ac0ba8b141feb03d0d5b63b0d9f, type: 3}
     - target: {fileID: 782732579876606099, guid: c43e8cb97a7607f479a4714a1aba9aa1, type: 3}
       propertyPath: characterName
       value: Warrior enemy

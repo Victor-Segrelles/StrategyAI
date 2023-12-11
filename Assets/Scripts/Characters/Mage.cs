@@ -41,6 +41,7 @@ public class Mage : Character
             yield return null;
         }
         Firestorm(selectedGroundPosition);
+        skillCompleted = true;
     }
 
     public void Firestorm(Transform target)
@@ -74,6 +75,7 @@ public class Mage : Character
             hasShield = true;
             Debug.Log("Mage envelops themselves in a shield.");
         }
+        skillCompleted = true;
 
     }
 
@@ -93,6 +95,7 @@ public class Mage : Character
             yield return null;
         }
         ArcaneMissiles(selectedCharacters[0], selectedCharacters[1], selectedCharacters[2]);
+        skillCompleted = true;
     }
 
     public void ArcaneMissiles(Character target1, Character target2, Character target3)

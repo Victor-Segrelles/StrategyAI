@@ -19,6 +19,8 @@ public class GameMaster : MonoBehaviour
     public Button firstSkill;
     public Button secondSkill;
     public Button thirdSkill;
+    public Button Movement;
+    public Button endTurn;
 
     //Listas de enemigos y aliados
     public GameObject alliesContainer;
@@ -32,6 +34,8 @@ public class GameMaster : MonoBehaviour
     //Raycast y derivados
     public List<Transform> auxTransform;
     public GameObject auxTransformContainer;
+
+    public Transform groundPosition;
 
     //Control de personajes y turnos
     private int activeCharacterIndex = 0;
@@ -112,21 +116,24 @@ public class GameMaster : MonoBehaviour
             }
         }
 
+        
         if (currentState == state.Action && !GetCurrentCharacter().SkillCompleted())
         {
             if (Input.GetMouseButtonDown(0))
             {
                 if(currentActionType == ActionType.allieTarget)
                 {
-                    seleccion(true);
+                    characterSelection(true);
                 }
                 else if(currentActionType == ActionType.oneTarget || currentActionType == ActionType.twoTarget || currentActionType == ActionType.threeTarget)
                 {
-                    seleccion(false);
+                    characterSelection(false);
                 }
-                
-
-                // Lanzar un rayo desde la posici�n del clic del mouse
+                else if (currentActionType == ActionType.groundTarget)
+                {
+                    groundSelection();
+                }
+                         
 
             }
             else if (Input.GetMouseButtonDown(1))
@@ -135,25 +142,14 @@ public class GameMaster : MonoBehaviour
                 changeActionType(ActionType.neutral);
             }
 
-            if(currentActionType == ActionType.oneTarget && GetCurrentCharacter().selectedCharacters.Count==1)
-            {
-
-            }
-            else if(currentActionType == ActionType.twoTarget)
-            {
-
-            }
-            else if(currentActionType == ActionType.threeTarget)
-            {
-
-            }
+            
         }
     }
 
     #endregion
 
-
-    public void seleccion(bool ally)
+    #region Código selector
+    public void characterSelection(bool ally)
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -179,33 +175,93 @@ public class GameMaster : MonoBehaviour
                     }
                 }
 
-                
-
-                // Handle the click event - return the parent character
-                //Debug.Log("Has golpeado a un personaje: " + personaje.name);
-
                 return;
             }
         }
     }
 
+    public void groundSelection()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
 
+        if (Physics.Raycast(ray, out hit, 100f, ground))
+        {
+            print("Entré");
+
+            groundPosition.position = hit.point;
+            groundPosition.rotation = Quaternion.identity;
+
+            GetCurrentCharacter().selectGroundPosition(groundPosition);
+            changeState(state.neutral);
+            changeActionType(ActionType.neutral);
 
 
+        }
+    }
 
+    #endregion
+
+    #region Codigo de interfaz
+    private void changeInterface()
+    {
+        if (GetCurrentCharacter().isPlayerControlled)
+        {
+            firstSkill.gameObject.SetActive(true);
+            secondSkill.gameObject.SetActive(true);
+            thirdSkill.gameObject.SetActive(true);
+            Movement.gameObject.SetActive(true);
+            endTurn.gameObject.SetActive(true);
+
+            firstSkill.interactable = true;
+            secondSkill.interactable = true;
+            thirdSkill.interactable = true;
+            Movement.interactable = true;
+            endTurn.interactable = true;
+        }
+        else
+        {
+            firstSkill.gameObject.SetActive(false);
+            secondSkill.gameObject.SetActive(false);
+            thirdSkill.gameObject.SetActive(false);
+            Movement.gameObject.SetActive(false);
+            endTurn.gameObject.SetActive(false);
+
+            firstSkill.interactable = false;
+            secondSkill.interactable = false;
+            thirdSkill.interactable = false;
+            Movement.interactable = false;
+            endTurn.interactable = false;
+        }
+    }
+
+    #endregion
 
 
     #region Controladores de turno
     //Inicia un nuevo turno
     private void StartTurn()
     {
-        // Reiniciar el estado de movimiento solo para el personaje actual
-        GetCurrentCharacter().ResetMovementStatus();
-        GetCurrentCharacter().startTurn();
-        camera.FocusCharacter(GetCurrentCharacter());
-        changeActionType(ActionType.neutral);
-        changeState(state.neutral) ;
+        if (GetCurrentCharacter().isStunned)
+        {
+            GetCurrentCharacter().isStunned = false;
+            EndTurn();
+        }
+        else
+        {
+            // Reiniciar el estado de movimiento solo para el personaje actual
+            GetCurrentCharacter().ResetMovementStatus();
+            GetCurrentCharacter().startTurn();
+
+            //Quita la interfaz o la pone
+            //changeInterface();
+
+            camera.FocusCharacter(GetCurrentCharacter());
+            changeActionType(ActionType.neutral);
+            changeState(state.neutral);
+        }
+        
     }
 
     //Termina el turno y pasa al siguiente
@@ -318,37 +374,47 @@ public class GameMaster : MonoBehaviour
     {
         //print(GetCurrentCharacter().firstSkill.Item2);
         //GetCurrentCharacter().PerformAction1();
-        if(GetCurrentCharacter().firstSkill.Item2 != ActionType.selfTarget)
+        if (!GetCurrentCharacter().SkillCompleted())
         {
-            changeState(state.Action);
-            changeActionType(GetCurrentCharacter().firstSkill.Item2);
+            if (GetCurrentCharacter().firstSkill.Item2 != ActionType.selfTarget)
+            {
+                changeState(state.Action);
+                changeActionType(GetCurrentCharacter().firstSkill.Item2);
+            }
+            GetCurrentCharacter().PerformAction1();
         }
-        GetCurrentCharacter().PerformAction1();
+
+        
     }
 
     public void PerformAction2()
     {
         //print(GetCurrentCharacter().secondSkill.Item2);
         //GetCurrentCharacter().PerformAction2();
-        if (GetCurrentCharacter().secondSkill.Item2 != ActionType.selfTarget)
+        if (!GetCurrentCharacter().SkillCompleted())
         {
-            changeState(state.Action);
-            changeActionType(GetCurrentCharacter().secondSkill.Item2);
+            if (GetCurrentCharacter().secondSkill.Item2 != ActionType.selfTarget)
+            {
+                changeState(state.Action);
+                changeActionType(GetCurrentCharacter().secondSkill.Item2);
+            }
+            GetCurrentCharacter().PerformAction2();
         }
-        GetCurrentCharacter().PerformAction2();
-
     }
 
     public void PerformAction3()
     {
         //print(GetCurrentCharacter().thirdSkill.Item2);
         //GetCurrentCharacter().PerformAction3();
-        if (GetCurrentCharacter().thirdSkill.Item2 != ActionType.selfTarget)
+        if (!GetCurrentCharacter().SkillCompleted())
         {
-            changeState(state.Action);
-            changeActionType(GetCurrentCharacter().thirdSkill.Item2);
-        }
-        GetCurrentCharacter().PerformAction3();
+            if (GetCurrentCharacter().thirdSkill.Item2 != ActionType.selfTarget)
+            {
+                changeState(state.Action);
+                changeActionType(GetCurrentCharacter().thirdSkill.Item2);
+            }
+            GetCurrentCharacter().PerformAction3();
+        }    
     }
 
     #endregion

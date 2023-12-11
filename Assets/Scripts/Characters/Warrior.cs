@@ -28,6 +28,7 @@ public class Warrior : Character
             yield return null;
         }
         Slash(selectedCharacters[0]);
+        skillCompleted = true;
     }
 
     public void Slash(Character target)
@@ -51,6 +52,7 @@ public class Warrior : Character
     {
         ResetSelected();
         Cleave();
+        skillCompleted = true;
     }
 
     public void Cleave()
@@ -74,6 +76,7 @@ public class Warrior : Character
     public override void PerformAction3()
     {
         ResetSelected();
+        Debug.Log("Waiting for target character to be selected.");
         StartCoroutine(WaitForEnemyTargetSelection());
         StartCoroutine(WaitForStunTargetSelection());
     }
@@ -85,6 +88,7 @@ public class Warrior : Character
             yield return null;
         }
         Stun(selectedCharacters[0]);
+        skillCompleted = true;
     }
 
     public void Stun(Character target)
