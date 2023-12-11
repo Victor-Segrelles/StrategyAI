@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class GameMaster : MonoBehaviour
 {
     #region Variables
+    //
+    public Transform parentCharacter;
+
     //Cámara
     public PlayerCamera camera;
 
@@ -35,6 +38,7 @@ public class GameMaster : MonoBehaviour
     private int generalTurn = 0;
 
     public LayerMask ground;
+    private int characterLayer;
 
     //Máquina de estados
     public enum state
@@ -64,6 +68,8 @@ public class GameMaster : MonoBehaviour
     #region Start y Update
     void Start()
     {
+        //parentCharacter = transform.parent;
+        characterLayer = LayerMask.NameToLayer("character");
         charactersList = generateList(allies, enemies);
         UpdateTurnText();
         StartTurn();
@@ -75,7 +81,7 @@ public class GameMaster : MonoBehaviour
         }
         for(int i = 0;i<charactersList.Count; i++)
         {
-            charactersList[i].selectGroundPosition(auxTransform[i]);
+            charactersList[i].SelectMovementPosition(auxTransform[i]);
         }
     }
 
@@ -83,6 +89,7 @@ public class GameMaster : MonoBehaviour
     {
         if(currentState == state.Moving && !GetCurrentCharacter().IsMovementCompleted())
         {
+            
             if (Input.GetMouseButtonDown(0))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -93,7 +100,7 @@ public class GameMaster : MonoBehaviour
                     auxTransform[activeCharacterIndex].position = hit.point;
                     auxTransform[activeCharacterIndex].rotation = Quaternion.identity;
 
-                    GetCurrentCharacter().selectGroundPosition(auxTransform[activeCharacterIndex]);
+                    GetCurrentCharacter().SelectMovementPosition(auxTransform[activeCharacterIndex]);
                     
                     changeState(state.neutral);
                     GetCurrentCharacter().Move();
@@ -102,6 +109,59 @@ public class GameMaster : MonoBehaviour
             else if (Input.GetMouseButtonDown(1))
             {
                 changeState(state.neutral);
+            }
+        }
+
+        if (currentState == state.Action && !GetCurrentCharacter().SkillCompleted())
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                // Lanzar un rayo desde la posición del clic del mouse
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if ( hit.collider.gameObject.layer == characterLayer)
+                    {
+                        GameObject objetoGolpeado = hit.collider.gameObject;
+
+                        Character personaje = objetoGolpeado.GetComponentInParent<Character>();
+
+                        if (GetCurrentCharacter().selectedCharacters.Contains(personaje))
+                        {
+                            GetCurrentCharacter().selectedCharacters.Remove(personaje);
+                        }
+                        else
+                        {
+                            GetCurrentCharacter().selectedCharacters.Add(personaje);
+                        }
+
+                        // Handle the click event - return the parent character
+                        Debug.Log("Has golpeado a un personaje: " + personaje.name);
+
+                        return;
+                    }
+                }
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                changeState(state.neutral);
+                changeActionType(ActionType.neutral);
+            }
+
+            if(currentActionType == ActionType.oneTarget && GetCurrentCharacter().selectedCharacters.Count==1)
+            {
+
+            }
+            else if(currentActionType == ActionType.twoTarget)
+            {
+
+            }
+            else if(currentActionType == ActionType.threeTarget)
+            {
+
             }
         }
     }
@@ -115,6 +175,8 @@ public class GameMaster : MonoBehaviour
         // Reiniciar el estado de movimiento solo para el personaje actual
         GetCurrentCharacter().ResetMovementStatus();
         camera.FocusCharacter(GetCurrentCharacter());
+        changeActionType(ActionType.neutral);
+        changeState(state.neutral) ;
     }
 
     //Termina el turno y pasa al siguiente
@@ -150,7 +212,7 @@ public class GameMaster : MonoBehaviour
         PopulateList(enemiesContainer, enemies);
         List<Character> list = new List<Character>(list1);
         list.AddRange(list2);
-        //ShuffleList(list); TODO descomentar
+        ShuffleList(list); //TODO descomentar
         return list;
     }
 
@@ -210,9 +272,13 @@ public class GameMaster : MonoBehaviour
     //Estas funciones se "comunican" con el personaje y les da instrucciones de lo que hacer
     public void Move()
     {
-        changeState(state.Moving);
+        if (!GetCurrentCharacter().IsMovementCompleted())
+        {
+            changeState(state.Moving);
+
+            GetCurrentCharacter().WarnMove();
+        }
         
-        GetCurrentCharacter().WarnMove();
         
         
 
@@ -220,29 +286,46 @@ public class GameMaster : MonoBehaviour
 
     public void PerformAction1()
     {
-        print(GetCurrentCharacter().firstSkill.Item2);
+        //print(GetCurrentCharacter().firstSkill.Item2);
         //GetCurrentCharacter().PerformAction1();
-        changeState(state.Action);
+        if(GetCurrentCharacter().firstSkill.Item2 != ActionType.selfTarget)
+        {
+            changeState(state.Action);
+            changeActionType(GetCurrentCharacter().firstSkill.Item2);
+        }
+        GetCurrentCharacter().PerformAction1();
     }
 
     public void PerformAction2()
     {
-        print(GetCurrentCharacter().secondSkill.Item2);
+        //print(GetCurrentCharacter().secondSkill.Item2);
         //GetCurrentCharacter().PerformAction2();
-        changeState(state.Action);
+        if (GetCurrentCharacter().secondSkill.Item2 != ActionType.selfTarget)
+        {
+            changeState(state.Action);
+            changeActionType(GetCurrentCharacter().secondSkill.Item2);
+        }
+
 
     }
 
     public void PerformAction3()
     {
-        print(GetCurrentCharacter().thirdSkill.Item2);
+        //print(GetCurrentCharacter().thirdSkill.Item2);
         //GetCurrentCharacter().PerformAction3();
-        changeState(state.Action);
+        if (GetCurrentCharacter().thirdSkill.Item2 != ActionType.selfTarget)
+        {
+            changeState(state.Action);
+            changeActionType(GetCurrentCharacter().thirdSkill.Item2);
+        }
+
     }
 
     #endregion
 
-    //Cambio de estado
+
+    #region Cambio de estado/acciones
+    //Cambio de estado/acciones
     public void changeState(state st)
     {
         if(!GetCurrentCharacter().IsMoving() && !GetCurrentCharacter().IsCastingsSkill())
@@ -250,5 +333,15 @@ public class GameMaster : MonoBehaviour
             currentState = st;
         }
     }
+
+    public void changeActionType(ActionType at)
+    {
+        if (!GetCurrentCharacter().IsMoving() && !GetCurrentCharacter().IsCastingsSkill())
+        {
+            currentActionType = at;
+        }
+    }
+
+    #endregion
 
 }

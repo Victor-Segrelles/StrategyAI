@@ -16,11 +16,7 @@ public class Character : MonoBehaviour
     public (string, ActionType) secondSkill;
     public (string, ActionType) thirdSkill;
 
-    //public string firstSkill;
-    //public string secondSkill;
-    //public string thirdSkill;
-
-
+    
     private bool skillCompleted = false;
 
     //Comprobante del tipo de personaje
@@ -30,6 +26,8 @@ public class Character : MonoBehaviour
     public List<Character> selectedCharacters = new List<Character>();
     public Transform selectedGroundPosition;
     public bool selectionFinished = false;
+
+    public Transform selectedMovementPosition;
 
     //Control de salud
     const int MaxHealth = 100;
@@ -49,7 +47,7 @@ public class Character : MonoBehaviour
 
     //Comprobantes del movimiento
     private bool isMoving = false;
-    private bool movementCompleted = false;
+    public bool movementCompleted = false;
 
     public float movementDistance = 15f;
 
@@ -107,12 +105,10 @@ public class Character : MonoBehaviour
     
     public void Move()
     {
-        //
-        ////// Preguntar si el Unit puede ir all�
-        //
-        if(Mathf.Abs(Vector3.Distance(transform.position, selectedGroundPosition.position)) <= movementDistance)
+        print(Mathf.Abs(Vector3.Distance(transform.position, selectedMovementPosition.position)));
+        if(Mathf.Abs(Vector3.Distance(transform.position, selectedMovementPosition.position)) <= movementDistance)
         {
-            unit.ChangeTarget(selectedGroundPosition);
+            unit.ChangeTarget(selectedMovementPosition);
             StartCoroutine(CheckImpasse());
             
         }
@@ -125,7 +121,7 @@ public class Character : MonoBehaviour
 
     public void WarnMove()
     {
-        ResetMovementStatus();
+        //ResetMovementStatus();
         print("Is going to move");
     }
 
@@ -145,7 +141,7 @@ public class Character : MonoBehaviour
     {
         isMoving = true;
 
-        while (Mathf.Abs(Vector3.Distance(transform.position, selectedGroundPosition.position)) >= 4f)
+        while (Mathf.Abs(Vector3.Distance(transform.position, selectedMovementPosition.position)) >= 4f)
         {
             //print(Mathf.Abs(Vector3.Distance(transform.position, selectedGroundPosition.position)));
             print("Me estoy moviendo todavia churrita");
@@ -180,10 +176,15 @@ public class Character : MonoBehaviour
 
     }
 
+    public void SelectMovementPosition(Transform pos)
+    {
+        selectedMovementPosition = pos;
+    }
+
 
     #endregion
 
-
+    #region Target
     protected IEnumerator WaitForEnemyTargetSelection() // TODO: fix missing enemy confirmation functionality
     {
         while (selectedCharacters.Count < 1)
@@ -238,6 +239,8 @@ public class Character : MonoBehaviour
         selectedGroundPosition = pos;
     }
 
+    #endregion
+
 
 
 
@@ -249,7 +252,7 @@ public class Character : MonoBehaviour
         selectionFinished = false;
     }
 
-
+    #region Skills
     //Actions
     public bool IsCastingsSkill()
     {
@@ -272,6 +275,7 @@ public class Character : MonoBehaviour
 
     }
 
+    #endregion
     public virtual void setNames()
     {
         //this.characterName = "Character";
@@ -280,32 +284,10 @@ public class Character : MonoBehaviour
         this.thirdSkill = ("3� skill", ActionType.neutral);
     }
 
-    //public void Highlight()
-    //{
-    //    rend.material.color = highlightedColor;
-    //}
-
-    //private void OnMouseEnter()
-    //{
-    //    Highlight();
-    //}
-
-    //private void OnMouseExit()
-    //{
-    //    Reset();
-    //}
-
-    //public void Reset()
-    //{
-    //    rend.material.color = actualColor;
-    //}
-
-
-    //private void OnMouseDown()
-    //{
-
-    //    gm.GetCurrentCharacter().selectedCharacters.Add(this);
-    //}
+    public bool SkillCompleted()
+    {
+        return skillCompleted;
+    }
 
     #region Control de da�o
     public virtual void ReceiveDamage(int damage) // If changed: reflect in Archer and Mage override
