@@ -116,34 +116,18 @@ public class GameMaster : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                // Lanzar un rayo desde la posici�n del clic del mouse
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-
-
-                if (Physics.Raycast(ray, out hit))
+                if(currentActionType == ActionType.allieTarget)
                 {
-                    if ( hit.collider.gameObject.layer == characterLayer)
-                    {
-                        GameObject objetoGolpeado = hit.collider.gameObject;
-
-                        Character personaje = objetoGolpeado.GetComponentInParent<Character>();
-
-                        if (GetCurrentCharacter().selectedCharacters.Contains(personaje))
-                        {
-                            GetCurrentCharacter().selectedCharacters.Remove(personaje);
-                        }
-                        else
-                        {
-                            GetCurrentCharacter().selectedCharacters.Add(personaje);
-                        }
-
-                        // Handle the click event - return the parent character
-                        Debug.Log("Has golpeado a un personaje: " + personaje.name);
-
-                        return;
-                    }
+                    seleccion(true);
                 }
+                else if(currentActionType == ActionType.oneTarget || currentActionType == ActionType.twoTarget || currentActionType == ActionType.threeTarget)
+                {
+                    seleccion(false);
+                }
+                
+
+                // Lanzar un rayo desde la posici�n del clic del mouse
+
             }
             else if (Input.GetMouseButtonDown(1))
             {
@@ -167,6 +151,50 @@ public class GameMaster : MonoBehaviour
     }
 
     #endregion
+
+
+    public void seleccion(bool ally)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.gameObject.layer == characterLayer)
+            {
+                GameObject objetoGolpeado = hit.collider.gameObject;
+
+                Character personaje = objetoGolpeado.GetComponentInParent<Character>();
+
+                if((ally==true && personaje.isPlayerControlled == true) || (ally==false &&  personaje.isPlayerControlled == false))
+                {
+                    if (GetCurrentCharacter().selectedCharacters.Contains(personaje))
+                    {
+                        GetCurrentCharacter().selectedCharacters.Remove(personaje);
+                    }
+                    else
+                    {
+                        GetCurrentCharacter().selectedCharacters.Add(personaje);
+                    }
+                }
+
+                
+
+                // Handle the click event - return the parent character
+                //Debug.Log("Has golpeado a un personaje: " + personaje.name);
+
+                return;
+            }
+        }
+    }
+
+
+
+
+
+
+
 
     #region Controladores de turno
     //Inicia un nuevo turno
@@ -307,7 +335,7 @@ public class GameMaster : MonoBehaviour
             changeState(state.Action);
             changeActionType(GetCurrentCharacter().secondSkill.Item2);
         }
-
+        GetCurrentCharacter().PerformAction2();
 
     }
 
@@ -320,7 +348,7 @@ public class GameMaster : MonoBehaviour
             changeState(state.Action);
             changeActionType(GetCurrentCharacter().thirdSkill.Item2);
         }
-
+        GetCurrentCharacter().PerformAction3();
     }
 
     #endregion
