@@ -36,7 +36,7 @@ public class Character : MonoBehaviour
     public bool isStunned = false;
 
     //Importar otros scripts
-    private GameMaster gm;
+    protected GameMaster gm;
     protected Unit unit;
 
 
