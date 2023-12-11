@@ -255,7 +255,7 @@ public class GameMaster : MonoBehaviour
             GetCurrentCharacter().startTurn();
 
             //Quita la interfaz o la pone
-            //changeInterface();
+            changeInterface();
 
             camera.FocusCharacter(GetCurrentCharacter());
             changeActionType(ActionType.neutral);
