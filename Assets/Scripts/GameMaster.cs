@@ -237,6 +237,7 @@ public class GameMaster : MonoBehaviour
     {
         // Reiniciar el estado de movimiento solo para el personaje actual
         GetCurrentCharacter().ResetMovementStatus();
+        GetCurrentCharacter().ResetTargetStatus();
         GetCurrentCharacter().startTurn();
         camera.FocusCharacter(GetCurrentCharacter());
     }

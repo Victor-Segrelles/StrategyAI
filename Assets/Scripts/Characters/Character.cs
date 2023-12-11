@@ -242,6 +242,14 @@ public class Character : MonoBehaviour
         selectedGroundPosition = null;
         selectionFinished = false;
     }
+
+    public void ResetTargetStatus()
+    {
+        //selectedGroundPosition = null;
+        isCastingSkill = false;
+        skillCompleted = false;
+
+    }
     #endregion
 
 
