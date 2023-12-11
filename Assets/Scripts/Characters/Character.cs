@@ -69,12 +69,13 @@ public class Character : MonoBehaviour
     }
     void Start()
     {
+        unit = GetComponent<Unit>();
         unit.life=MaxHealth;
         
         //rend = GetComponent<Renderer>();
         //actualColor = rend.material.color;
         gm = FindObjectOfType<GameMaster>();
-        unit = GetComponent<Unit>();
+        
         //selectedGroundPosition = this.transform;
 
 
