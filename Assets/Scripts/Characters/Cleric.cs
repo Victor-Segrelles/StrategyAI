@@ -31,6 +31,7 @@ public class Cleric : Character
             yield return null;
         }
         Smite(selectedCharacters[0]);
+        skillCompleted = true;
     }
 
     public void Smite(Character target)
@@ -64,6 +65,7 @@ public class Cleric : Character
             yield return null;
         }
         Heal(selectedCharacters[0]);
+        skillCompleted = true;
     }
 
     public void Heal(Character target)
@@ -84,7 +86,9 @@ public class Cleric : Character
 
     public override void PerformAction3()
     {
+        //print(selectedGroundPosition.position);
         ResetSelected();
+        //print(selectedGroundPosition.position);
         Debug.Log("Waiting for target position to be selected.");
         StartCoroutine(WaitForGroundTargetSelection());
         StartCoroutine(WaitForhealingAreaTargetSelection());
@@ -97,6 +101,7 @@ public class Cleric : Character
             yield return null;
         }
         healingArea(selectedGroundPosition);
+        skillCompleted = true;
     }
 
     public void healingArea(Transform target)

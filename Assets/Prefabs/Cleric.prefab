@@ -205,8 +205,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7265527248713835928}
-  - component: {fileID: 5574598853585063659}
-  - component: {fileID: 8618401339588387733}
   - component: {fileID: 5311976664971691011}
   - component: {fileID: 1205484373706876147}
   m_Layer: 0
@@ -232,56 +230,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5574598853585063659
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7650875116458590176}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8618401339588387733
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7650875116458590176}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 8f89001856f708e47b9f67a0210c196c, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &5311976664971691011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,16 +242,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59400255b356f408e99def31ccd144e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stunVFX: {fileID: 0}
   characterName: Cleric 1
-  firstSkill: 
-  secondSkill: 
-  thirdSkill: 
   isPlayerControlled: 0
   selectedCharacters: []
   selectedGroundPosition: {fileID: 0}
   selectionFinished: 0
   health: 100
-  rend: {fileID: 0}
+  movementDistance: 15
   smiteVFX: {fileID: 2944396702758532163, guid: 2fd5ab3d5ca5541f19d33acbc8ed910d, type: 3}
   healVFX: {fileID: 9017484664307500583, guid: 6002308570e5040db90027a3b92aad02, type: 3}
   healingAreaVFX: {fileID: 7986504087968017091, guid: 894e432e9d0d747e097c115ed94f5ba3, type: 3}
@@ -325,3 +271,8 @@ MonoBehaviour:
   audio: {fileID: 0}
   warned: 0
   hijo: {fileID: 0}
+  ignored:
+    serializedVersion: 2
+    m_Bits: 0
+  heightoffset: 0
+  life: 0
