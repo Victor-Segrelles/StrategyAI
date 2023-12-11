@@ -93,7 +93,6 @@ public class GameMaster : MonoBehaviour
     {
         if(currentState == state.Moving && !GetCurrentCharacter().IsMovementCompleted())
         {
-            
             if (Input.GetMouseButtonDown(0))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -105,7 +104,6 @@ public class GameMaster : MonoBehaviour
                     auxTransform[activeCharacterIndex].rotation = Quaternion.identity;
 
                     GetCurrentCharacter().SelectMovementPosition(auxTransform[activeCharacterIndex]);
-                    
                     changeState(state.neutral);
                     GetCurrentCharacter().Move();
                 }
@@ -115,8 +113,6 @@ public class GameMaster : MonoBehaviour
                 changeState(state.neutral);
             }
         }
-
-        
         if (currentState == state.Action && !GetCurrentCharacter().SkillCompleted())
         {
             if (Input.GetMouseButtonDown(0))
@@ -133,16 +129,12 @@ public class GameMaster : MonoBehaviour
                 {
                     groundSelection();
                 }
-                         
-
             }
             else if (Input.GetMouseButtonDown(1))
             {
                 changeState(state.neutral);
                 changeActionType(ActionType.neutral);
             }
-
-            
         }
     }
 

@@ -17,7 +17,7 @@ public class CheckLifeUnder50 : NodeBT
     {
         object t = GetData("target");
         if(t==null || (int)t!=unit.life){
-        
+            Debug.Log("vida bajo 50");
 
             if (unit.life < 50)
             {
