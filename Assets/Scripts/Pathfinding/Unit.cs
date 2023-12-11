@@ -61,6 +61,7 @@ public class Unit : MonoBehaviour {
 
 
 		Movement();
+		//Action();
 
 
 		Ray ray = new Ray(transform.position + new Vector3(0, 100, 0), Vector3.down);
@@ -96,7 +97,11 @@ public class Unit : MonoBehaviour {
 		if(myturn && !moved && isAI){
 			ChangeTarget(targetaux);
 			moved = true;
+			Invoke("Action", 3.6f);
 		}
+	}
+	private void Action(){
+		Debug.Log("cafetera industrial");
 	}
 
 	public void ChangeTarget(Transform newTarget) {
