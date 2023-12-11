@@ -37,7 +37,7 @@ public class Character : MonoBehaviour
     public bool isStunned = false;
 
     //Importar otros scripts
-    private GameMaster gm;
+    protected GameMaster gm;
     private Unit unit;
 
 
@@ -292,7 +292,7 @@ public class Character : MonoBehaviour
     #region Control de da�o
     public virtual void ReceiveDamage(int damage) // If changed: reflect in Archer and Mage override
     {
-        Debug.Log("My health before the attack: " + health);
+        Debug.Log("My health before the attack: " + health + characterName);
         int newHealth = health - damage;
         if (newHealth < 1)
         {
