@@ -248,6 +248,8 @@ public class Character : MonoBehaviour
         //selectedGroundPosition = null;
         isCastingSkill = false;
         skillCompleted = false;
+        selectedCharacters.Clear();
+        selectedGroundPosition = null;
 
     }
     #endregion

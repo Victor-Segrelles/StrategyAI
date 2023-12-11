@@ -247,6 +247,7 @@ public class GameMaster : MonoBehaviour
     {
         // Reiniciar el estado de movimiento solo para el personaje actual
         GetCurrentCharacter().ResetMovementStatus();
+        GetCurrentCharacter().ResetTargetStatus();
         GetCurrentCharacter().startTurn();
         camera.FocusCharacter(GetCurrentCharacter());
     }
@@ -254,6 +255,7 @@ public class GameMaster : MonoBehaviour
     //Termina el turno y pasa al siguiente
     public void EndTurn()
     {
+        currentCharacter.movementCompleted = true;
         currentCharacter.endTurn();
         // Pasar al siguiente personaje
         activeCharacterIndex++;
