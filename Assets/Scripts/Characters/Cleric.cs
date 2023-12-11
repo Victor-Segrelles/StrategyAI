@@ -14,6 +14,7 @@ public class Cleric : Character
     const int smiteDamage = 10;
     const int healPower = 10;
     const int healingAreaPower = 5;
+    const int healingAreaRadius=5;
 
     // ACTION 1 - SMITE
     public override void PerformAction1()
@@ -116,9 +117,27 @@ public class Cleric : Character
     {
         yield return new WaitForSeconds(1.2f);
         Destroy(currentHealingAreaVFX);
-        // TODO: Find allies in area and heal them
-        // recorrer lista de aliados
-        // si aliado en rango curar "healingAreaPower"
+
+        if (isPlayerControlled)
+        {
+            foreach (Character ally in gm.allies)
+            {
+                if (Vector3.Distance(target.position, ally.transform.position) < healingAreaRadius)
+                {
+                    ally.ReceiveHealing(healingAreaPower);
+                }
+            }
+        }
+        else
+        {
+            foreach (Character ally in gm.enemies)
+            {
+                if (Vector3.Distance(target.position, ally.transform.position) < healingAreaRadius)
+                {
+                    ally.ReceiveHealing(healingAreaPower);
+                }
+            }
+        }
     }
 
 
