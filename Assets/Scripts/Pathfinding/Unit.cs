@@ -31,7 +31,8 @@ public class Unit : MonoBehaviour {
 	public int heightoffset;
 	MageBT mageBT;
 	public int life;
-	public GameMaster gm;
+    public Healthbar healthbar;
+    public GameMaster gm;
 	public float attackRange = 15;
 	public Character attackTarget;
 	public bool moved = false;
@@ -52,7 +53,9 @@ public class Unit : MonoBehaviour {
 		target=transform;
 		targetaux=target;
 		lastPosition=transform.position;
-	}
+        healthbar.UpdateBar(life, 100);
+
+    }
 
     private void Update() {
 
@@ -86,7 +89,8 @@ public class Unit : MonoBehaviour {
 				target = waypoints[currentIndex];
 			}
 		}
-	}
+        healthbar.UpdateBar(life, 100);
+    }
 	private void Movement(){
 		moveLimited();
 		if(myturn && !moved && isAI){
