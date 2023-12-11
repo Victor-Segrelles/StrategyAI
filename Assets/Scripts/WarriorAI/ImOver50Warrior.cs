@@ -17,7 +17,7 @@ public class ImOver50Warrior : NodeBT
     {
         int amount = (int)GetData("target");
 
-        if (amount >= 50)
+        if (amount >= 30)
         {
 
         }

@@ -19,7 +19,7 @@ public class CheckLifeUnder50Warrior : NodeBT
         if(t==null || (int)t!=unit.life){
         
 
-            if (unit.life < 50)
+            if (unit.life < 30)
             {
                 parent.parent.SetData("target", unit.life);
                 state = NodeState.SUCCESS;
