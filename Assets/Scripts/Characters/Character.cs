@@ -274,6 +274,12 @@ public class Character : MonoBehaviour
     {
 
     }
+    public void endTurn(){
+        unit.endTurn();
+    }
+    public void startTurn(){
+        unit.myturn=true;
+    }
 
     #endregion
     public virtual void setNames()

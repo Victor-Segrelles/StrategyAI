@@ -4,23 +4,21 @@ using UnityEngine;
 
 using BehaviorTree;
 
-public class ImAlive : NodeBT
+public class OutOfRangeEnemy : NodeBT
 {
     private Unit unit;
 
-    public ImAlive(Unit obj)
+    public OutOfRangeEnemy(Unit obj)
     {
-        unit=obj;
+        unit = obj;
     }
 
     public override NodeState Evaluate()
     {
-        int amount = (int)GetData("target");
-
-        if (amount > 80)
+        Debug.Log(unit.myturn);
+        if (!unit.moved)
         {
-            //Debug.Log("Tengo m�s de 80 de vida");
-            Debug.Log("Tengo m�s de 80 de vida"+amount);
+            unit.move2(unit.attackTarget.gameObject.transform);
         }
 
         state = NodeState.RUNNING;

@@ -10,7 +10,7 @@ public class GameMaster : MonoBehaviour
     //
     public Transform parentCharacter;
 
-    //Cámara
+    //Cï¿½mara
     public PlayerCamera camera;
 
     //Interfaz
@@ -24,8 +24,8 @@ public class GameMaster : MonoBehaviour
     public GameObject alliesContainer;
     public GameObject enemiesContainer;
 
-    private List<Character> allies = new List<Character>();
-    private List<Character> enemies = new List<Character>();
+    public List<Character> allies = new List<Character>();
+    public List<Character> enemies = new List<Character>();
 
     public List<Character> charactersList;
 
@@ -40,7 +40,7 @@ public class GameMaster : MonoBehaviour
     public LayerMask ground;
     private int characterLayer;
 
-    //Máquina de estados
+    //Mï¿½quina de estados
     public enum state
     {
         neutral,
@@ -116,7 +116,7 @@ public class GameMaster : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                // Lanzar un rayo desde la posición del clic del mouse
+                // Lanzar un rayo desde la posiciï¿½n del clic del mouse
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
@@ -174,6 +174,7 @@ public class GameMaster : MonoBehaviour
     {
         // Reiniciar el estado de movimiento solo para el personaje actual
         GetCurrentCharacter().ResetMovementStatus();
+        GetCurrentCharacter().startTurn();
         camera.FocusCharacter(GetCurrentCharacter());
         changeActionType(ActionType.neutral);
         changeState(state.neutral) ;
@@ -182,6 +183,7 @@ public class GameMaster : MonoBehaviour
     //Termina el turno y pasa al siguiente
     public void EndTurn()
     {
+        charactersList[activeCharacterIndex].endTurn();
         // Pasar al siguiente personaje
         activeCharacterIndex++;
 
@@ -196,7 +198,7 @@ public class GameMaster : MonoBehaviour
         StartTurn();
     }
 
-    //Esta función devuelve el personaje actual
+    //Esta funciï¿½n devuelve el personaje actual
     public Character GetCurrentCharacter()
     {
         return charactersList[activeCharacterIndex];
@@ -244,7 +246,7 @@ public class GameMaster : MonoBehaviour
 
     #region Controladores de texto
 
-    //Esta función se encarga de poner el texto por pantalla
+    //Esta funciï¿½n se encarga de poner el texto por pantalla
     private void UpdateTurnText()
     {
         characterText.text = $"Turno de: {GetCurrentCharacterName()}";
@@ -259,7 +261,7 @@ public class GameMaster : MonoBehaviour
         thirdSkill.GetComponentInChildren<TMP_Text>().text = GetCurrentCharacter().thirdSkill.Item1;
     }
 
-    //Esta función se ocupa de coger todos los nombres de Character, bien su nombre principal o bien sus habilidades
+    //Esta funciï¿½n se ocupa de coger todos los nombres de Character, bien su nombre principal o bien sus habilidades
     private string GetCurrentCharacterName()
     {
         return charactersList[activeCharacterIndex].characterName;

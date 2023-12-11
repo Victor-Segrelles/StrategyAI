@@ -4,24 +4,23 @@ using UnityEngine;
 
 using BehaviorTree;
 
-public class CheckLife80 : NodeBT
+public class CheckLifeUnder50 : NodeBT
 {
     private Unit unit;
 
-    public CheckLife80(Unit obj)
+    public CheckLifeUnder50(Unit obj)
     {
         unit=obj;
     }
 
     public override NodeState Evaluate()
     {
-        Debug.Log(unit.life);
         object t = GetData("target");
         if(t==null || (int)t!=unit.life){
+        
 
-            if (unit.life > 80)
+            if (unit.life < 50)
             {
-                Debug.Log(unit.life);
                 parent.parent.SetData("target", unit.life);
                 state = NodeState.SUCCESS;
                 return state;
@@ -30,6 +29,7 @@ public class CheckLife80 : NodeBT
             state = NodeState.FAILURE;
             return state;
         }
+
         state = NodeState.SUCCESS;
         return state;
     }

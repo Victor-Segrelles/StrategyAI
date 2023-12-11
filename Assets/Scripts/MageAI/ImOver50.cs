@@ -4,11 +4,11 @@ using UnityEngine;
 
 using BehaviorTree;
 
-public class ImDead : NodeBT
+public class ImOver50 : NodeBT
 {
     private Unit unit;
 
-    public ImDead(Unit obj)
+    public ImOver50(Unit obj)
     {
         unit=obj;
     }
@@ -17,9 +17,9 @@ public class ImDead : NodeBT
     {
         int amount = (int)GetData("target");
 
-        if (amount < 80)
+        if (amount >= 50)
         {
-            Debug.Log("NOOOO TOY MUERTOOOOOOO"+amount);
+
         }
 
         state = NodeState.RUNNING;
