@@ -4,10 +4,10 @@ using UnityEngine;
 
 using BehaviorTree;
 
-public class ImInLimbo : NodeBT
+public class ImInLimboArcher : NodeBT
 {
     
-    public ImInLimbo()
+    public ImInLimboArcher()
     {
         
     }
