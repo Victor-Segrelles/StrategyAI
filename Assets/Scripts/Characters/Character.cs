@@ -338,6 +338,10 @@ public class Character : MonoBehaviour
         gm.auxTransform.Remove(selectedMovementPosition);
         Destroy(selectedMovementPosition.gameObject);
         Destroy(this.gameObject);
+
+        int characterIndex = gm.charactersList.IndexOf(gm.GetCurrentCharacter());
+        gm.SetCurrentCharacterIndex(characterIndex);
+
     }
 
     public void GetStunned()
