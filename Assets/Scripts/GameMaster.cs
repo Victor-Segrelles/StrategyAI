@@ -243,6 +243,7 @@ public class GameMaster : MonoBehaviour
     //Inicia un nuevo turno
     private void StartTurn()
     {
+        GetCurrentCharacter().startTurn();
         if (GetCurrentCharacter().isStunned)
         {
             GetCurrentCharacter().isStunned = false;
@@ -252,7 +253,7 @@ public class GameMaster : MonoBehaviour
         {
             // Reiniciar el estado de movimiento solo para el personaje actual
             GetCurrentCharacter().ResetMovementStatus();
-            GetCurrentCharacter().startTurn();
+            
 
             //Quita la interfaz o la pone
             //changeInterface();
