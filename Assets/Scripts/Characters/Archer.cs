@@ -56,7 +56,6 @@ public class Archer : Character
         Debug.Log("Archer shoots 1 arrow");
         currentArrowVFX1 = Instantiate(arrowVFX, target.transform.position, Quaternion.identity);
         currentArrowVFX1.SetActive(true);
-        skillCompleted = true;
         StartCoroutine(PlayArrowVFXAndHit(target));
     }
 
@@ -104,7 +103,6 @@ public class Archer : Character
         currentArrowVFX1.SetActive(true);
         currentArrowVFX2.SetActive(true);
         StartCoroutine(PlayTwinArrowVFXAndHit(target1, target2));
-        skillCompleted = true;
     }
 
 
@@ -137,7 +135,6 @@ public class Archer : Character
     public override void PerformAction3()
     {
         Evade();
-        skillCompleted = true;
     }
 
     public void Evade()

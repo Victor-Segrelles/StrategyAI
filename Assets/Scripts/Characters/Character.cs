@@ -16,9 +16,12 @@ public class Character : MonoBehaviour
     public (string, ActionType) secondSkill;
     public (string, ActionType) thirdSkill;
 
-    //Control de skills
-    public bool skillCompleted = false;
-    //private bool evaded;
+    //public string firstSkill;
+    //public string secondSkill;
+    //public string thirdSkill;
+
+
+    private bool skillCompleted = false;
 
     //Comprobante del tipo de personaje
     public bool isPlayerControlled;
@@ -28,21 +31,24 @@ public class Character : MonoBehaviour
     public Transform selectedGroundPosition;
     public bool selectionFinished = false;
 
-    public Transform selectedMovementPosition;
-
     //Control de salud
     const int MaxHealth = 100;
 
-    public bool isStunned = false;
+    bool isStunned = false;
 
     //Importar otros scripts
     private GameMaster gm;
     protected Unit unit;
 
+    //C�digo gr�fico para resaltar color
+    //public Renderer rend;
+    Color highlightedColor = Color.green;
+    Color actualColor;
+
 
     //Comprobantes del movimiento
     private bool isMoving = false;
-    public bool movementCompleted = false;
+    private bool movementCompleted = false;
 
     public float movementDistance = 15f;
 
@@ -101,10 +107,12 @@ public class Character : MonoBehaviour
     
     public void Move()
     {
-        print(Mathf.Abs(Vector3.Distance(transform.position, selectedMovementPosition.position)));
-        if(Mathf.Abs(Vector3.Distance(transform.position, selectedMovementPosition.position)) <= movementDistance)
+        //
+        ////// Preguntar si el Unit puede ir all�
+        //
+        if(Mathf.Abs(Vector3.Distance(transform.position, selectedGroundPosition.position)) <= movementDistance)
         {
-            unit.ChangeTarget(selectedMovementPosition);
+            unit.ChangeTarget(selectedGroundPosition);
             StartCoroutine(CheckImpasse());
             
         }
@@ -117,7 +125,7 @@ public class Character : MonoBehaviour
 
     public void WarnMove()
     {
-        //ResetMovementStatus();
+        ResetMovementStatus();
         print("Is going to move");
     }
 
@@ -137,7 +145,7 @@ public class Character : MonoBehaviour
     {
         isMoving = true;
 
-        while (Mathf.Abs(Vector3.Distance(transform.position, selectedMovementPosition.position)) >= 4f)
+        while (Mathf.Abs(Vector3.Distance(transform.position, selectedGroundPosition.position)) >= 4f)
         {
             //print(Mathf.Abs(Vector3.Distance(transform.position, selectedGroundPosition.position)));
             print("Me estoy moviendo todavia churrita");
@@ -172,15 +180,10 @@ public class Character : MonoBehaviour
 
     }
 
-    public void SelectMovementPosition(Transform pos)
-    {
-        selectedMovementPosition = pos;
-    }
-
 
     #endregion
 
-    #region Target
+
     protected IEnumerator WaitForEnemyTargetSelection() // TODO: fix missing enemy confirmation functionality
     {
         while (selectedCharacters.Count < 1)
@@ -235,16 +238,18 @@ public class Character : MonoBehaviour
         selectedGroundPosition = pos;
     }
 
+
+
+
+    //
     public void ResetSelected()
     {
         selectedCharacters.Clear();
         selectedGroundPosition = null;
         selectionFinished = false;
     }
-    #endregion
 
 
-    #region Skills
     //Actions
     public bool IsCastingsSkill()
     {
@@ -273,13 +278,6 @@ public class Character : MonoBehaviour
         unit.myturn=true;
     }
 
-    public bool SkillCompleted()
-    {
-        return skillCompleted;
-    }
-
-    #endregion
-
     public virtual void setNames()
     {
         //this.characterName = "Character";
@@ -288,6 +286,32 @@ public class Character : MonoBehaviour
         this.thirdSkill = ("3� skill", ActionType.neutral);
     }
 
+    //public void Highlight()
+    //{
+    //    rend.material.color = highlightedColor;
+    //}
+
+    //private void OnMouseEnter()
+    //{
+    //    Highlight();
+    //}
+
+    //private void OnMouseExit()
+    //{
+    //    Reset();
+    //}
+
+    //public void Reset()
+    //{
+    //    rend.material.color = actualColor;
+    //}
+
+
+    //private void OnMouseDown()
+    //{
+
+    //    gm.GetCurrentCharacter().selectedCharacters.Add(this);
+    //}
 
     #region Control de da�o
     public virtual void ReceiveDamage(int damage) // If changed: reflect in Archer and Mage override
