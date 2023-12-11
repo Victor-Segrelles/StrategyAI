@@ -29,6 +29,7 @@ public class Archer : Character
         }
     }
     public override void startTurn(){
+        unit.myturn=true;
         if(turnsWithEvasion>0){
             turnsWithEvasion--;
         }
