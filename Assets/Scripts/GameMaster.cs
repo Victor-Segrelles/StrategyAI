@@ -235,26 +235,10 @@ public class GameMaster : MonoBehaviour
     //Inicia un nuevo turno
     private void StartTurn()
     {
+        // Reiniciar el estado de movimiento solo para el personaje actual
+        GetCurrentCharacter().ResetMovementStatus();
         GetCurrentCharacter().startTurn();
-        if (GetCurrentCharacter().isStunned)
-        {
-            GetCurrentCharacter().isStunned = false;
-            EndTurn();
-        }
-        else
-        {
-            // Reiniciar el estado de movimiento solo para el personaje actual
-            GetCurrentCharacter().ResetMovementStatus();
-            
-
-            //Quita la interfaz o la pone
-            changeInterface();
-
-            camera.FocusCharacter(GetCurrentCharacter());
-            changeActionType(ActionType.neutral);
-            changeState(state.neutral);
-        }
-        
+        camera.FocusCharacter(GetCurrentCharacter());
     }
 
     //Termina el turno y pasa al siguiente
