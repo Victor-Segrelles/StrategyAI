@@ -163,19 +163,18 @@ public class Mage : Character
 
     public override void ReceiveDamage(int damage)
     {
-        Debug.Log("My health before the attack: " + health);
-        float randomValue = Random.value;
+        Debug.Log("My health before the attack: " +  unit.life);
         if (!hasShield) // failed evasion
         {
-            int newHealth = health - damage;
+            int newHealth =  unit.life - damage;
             if (newHealth < 1)
             {
-                health = 0;
+                 unit.life = 0;
                 Die();
             }
             else
             {
-                health = newHealth;
+                 unit.life = newHealth;
             }
         }
         else
@@ -183,7 +182,7 @@ public class Mage : Character
             hasShield = false;
             Destroy(currentShieldVFX);
         }
-        Debug.Log("My health after the attack: " + health);
+        Debug.Log("My health after the attack: " +  unit.life);
     }
 
     // TODO: DELETE AFTER TESTING

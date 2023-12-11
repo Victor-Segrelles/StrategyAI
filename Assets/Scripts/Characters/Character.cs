@@ -33,13 +33,12 @@ public class Character : MonoBehaviour
 
     //Control de salud
     const int MaxHealth = 100;
-    public int health = MaxHealth;
 
     bool isStunned = false;
 
     //Importar otros scripts
     private GameMaster gm;
-    private Unit unit;
+    protected Unit unit;
 
     //C�digo gr�fico para resaltar color
     //public Renderer rend;
@@ -70,6 +69,7 @@ public class Character : MonoBehaviour
     }
     void Start()
     {
+        unit.life=MaxHealth;
         
         //rend = GetComponent<Renderer>();
         //actualColor = rend.material.color;
@@ -271,10 +271,10 @@ public class Character : MonoBehaviour
     {
 
     }
-    public void endTurn(){
+    public virtual void endTurn(){
         unit.endTurn();
     }
-    public void startTurn(){
+    public virtual void startTurn(){
         unit.myturn=true;
     }
 
@@ -316,34 +316,34 @@ public class Character : MonoBehaviour
     #region Control de da�o
     public virtual void ReceiveDamage(int damage) // If changed: reflect in Archer and Mage override
     {
-        Debug.Log("My health before the attack: " + health);
-        int newHealth = health - damage;
+        Debug.Log("My health before the attack: " + unit.life);
+        int newHealth = unit.life - damage;
         if (newHealth < 1)
         {
-            health = 0;
+            unit.life = 0;
             Die();
         }
         else
         {
-            health = newHealth;
+            unit.life = newHealth;
         }
-        Debug.Log("My health after the attack: " + health);
+        Debug.Log("My health after the attack: " +  unit.life);
     }
 
     public void ReceiveHealing(int heal)
     {
-        Debug.Log("My health before the healing: " + health);
+        Debug.Log("My health before the healing: " +  unit.life);
 
-        int newHealth = health + heal;
+        int newHealth =  unit.life + heal;
         if (newHealth > MaxHealth)
         {
-            health = MaxHealth;
+             unit.life = MaxHealth;
         }
         else
         {
-            health = newHealth;
+             unit.life= newHealth;
         }
-        Debug.Log("My health after the healing: " + health);
+        Debug.Log("My health after the healing: " +  unit.life);
     }
 
     public void Die()

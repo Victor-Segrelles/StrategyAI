@@ -28,6 +28,11 @@ public class Archer : Character
             Destroy(currentEvadeVFX);
         }
     }
+    public override void startTurn(){
+        if(turnsWithEvasion>0){
+            turnsWithEvasion--;
+        }
+    }
 
     public override void PerformAction1()
     {
@@ -152,22 +157,22 @@ public class Archer : Character
 
     public override void ReceiveDamage(int damage)
     {
-        Debug.Log("My health before the attack: " + health);
+        Debug.Log("My health before the attack: " +  unit.life);
         float randomValue = Random.value;
-        if (randomValue > evasionChance) // failed evasion
+        if ((randomValue > evasionChance)||turnsWithEvasion==0) // failed evasion
         {
-            int newHealth = health - damage;
+            int newHealth =  unit.life - damage;
             if (newHealth < 1)
             {
-                health = 0;
+                 unit.life = 0;
                 Die();
             }
             else
             {
-                health = newHealth;
+                 unit.life = newHealth;
             }
         }
-        Debug.Log("My health after the attack: " + health);
+        Debug.Log("My health after the attack: " +  unit.life);
     }
 
     // TODO: DELETE AFTER TESTING
