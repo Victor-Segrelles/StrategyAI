@@ -18,7 +18,7 @@ public class CheckLifeOver50Warrior : NodeBT
         object t = GetData("target");
         if(t==null || (int)t!=unit.life){
 
-            if (unit.life >= 50)
+            if (unit.life >= 30)
             {
                 //Debug.Log(unit.life + "Tengo 50 o m�s de vida");
                 parent.parent.SetData("target", unit.life);

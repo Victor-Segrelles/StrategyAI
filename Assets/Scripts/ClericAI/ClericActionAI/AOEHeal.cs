@@ -4,24 +4,16 @@ using UnityEngine;
 
 using BehaviorTree;
 
-public class ImOver50Warrior : NodeBT
+public class AOEHeal : NodeBT
 {
-    private Unit unit;
 
-    public ImOver50Warrior(Unit obj)
+    public AOEHeal()
     {
-        unit=obj;
+
     }
 
     public override NodeState Evaluate()
     {
-        int amount = (int)GetData("target");
-
-        if (amount >= 30)
-        {
-
-        }
-
         state = NodeState.RUNNING;
         return state;
     }

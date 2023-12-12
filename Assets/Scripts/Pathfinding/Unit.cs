@@ -40,6 +40,9 @@ public class Unit : MonoBehaviour {
 	public bool isAI;
 	public Vector3 lastPosition;
 	public float moveDistance;
+	public Character actionTarget;
+	public int selectedAction;  //Desde aquí se llamará a character
+	public Transform AOETarget;
 
 
 	void Awake() {
@@ -102,6 +105,28 @@ public class Unit : MonoBehaviour {
 	}
 	private void Action(){
 		Debug.Log("cafetera industrial");
+		if (selectedAction != 0)
+        {
+			if (gameObject.GetComponent<Character>() is Cleric)
+            {
+				if (selectedAction == 1)
+                {
+					gameObject.GetComponent<Cleric>().Smite(actionTarget);
+				}
+				else if (selectedAction == 2)
+                {
+					gameObject.GetComponent<Cleric>().Heal(actionTarget);
+				}
+                else
+                {
+					gameObject.GetComponent<Cleric>().healingArea(AOETarget);
+				}
+            }
+			else if (gameObject.GetComponent<Character>() is Mage)
+            {
+
+            }
+        }
 	}
 
 	public void ChangeTarget(Transform newTarget) {
@@ -226,6 +251,9 @@ public class Unit : MonoBehaviour {
 		moved = false;
 		attackTarget = null;
 		myturn=false;
-		//targetaux=transform;//meter un ismoving
+		actionTarget = null;
+		selectedAction = 0;
+		AOETarget = null;
+		//habrá que poner una bool de action a false, same as movement
     }
 }

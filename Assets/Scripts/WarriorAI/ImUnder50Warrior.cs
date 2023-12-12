@@ -17,7 +17,7 @@ public class ImUnder50Warrior : NodeBT
     {
         int amount = (int)GetData("target");
 
-        if (amount < 80)
+        if (amount < 30)
         {
             Debug.Log("NOOOO TOY MUERTOOOOOOO"+amount);
         }
