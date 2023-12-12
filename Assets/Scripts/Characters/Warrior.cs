@@ -10,8 +10,8 @@ public class Warrior : Character
     private GameObject currentSlashVFX;
     private GameObject currentCleaveVFX;
 
-    int slashDamage = 10;
-    int cleaveDamage = 8;
+    int slashDamage = 25;
+    int cleaveDamage = 20;
     int cleaveRadius = 5;
 
     // ACTION 1 - SLASH

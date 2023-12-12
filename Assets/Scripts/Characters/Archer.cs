@@ -11,8 +11,8 @@ public class Archer : Character
     private GameObject currentArrowVFX2;
     public GameObject evadeVFX;
     private GameObject currentEvadeVFX;
-    const int singleShotDamage = 10;
-    const int twinShotDamage = 8;
+    const int singleShotDamage = 20;
+    const int twinShotDamage = 15;
     const float evasionChance = 0.6f;
     private int turnsWithEvasion = 0;
 

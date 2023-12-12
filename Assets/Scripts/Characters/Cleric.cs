@@ -12,8 +12,8 @@ public class Cleric : Character
     private GameObject currentHealingAreaVFX;
 
     const int smiteDamage = 10;
-    const int healPower = 10;
-    const int healingAreaPower = 5;
+    const int healPower = 20;
+    const int healingAreaPower = 10;
     const int healingAreaRadius=5;
 
     // ACTION 1 - SMITE
