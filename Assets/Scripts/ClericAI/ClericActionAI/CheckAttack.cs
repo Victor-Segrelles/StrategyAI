@@ -23,13 +23,10 @@ public class CheckAttack : NodeBT
 
             foreach (Character ally in unit.gm.allies)
             {
-                if (ally.unit.life < 100)
+                if (Vector3.Distance(unit.gameObject.transform.position, ally.gameObject.transform.position) < unit.attackRange && ally.unit.life < min)
                 {
-                    if (Vector3.Distance(unit.gameObject.transform.position, ally.gameObject.transform.position) < unit.attackRange && ally.unit.life < min)
-                    {
-                        odiado = ally;
-                        min = ally.unit.life;
-                    }
+                    odiado = ally;
+                    min = ally.unit.life;
                 }
             }
 
