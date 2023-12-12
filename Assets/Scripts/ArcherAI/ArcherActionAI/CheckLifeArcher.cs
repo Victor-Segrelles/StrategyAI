@@ -21,9 +21,8 @@ public class CheckLifeArcher : NodeBT
 
             if (unit.life <= 40)
             {
-                unit.actionTarget = unit.gameObject.GetComponent<Character>();
                 unit.selectedAction = 3;    //evade
-                parent.parent.SetData("checkLifeArcher", unit.actionTarget);
+                parent.parent.SetData("checkLifeArcher", unit.life);
                 state = NodeState.SUCCESS;
                 return state;
             }
