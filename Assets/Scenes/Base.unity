@@ -1316,6 +1316,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7642907062037218468, guid: 21018057991ff104ea7eb7f63ed94174, type: 3}
   m_PrefabInstance: {fileID: 113264988}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &121598476 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3671457729047507539, guid: c565cc2194351b544a7cb7fc37267146, type: 3}
+  m_PrefabInstance: {fileID: 1584384422}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &124637932
 GameObject:
   m_ObjectHideFlags: 0
@@ -8631,6 +8636,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyMage
       objectReference: {fileID: 0}
+    - target: {fileID: 5403026297322083429, guid: e562d757bf45e9b47987388e3a16df62, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5403026297322083430, guid: e562d757bf45e9b47987388e3a16df62, type: 3}
       propertyPath: isAI
       value: 1
@@ -12498,7 +12507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3671457729047507536, guid: c565cc2194351b544a7cb7fc37267146, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.63
+      value: -29.82
       objectReference: {fileID: 0}
     - target: {fileID: 3671457729047507536, guid: c565cc2194351b544a7cb7fc37267146, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12506,7 +12515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3671457729047507536, guid: c565cc2194351b544a7cb7fc37267146, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 33.82
+      value: 46.98
       objectReference: {fileID: 0}
     - target: {fileID: 3671457729047507536, guid: c565cc2194351b544a7cb7fc37267146, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12551,6 +12560,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3671457729047507536, guid: c565cc2194351b544a7cb7fc37267146, type: 3}
   m_PrefabInstance: {fileID: 1584384422}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1584384424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121598476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b42dcfef87318984eb3006c0a09a6dd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1585182190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12640,6 +12661,10 @@ PrefabInstance:
     - target: {fileID: 8147869980444243848, guid: 07884a415575caa4983a9aa340de8d5b, type: 3}
       propertyPath: m_Name
       value: EnemyCleric
+      objectReference: {fileID: 0}
+    - target: {fileID: 8147869980444243848, guid: 07884a415575caa4983a9aa340de8d5b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8147869980444243849, guid: 07884a415575caa4983a9aa340de8d5b, type: 3}
       propertyPath: m_RootOrder
@@ -18943,6 +18968,10 @@ PrefabInstance:
     - target: {fileID: 9206594641218113065, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
       propertyPath: m_Name
       value: EnemyArcher
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206594641218113065, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9206594641218113066, guid: 2ad1586e3b4ede542aec1ab8742287e9, type: 3}
       propertyPath: speed

@@ -138,6 +138,18 @@ public class Unit : MonoBehaviour {
 					gameObject.GetComponent<Archer>().Evade();
 				}
 			}
+			else if(gameObject.GetComponent<Character>() is Warrior)
+			{
+                if (selectedAction == 1)
+                {
+                    Debug.Log("Slash SISISI");
+                    gameObject.GetComponent<Warrior>().Slash(actionTarget);
+                }
+                else if (selectedAction == 2)
+                {
+                    gameObject.GetComponent<Warrior>().Cleave();
+                }
+            }
         }
 		Invoke("EndTurnPLS", 2.0f);
 	}
