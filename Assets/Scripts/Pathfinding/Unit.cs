@@ -126,8 +126,20 @@ public class Unit : MonoBehaviour {
             }
 			else if (gameObject.GetComponent<Character>() is Mage)
             {
-
-            }
+				/*if (selectedAction == 1)
+				{
+					
+				}
+				else */if (selectedAction == 2)
+				{
+					gameObject.GetComponent<Mage>().Shield();
+				}
+				else
+				{
+					Debug.Log("ATACOOOOOOOOOOOOOOOOOOOO");
+					gameObject.GetComponent<Mage>().Firestorm(AOETarget);
+				}
+			}
         }
 		Invoke("EndTurnPLS", 2.0f);
 	}
