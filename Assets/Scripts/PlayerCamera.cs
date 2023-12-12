@@ -6,7 +6,7 @@ public class PlayerCamera : MonoBehaviour
 {
     GameMaster gm;
     public Transform target;
-    private float speed = 5f;
+    private float speed = 10f;
     private float rotationSpeed = 10f;
 
     private void Start()
@@ -45,7 +45,7 @@ public class PlayerCamera : MonoBehaviour
     public void FocusCharacter(Character character)
     {
         target = character.transform;
-        transform.position = new Vector3(target.position.x, target.position.y + 15, target.position.z - 15);
+        transform.position = new Vector3(target.position.x, target.position.y + 10, target.position.z - 10);
         transform.LookAt(target);
     }
 }
