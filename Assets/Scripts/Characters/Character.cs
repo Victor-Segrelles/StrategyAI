@@ -37,7 +37,7 @@ public class Character : MonoBehaviour
 
     //Importar otros scripts
     protected GameMaster gm;
-    protected Unit unit;
+    public Unit unit;
 
 
     //Comprobantes del movimiento
