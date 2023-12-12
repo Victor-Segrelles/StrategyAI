@@ -7534,15 +7534,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentCharacter: {fileID: 0}
-  currentCharacter: {fileID: 0}
   camera: {fileID: 48802889}
   characterText: {fileID: 1832135244}
   turnText: {fileID: 1772400262}
   firstSkill: {fileID: 1663421135}
   secondSkill: {fileID: 551890860}
   thirdSkill: {fileID: 542336005}
-  Movement: {fileID: 0}
-  endTurn: {fileID: 0}
+  Movement: {fileID: 2132719242}
+  endTurn: {fileID: 732070488}
   alliesContainer: {fileID: 150763580}
   enemiesContainer: {fileID: 1224325701}
   allies: []
@@ -7552,6 +7551,7 @@ MonoBehaviour:
   auxTransformContainer: {fileID: 342100509}
   groundPosition: {fileID: 1863156880}
   activeCharacterIndex: 0
+  currentCharacter: {fileID: 0}
   ground:
     serializedVersion: 2
     m_Bits: 384

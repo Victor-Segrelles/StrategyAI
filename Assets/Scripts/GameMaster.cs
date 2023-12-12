@@ -11,7 +11,7 @@ public class GameMaster : MonoBehaviour
     public Transform parentCharacter;
 
     //
-    public Character currentCharacter;
+    
 
     //C�mara
     public PlayerCamera camera;
@@ -42,6 +42,7 @@ public class GameMaster : MonoBehaviour
 
     //Control de personajes y turnos
     public int activeCharacterIndex = 0;
+    public Character currentCharacter;
     private int generalTurn = 0;
 
     public LayerMask ground;
@@ -250,6 +251,7 @@ public class GameMaster : MonoBehaviour
         GetCurrentCharacter().ResetTargetStatus();
         GetCurrentCharacter().startTurn();
         camera.FocusCharacter(GetCurrentCharacter());
+        changeInterface();
     }
 
     //Termina el turno y pasa al siguiente
