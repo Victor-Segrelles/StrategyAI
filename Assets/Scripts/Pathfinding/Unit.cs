@@ -42,6 +42,7 @@ public class Unit : MonoBehaviour {
 	public float moveDistance;
 	public Character actionTarget;
 	public int selectedAction;  //Desde aquí se llamará a character
+	public List<Character> actionTargets;
 	public Transform AOETarget;
 
 
@@ -140,6 +141,29 @@ public class Unit : MonoBehaviour {
 					gameObject.GetComponent<Mage>().Firestorm(AOETarget);
 				}
 			}
+
+            }
+			else if (gameObject.GetComponent<Character>() is Archer){
+				if(selectedAction == 1){
+					gameObject.GetComponent<Archer>().SingleShot(actionTarget);
+				} else if (selectedAction==2){
+					gameObject.GetComponent<Archer>().TwinShot(actionTargets[0],actionTargets[1]);
+				} else {
+					gameObject.GetComponent<Archer>().Evade();
+				}
+			}
+			else if(gameObject.GetComponent<Character>() is Warrior)
+			{
+                if (selectedAction == 1)
+                {
+                    Debug.Log("Slash SISISI");
+                    gameObject.GetComponent<Warrior>().Slash(actionTarget);
+                }
+                else if (selectedAction == 2)
+                {
+                    gameObject.GetComponent<Warrior>().Cleave();
+                }
+            }
         }
 		Invoke("EndTurnPLS", 2.0f);
 	}
@@ -274,6 +298,7 @@ public class Unit : MonoBehaviour {
 		actionTarget = null;
 		selectedAction = 0;
 		AOETarget = null;
+		actionTargets=null;
 		//habrá que poner una bool de action a false, same as movement
     }
 }

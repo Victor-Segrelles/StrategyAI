@@ -248,6 +248,8 @@ public class Character : MonoBehaviour
         //selectedGroundPosition = null;
         isCastingSkill = false;
         skillCompleted = false;
+        selectedCharacters.Clear();
+        selectedGroundPosition = null;
 
     }
     #endregion
@@ -338,6 +340,10 @@ public class Character : MonoBehaviour
         gm.auxTransform.Remove(selectedMovementPosition);
         Destroy(selectedMovementPosition.gameObject);
         Destroy(this.gameObject);
+
+        int characterIndex = gm.charactersList.IndexOf(gm.GetCurrentCharacter());
+        gm.SetCurrentCharacterIndex(characterIndex);
+
     }
 
     public void GetStunned()

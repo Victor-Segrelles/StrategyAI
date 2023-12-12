@@ -10,6 +10,9 @@ public class GameMaster : MonoBehaviour
     //
     public Transform parentCharacter;
 
+    //
+    public Character currentCharacter;
+
     //C�mara
     public PlayerCamera camera;
 
@@ -38,7 +41,7 @@ public class GameMaster : MonoBehaviour
     public Transform groundPosition;
 
     //Control de personajes y turnos
-    private int activeCharacterIndex = 0;
+    public int activeCharacterIndex = 0;
     private int generalTurn = 0;
 
     public LayerMask ground;
@@ -75,6 +78,7 @@ public class GameMaster : MonoBehaviour
         //parentCharacter = transform.parent;
         characterLayer = LayerMask.NameToLayer("character");
         charactersList = generateList(allies, enemies);
+        currentCharacter = charactersList[0];
         UpdateTurnText();
         StartTurn();
         for(int i = 0; i<charactersList.Count; i++)
@@ -139,6 +143,12 @@ public class GameMaster : MonoBehaviour
     }
 
     #endregion
+
+    public void FuncionCurrent()
+    {
+
+    }
+
 
     #region Código selector
     public void characterSelection(bool ally)
@@ -245,17 +255,20 @@ public class GameMaster : MonoBehaviour
     //Termina el turno y pasa al siguiente
     public void EndTurn()
     {
-        charactersList[activeCharacterIndex].endTurn();
+        currentCharacter.movementCompleted = true;
+        currentCharacter.endTurn();
         // Pasar al siguiente personaje
         activeCharacterIndex++;
 
         if (activeCharacterIndex >= charactersList.Count)
         {
+            
             activeCharacterIndex = 0;
+            SetCharacter();
             generalTurn++;
             StartTurn();  // Iniciar un nuevo turno cuando se completa un ciclo de turnos
         }
-
+        SetCharacter();
         UpdateTurnText();
         StartTurn();
     }
@@ -263,7 +276,17 @@ public class GameMaster : MonoBehaviour
     //Esta funci�n devuelve el personaje actual
     public Character GetCurrentCharacter()
     {
-        return charactersList[activeCharacterIndex];
+        return currentCharacter;
+    }
+
+    public void SetCharacter()
+    {
+        currentCharacter = charactersList[activeCharacterIndex];
+    }
+
+    public void SetCurrentCharacterIndex(int ch)
+    {
+        activeCharacterIndex=ch;
     }
 
     #endregion

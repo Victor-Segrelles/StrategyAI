@@ -15,7 +15,6 @@ public class OutOfRangeEnemyArcher : NodeBT
 
     public override NodeState Evaluate()
     {
-        Debug.Log("cafetera oxidada");
         if (!unit.moved)
         {
             unit.move2(unit.attackTarget.gameObject.transform);

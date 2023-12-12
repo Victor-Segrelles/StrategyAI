@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Warrior : Character
 {
@@ -11,6 +12,7 @@ public class Warrior : Character
 
     int slashDamage = 10;
     int cleaveDamage = 8;
+    int cleaveRadius = 5;
 
     // ACTION 1 - SLASH
     public override void PerformAction1()
@@ -60,17 +62,35 @@ public class Warrior : Character
         Debug.Log("Warrior cleaves target location (melee range)");
         currentCleaveVFX = Instantiate(cleaveVFX, transform.position, Quaternion.identity);
         currentCleaveVFX.SetActive(true);
-        StartCoroutine(PlayCleaveVFX());
+        StartCoroutine(PlayCleaveVFX(this.transform));
     }
 
-    private IEnumerator PlayCleaveVFX()
+    private IEnumerator PlayCleaveVFX(Transform target)
     {
         yield return new WaitForSeconds(0.3f);
         Destroy(currentCleaveVFX);
-        // TODO: Find enemies en area and damage them
-        // recorrer lista de enemigos
-        // si enemigo en rango hacer "cleaveDamage" de daño
-    }
+
+        if (isPlayerControlled)
+        {
+            foreach (Character enemy in gm.enemies)
+            {
+                if (Vector3.Distance(target.position, enemy.transform.position) < cleaveRadius)
+                {
+                    enemy.ReceiveDamage(cleaveDamage);
+                }
+            }
+        }
+        else
+        {
+            foreach (Character enemy in gm.allies)
+            {
+                if (Vector3.Distance(target.position, enemy.transform.position) < cleaveRadius)
+                {
+                    enemy.ReceiveDamage(cleaveDamage);
+                }
+            }
+        }
+}
 
     // ACTION 3 - STUN
     public override void PerformAction3()

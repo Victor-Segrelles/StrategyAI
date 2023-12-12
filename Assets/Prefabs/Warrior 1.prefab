@@ -58,6 +58,7 @@ MonoBehaviour:
     m_Bits: 512
   heightoffset: 0
   life: 100
+  healthbar: {fileID: 0}
   gm: {fileID: 0}
   attackRange: 3
   attackTarget: {fileID: 0}
@@ -66,6 +67,9 @@ MonoBehaviour:
   isAI: 0
   lastPosition: {x: 0, y: 0, z: 0}
   moveDistance: 13
+  actionTarget: {fileID: 0}
+  selectedAction: 0
+  AOETarget: {fileID: 0}
 --- !u!114 &3671457729047507537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,6 +91,7 @@ MonoBehaviour:
   selectionFinished: 0
   selectedMovementPosition: {fileID: 0}
   isStunned: 0
+  unit: {fileID: 0}
   movementCompleted: 0
   movementDistance: 13
   slashVFX: {fileID: 5284079036507001202, guid: 7879368136f1c4486a0c02d608050903, type: 3}
