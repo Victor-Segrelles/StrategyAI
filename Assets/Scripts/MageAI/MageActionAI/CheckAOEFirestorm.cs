@@ -62,7 +62,7 @@ public class CheckAOEFirestorm : NodeBT
             {
                 unit.AOETarget = unit.gameObject.transform;
                 unit.AOETarget.position = puntoMedio;   //Cuidado hay que coger el position no el AOETarget
-                unit.selectedAction = 1;    //AOEHeal
+                unit.selectedAction = 3;    //AOEHeal
                 parent.parent.SetData("checkAOEFirestorm", unit.AOETarget);
                 state = NodeState.SUCCESS;
                 return state;

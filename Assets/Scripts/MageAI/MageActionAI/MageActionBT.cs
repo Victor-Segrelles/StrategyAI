@@ -22,19 +22,14 @@ public class MageActionBT : Tree
             }),
             new Sequence(new List<NodeBT>
             {
-                new CheckAOEFirestorm(GetComponent<Unit>()),
-                new AOEHeal(),
-            }),/*
-            new Sequence(new List<NodeBT>
-            {
-                new CheckWhoIHeal(GetComponent<Unit>()),
+                new CheckArcane(GetComponent<Unit>()),
                 new WhoIHeal(),
             }),
             new Sequence(new List<NodeBT>
             {
-                new CheckAttack(GetComponent<Unit>()),
-                new Attack(),
-            }),*/
+                new CheckAOEFirestorm(GetComponent<Unit>()),
+                new AOEHeal(),
+            }),
         });
         return root;
     }

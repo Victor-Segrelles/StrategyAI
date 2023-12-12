@@ -127,11 +127,11 @@ public class Unit : MonoBehaviour {
             }
 			else if (gameObject.GetComponent<Character>() is Mage)
             {
-				/*if (selectedAction == 1)
+				if (selectedAction == 1)
 				{
-					
+					gameObject.GetComponent<Mage>().ArcaneMissiles(actionTargets[0], actionTargets[1], actionTargets[2]);
 				}
-				else */if (selectedAction == 2)
+				else if (selectedAction == 2)
 				{
 					gameObject.GetComponent<Mage>().Shield();
 				}
@@ -140,8 +140,6 @@ public class Unit : MonoBehaviour {
 					Debug.Log("ATACOOOOOOOOOOOOOOOOOOOO");
 					gameObject.GetComponent<Mage>().Firestorm(AOETarget);
 				}
-			}
-
             }
 			else if (gameObject.GetComponent<Character>() is Archer){
 				if(selectedAction == 1){
