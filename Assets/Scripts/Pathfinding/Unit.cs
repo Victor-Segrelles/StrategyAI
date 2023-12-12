@@ -105,12 +105,14 @@ public class Unit : MonoBehaviour {
 	}
 	private void Action(){
 		Debug.Log("cafetera industrial");
+		Debug.Log(selectedAction + "SELECTEDACTION");
 		if (selectedAction != 0)
         {
 			if (gameObject.GetComponent<Character>() is Cleric)
             {
 				if (selectedAction == 1)
                 {
+					Debug.Log("SMITEO SISISI");
 					gameObject.GetComponent<Cleric>().Smite(actionTarget);
 				}
 				else if (selectedAction == 2)
@@ -127,7 +129,13 @@ public class Unit : MonoBehaviour {
 
             }
         }
+		Invoke("EndTurnPLS", 2.0f);
 	}
+
+	private void EndTurnPLS()
+    {
+		gm.EndTurn();
+    }
 
 	public void ChangeTarget(Transform newTarget) {
 		target = newTarget;

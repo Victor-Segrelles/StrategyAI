@@ -58,6 +58,7 @@ public class CheckAOEHeal : NodeBT
 
             if (encontrado)
             {
+                unit.AOETarget = unit.gameObject.transform;
                 unit.AOETarget.position = puntoMedio;   //Cuidado hay que coger el position no el AOETarget
                 unit.selectedAction = 3;    //AOEHeal
                 parent.parent.SetData("checkAOEHeal", unit.AOETarget);
